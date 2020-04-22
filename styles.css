@@ -1,5 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 *{
     margin: 0;
     border: 0;
     padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+body{
+    color: black;
+}
+
+#intro{
+    margin: 0 auto;
+    max-width: 940px;
+}
+
+nav{
+    line-height: 90px;
+    height: 90px;
+}
+
+nav img{
+    margin-right: 122px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+nav a{
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 26px;
+    color: #111;
+    margin-left: 30px;
+}
+
+.banner{
+    height: 366px;
+    max-width: 940px;
+    background: #FBDFDB;
+    border-radius: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+}
+
+.info-banner{
+    align-items: center;
+    width: 320px;
+    margin: auto;
+}
+
+.info-banner h1{
+    font-size: 32px;
+    line-height: 42px;
+}
+
+.info-banner p{
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 28px;
+    width: 350px;
+    opacity: 0.7;
+}
+
+.info-banner-img{
+    margin-top: 66px;
+    height: 300px;
+    right: 10vw;
+    position: absolute;
+}
+
+.title{
+    margin: 30px 0 20px 0;
+    font-size: 22px;
+    line-height: 32px;
+}
+
+.receitas-container{
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.receitas-img img{
+    height: 140px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.receitas-titulo{
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.receitas-autor{
+    font-size: 14px;
+    color: #777777;
+    margin-bottom: 20px;
+}
+
+footer{
+    padding: 24px;
+    background: #EEEEEE;
+    margin-top: 50px;
+}
+
+footer p{
+    font-size: 14px;
+    color: #999999;
+    text-align: center;
 }
