@@ -146,10 +146,8 @@ footer p{
     height: 100%;
     position: fixed;
     top: 0;
-    /* opacity: 0;
-    visibility: hidden; */
-    opacity: 1;
-    visibility: visible;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .modal{
