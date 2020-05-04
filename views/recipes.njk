@@ -1,0 +1,35 @@
+{% extends "layout.njk" %}
+
+        {% block head%}
+            <title>Receitas</title>
+        {% endblock %}
+
+        {% block container %}
+
+            <section class="recipes-container">
+
+            {% for data in dataRecipes %}
+                
+                <div class="recipes-image" id="{{ data.mini }}">
+                    <div class="page-recipes-img">
+                        <img src="{{ data.image }}" alt="Imagem de {{ data.title }}">
+                    </div>
+
+                    <div class="recipes-name">
+                        <p>{{ data.title }}</p>
+                    </div>
+
+                    <div class="recipes-author">
+                        <p>{{ data.author }}</p>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+            </section>
+
+        </section>  
+
+        {% endblock %}
+
+</html>

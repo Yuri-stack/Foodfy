@@ -1,0 +1,47 @@
+{% extends "layout.njk" %}
+
+        {% block container %}
+
+            <section class="banner">
+                <div class="info-banner">
+                    <h1>As melhores receitas</h1>
+                    <p>Aprenda a construir os melhores pratos com receitas criadas por 
+                        profissionais do mundo inteiro.</p>
+                </div>
+
+                <div class="info-banner-img">
+                    <img src="assets/chef.png" alt="Chef da Foodfy">
+                </div>
+            </section>
+
+            <section class="recipes-title">
+                <h2>Mais acessadas</h2>
+            </section>
+
+            <section class="recipes-container"> 
+
+            {% for data in dataRecipes%}
+
+                <div class="recipes-image">
+
+                    <div class="recipes-img">
+                        <img src="{{ data.mini }}" alt="Imagem de {{ data.title }}">
+                    </div>
+
+                    <div class="recipes-name">
+                        <p>{{ data.title }}</p>
+                    </div>
+
+                    <div class="recipes-author">
+                        <p>{{ data.author }}</p>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+            </section>     
+            
+    {% endblock %}
+
+</html>
