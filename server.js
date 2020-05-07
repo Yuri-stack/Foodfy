@@ -26,6 +26,20 @@ server.get("/recipes", function(req, res){
     return res.render('recipes', {dataRecipes : dataRecipes})
 })
 
+server.get("/recipes/:id", function(req, res){
+    const index = req.params.id;
+    // const recipe = dataRecipes[index]
+
+    const recipe = dataRecipes.find(function(recipe){
+        if(recipe.id == index){
+            return recipe
+        } 
+    })
+
+    return res.render('recipe', {recipe : recipe})
+
+})
+
 server.use(function(req, res){
     res.send("Não encontrou")
     // res.status(404).render("not-found")

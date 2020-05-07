@@ -22,7 +22,7 @@
 
             {% for data in dataRecipes%}
 
-                <div class="recipes-image">
+                <div class="recipes-image" id="{{ data.id }}"> 
 
                     <div class="recipes-img">
                         <img src="{{ data.mini }}" alt="Imagem de {{ data.title }}">
