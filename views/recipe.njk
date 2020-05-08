@@ -1,25 +1,53 @@
-{% extends "layout.njk" %}
+{% extends "layout.njk" %} 
 
         {% block head%}
-            <title>Receitas</title>
+            <title>Receita - {{ recipe.title }}</title>
         {% endblock %}
 
         {% block container %}
 
-            <section class="recipes-container">
+            <section class="recipe-details-container">
 
-                <div class="recipes-image" id="{{ recipe.id }}">
-                    <div class="page-recipes-img">
+                <div class="recipe">
+                
+                    <div class="recipe-img">
                         <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
                     </div>
 
-                    <div class="recipes-name">
-                        <p>{{ recipe.title }}</p>
+                    <div class="recipe-intro">
+                        <h1>{{ recipe.title }}</h1>
+                        <h3>por {{ recipe.author }}</h3>
                     </div>
 
-                    <div class="recipes-author">
-                        <p>{{ recipe.author }}</p>
+                    <div class="recipe-info">
+                        <h1>Ingredientes</h1>
+                        <ul>
+                            {% for item in recipe.ingredients %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
                     </div>
+
+                    <div class="recipe-info">
+                        <h1>Modo de Preparo</h1>   
+                        <ul>
+                            {% for item in recipe.preparation %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>                     
+                    </div>
+
+                    <div class="recipe-info">
+                        <h1>Informações adicionais</h1>
+                        <p>
+                            {% if(recipe.information == "")%}
+                                Não há informações adicionais para essa receita.
+                            {% else %}
+                                {{ recipe.information }}
+                            {% endif %}
+                        </p>
+                    </div>
+
                 </div>
 
             </section>

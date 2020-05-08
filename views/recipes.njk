@@ -8,20 +8,20 @@
 
             <section class="recipes-container">
 
-            {% for data in dataRecipes %}
+            {% for recipe in dataRecipes %}
                 
-                <div class="recipes-image" id="{{ data.id }}">
+                <div class="recipes" id="{{ recipe.id }}">
                 
                     <div class="page-recipes-img">
-                        <img src="{{ data.image }}" alt="Imagem de {{ data.title }}">
+                        <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
                     </div>
 
                     <div class="recipes-name">
-                        <p>{{ data.title }}</p>
+                        <p>{{ recipe.title }}</p>
                     </div>
 
                     <div class="recipes-author">
-                        <p>{{ data.author }}</p>
+                        <p>{{ recipe.author }}</p>
                     </div>
                 </div>
 

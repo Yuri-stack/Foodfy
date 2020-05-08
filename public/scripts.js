@@ -1,16 +1,14 @@
-const recipes = document.querySelectorAll(".recipes-image")
+/*Lógica para carregar as informações das receitas*/
+/* Logic for loading recipe information */
 
-for(let recipe of recipes){
-    recipe.addEventListener("click", function(){
+const recipes = document.querySelectorAll(".recipes")
 
-        const recipeID = recipe.getAttribute("id")
-        window.location.href = `/recipes/${recipeID}`
+    for(let i = 0; i < recipes.length; i++) {
+        recipes[i].addEventListener('click', function() {
+            window.location.href = `/recipes/${i}`;
+        });
+    }
 
-        // for(let i = 0; i < recipes.length; i++) {
-        //     recipes[i].addEventListener('click', function() {
-        //         window.location.href = `/recipes/${i}`;
-        //     });
-        // }
-    })
+/* Lógica para esconder/mostrar info das receitas */
+/* Logic to hide / show recipe info */
 
-}

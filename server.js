@@ -28,16 +28,9 @@ server.get("/recipes", function(req, res){
 
 server.get("/recipes/:id", function(req, res){
     const index = req.params.id;
-    // const recipe = dataRecipes[index]
-
-    const recipe = dataRecipes.find(function(recipe){
-        if(recipe.id == index){
-            return recipe
-        } 
-    })
+    const recipe = dataRecipes[index]
 
     return res.render('recipe', {recipe : recipe})
-
 })
 
 server.use(function(req, res){
