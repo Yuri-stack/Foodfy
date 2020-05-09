@@ -19,8 +19,9 @@
                         <h3>por {{ recipe.author }}</h3>
                     </div>
 
-                    <div class="recipe-info">
-                        <h1>Ingredientes</h1>
+                        <h1>Ingredientes <button class="visibility">ESCONDER</button></h1>
+
+                    <div class="recipe-info fadeIn">
                         <ul>
                             {% for item in recipe.ingredients %}
                                 <li>{{ item }}</li>
@@ -28,8 +29,9 @@
                         </ul>
                     </div>
 
+                        <h1>Modo de Preparo <button class="visibility">ESCONDER</button></h1>   
+
                     <div class="recipe-info">
-                        <h1>Modo de Preparo</h1>   
                         <ul>
                             {% for item in recipe.preparation %}
                                 <li>{{ item }}</li>
@@ -37,13 +39,14 @@
                         </ul>                     
                     </div>
 
+                        <h1>Informações adicionais <button class="visibility">ESCONDER</button></h1>
+
                     <div class="recipe-info">
-                        <h1>Informações adicionais</h1>
                         <p>
                             {% if(recipe.information == "")%}
                                 Não há informações adicionais para essa receita.
                             {% else %}
-                                {{ recipe.information }}
+                                {{ recipe.information | striptags(true) | escape | nl2br }}
                             {% endif %}
                         </p>
                     </div>

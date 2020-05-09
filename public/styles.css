@@ -154,6 +154,17 @@ footer p{
 
 /* Pag. Receita Detalhes / Recipe Details Page */
 
+.recipe h1{
+    font-size: 24px;
+    color: var(--color-blackGray);
+}
+
+.recipe .visibility{
+    background: none;
+    color: #999999;
+    font-size: 12px;
+}
+
 .recipe-img img{
     border-radius: 15px;
 }
@@ -178,8 +189,14 @@ footer p{
     font-size: 18px;
     line-height: 28px;
     color: var(--color-gray);
+    margin-top: 20px;
     margin-bottom: 39px;
 }
+
+.hide{
+    display: none;
+}
+
 .recipe-info ul{
     margin-left: 18px;
 }
