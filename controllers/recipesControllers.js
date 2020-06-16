@@ -1,2 +1,0 @@
-const dataRecipes = require('./data')
-
