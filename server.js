@@ -30,12 +30,11 @@ server.get("/recipes/:id", function(req, res){
     const index = req.params.id;
     const recipe = dataRecipes[index]
 
-    return res.render('recipe', {recipe : recipe})
+    return res.render('details_recipe', {recipe : recipe})
 })
 
 server.use(function(req, res){
-    res.send("Não encontrou")
-    // res.status(404).render("not-found")
+    res.status(404).render("not-found")
 })
 
 server.listen(5000, function(){

@@ -41,7 +41,7 @@ nav a{
     margin-left: 30px;
 }
 
-#wrapper{
+.wrapper{
     margin: 0 auto;
     max-width: 940px;
 }
@@ -206,6 +206,30 @@ footer p{
     color: var(--color-blackGray);
     margin-bottom: 20px;
 }
+
+/* Pag. 404*/
+
+.notFound{
+    text-align: center;
+}
+
+.notFound h1{
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: bold;
+}
+
+.notFound p{
+    /* max-width: 600px; */
+    margin: 5px auto;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.notFound img{
+    margin: 38px auto;
+}
+
 
 /* Responsividade */
 

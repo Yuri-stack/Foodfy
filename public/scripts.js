@@ -1,4 +1,4 @@
-/*Lógica para carregar as informações das receitas / Logic for loading recipe information */
+/*Lógica para carregar as informações das receitas - Logic for loading recipe information */
 
 const recipes = document.querySelectorAll(".recipes")
 
@@ -8,7 +8,7 @@ const recipes = document.querySelectorAll(".recipes")
         });
     }
 
-/* Lógica para esconder/mostrar info das receitas / Logic to hide / show recipe info */
+/* Lógica para esconder/mostrar info das receitas - Logic to hide / show recipe info */
 
 const info = document.querySelectorAll(".recipe-info")
 const visibility = document.querySelectorAll(".visibility")
