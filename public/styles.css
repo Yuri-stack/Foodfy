@@ -14,18 +14,30 @@
 }
 
 body{
-    color: black;
+    color: var(--color-blackGray);
 }
 
 header{
+    width: 100%;
+    height: 80px;
     display: inline-flex;
     align-items: center;
 }
 
-.logo-menu{
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 122px;
+header div{
+    margin-left: 15%;
+}
+
+header div a img.invert{
+    filter: invert(100%);
+}
+
+header .none{
+    opacity: 0;
+}
+
+header.black-menu{
+    background-color: var(--color-blackGray);
 }
 
 nav{
@@ -39,6 +51,10 @@ nav a{
     line-height: 26px;
     color: var(--color-blackgray);
     margin-left: 30px;
+}
+
+nav a.active{
+    font-weight: bold;
 }
 
 .wrapper{
