@@ -4,6 +4,7 @@
     --color-blackGray: #111111;
     --color-graySoft: #777777;
     --color-gray: #444444;
+    --color-rocket: #6558C3;
 }
 
 *{
@@ -34,6 +35,7 @@ header div a img.invert{
 
 header .none{
     opacity: 0;
+    pointer-events: none;
 }
 
 header.black-menu{
@@ -246,6 +248,44 @@ footer p{
     margin: 38px auto;
 }
 
+/* Área de Administração */
+
+.recipes-container-admin{
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.recipes-admin{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.recipes-admin img{
+    width: 172px;
+    height: 80px;
+    border-radius: 15px;
+}
+
+.recipes-name-admin{
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.recipes-author-admin{
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--color-graySoft);
+}
+
+.recipes-view-admin a{
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--color-rocket);
+}
 
 /* Responsividade */
 

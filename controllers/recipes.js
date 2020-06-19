@@ -2,9 +2,9 @@
 
 const data = require('../data')
 
-//Função para LISTAR as receitas no Index
+//Função para LISTAR as receitas no Index da Administração
 exports.index = function(req, res){
-    return res.render('admin/index')
+    return res.render('admin/index', {recipes : data})
 }
 
 //Função para LISTAR as receitas na pag. Receitas

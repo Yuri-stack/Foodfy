@@ -1,4 +1,42 @@
 {% extends "layout.njk" %}
 
-{% block footer %}
-{% endblock footer %}
+    {% block container %}
+
+        <section class="recipes-title">
+            <h2>Gerenciar receitas</h2>
+        </section>
+
+        <section class="recipes-container-admin">
+
+            {% for recipe in recipes%}
+
+                <div class="recipes-admin" id="{{ recipe.id }}"> 
+
+                    <div class="recipes-img-admin">
+                        <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
+                    </div>
+
+                    <div>
+                        <div class="recipes-name-admin">
+                            <p>{{ recipe.title }}</p>
+                        </div>
+
+                        <div class="recipes-author-admin">
+                            <p>{{ recipe.author }}</p>
+                        </div>
+
+                        <div class="recipes-view-admin">
+                            <a href="/admin/recipes">Visualizar</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+        
+        </section>
+
+    {% endblock container %}
+
+    {% block footer %}
+    {% endblock footer %}
