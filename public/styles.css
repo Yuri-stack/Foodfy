@@ -185,20 +185,22 @@ footer p{
 
 .recipe-img img{
     border-radius: 15px;
+    width: 940px;
+    height: 280px;
 }
 
-.recipe-intro{
+.recipe-name{
     margin: 0 auto;
     text-align: center;
     margin: 50px auto;
 }
 
-.recipe-intro h1{
+.recipe-name h1{
     font-size: 36px;
     color: var(--color-blackGray);
 }
 
-.recipe-intro h3{
+.recipe-name h3{
     font-size: 20px;
     color: var(--color-graySoft);
 }
@@ -285,6 +287,32 @@ footer p{
     font-size: 14px;
     line-height: 24px;
     color: var(--color-rocket);
+}
+
+.recipe-details-container-admin{
+    margin-top: 55px;
+}
+
+.recipe-intro{
+    margin-bottom: 24px;
+}
+
+.recipe-intro-text{
+    display: inline-block;
+}
+
+.recipe-intro-btn{
+    float: right;
+}
+
+.recipe-intro-btn a{
+    background-color: var(--color-rocket);
+    padding: 8px 16px;
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
 }
 
 /* Responsividade */

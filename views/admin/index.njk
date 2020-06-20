@@ -1,5 +1,9 @@
 {% extends "layout.njk" %}
 
+    {% block head %}
+        <title>Foodfy - Administração</title>
+    {% endblock %}
+
     {% block container %}
 
         <section class="recipes-title">
@@ -26,7 +30,7 @@
                         </div>
 
                         <div class="recipes-view-admin">
-                            <a href="/admin/recipes">Visualizar</a>
+                            <a href="/admin/recipes/{{ recipe.id }}">Visualizar</a>
                         </div>
                     </div>
 

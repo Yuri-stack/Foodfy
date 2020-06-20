@@ -14,14 +14,14 @@
                         <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
                     </div>
 
-                    <div class="recipe-intro">
+                    <div class="recipe-name">
                         <h1>{{ recipe.title }}</h1>
                         <h3>por {{ recipe.author }}</h3>
                     </div>
 
                         <h1>Ingredientes <button class="visibility">ESCONDER</button></h1>
 
-                    <div class="recipe-info fadeIn">
+                    <div class="recipe-info">
                         <ul>
                             {% for item in recipe.ingredients %}
                                 <li>{{ item }}</li>
