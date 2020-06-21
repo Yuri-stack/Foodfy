@@ -5,6 +5,7 @@
     --color-graySoft: #777777;
     --color-gray: #444444;
     --color-rocket: #6558C3;
+    --color-deleteRed: #DC4747;
 }
 
 *{
@@ -289,12 +290,10 @@ footer p{
     color: var(--color-rocket);
 }
 
-.recipe-details-container-admin{
-    margin-top: 55px;
-}
-
 .recipe-intro{
+    margin-top: 55px;
     margin-bottom: 24px;
+    font-size: 24px;
 }
 
 .recipe-intro-text{
@@ -305,7 +304,7 @@ footer p{
     float: right;
 }
 
-.recipe-intro-btn a{
+.recipe-intro-btn a, button[type="submit"]{
     background-color: var(--color-rocket);
     padding: 8px 16px;
     text-decoration: none;
@@ -314,6 +313,41 @@ footer p{
     font-weight: bold;
     border-radius: 4px;
 }
+
+button[type="submit"].btn-delete {
+    background-color: var(--color-deleteRed);
+}
+
+/*Página de Edição de Receitas - Administração*/
+
+.item{
+    margin-bottom: 30px;
+}
+
+.item a{
+    text-decoration: none;
+    color: var(--color-rocket);
+}
+
+.item div:nth-child(2){
+    margin-bottom: 10px;
+}
+
+form div:first-child{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+form input, textarea{
+    width: 95%;
+    color: #555;
+    padding: 15px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+}
+
 
 /* Responsividade */
 

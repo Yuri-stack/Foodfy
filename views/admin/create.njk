@@ -1,0 +1,72 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Foodfy - Administração</title>
+    {% endblock %}
+
+    {% block container %}
+
+        <section class="recipe-intro">
+
+            <div class="recipe-intro-text">
+                <h1>Criando receita</h1>
+            </div>
+
+            <div class="recipe-intro-btn">
+                <button class="btn-salve" type="submit" form="form-save">Salvar Receita</button>
+            </div>
+
+        </section>
+
+        <section class="details-admin">
+
+            <form id="form-save" method="post" action="">
+
+                <input type="hidden" name="id">
+
+                <div class="item">
+
+                    <div>Imagem da receita</div>
+                    <div>
+                        <input type="url" name="" placeholder="Insira a URL da imagem" value="" required>
+                    </div>
+
+                </div>
+
+                <div class="item">
+
+                    <div>Ingredientes</div>
+                    <div>
+                        <input type="text" name="" placeholder="Insira os ingredientes" value="" required>
+                    </div>
+                    <a href="#">Adicionar novo ingrediente</a>
+                    
+                </div>
+
+                <div class="item">
+
+                    <div>Modo de Preparo</div>
+                    <div>
+                        <input type="text" name="" placeholder="Insira os passos da receita" value="" required>
+                    </div>
+                    <a href="#">Adicionar novo passo</a>
+                    
+                </div>
+
+                <div class="item">
+
+                    <div>Informações adicionais</div>
+                    <div>
+                        <textarea name="" id="" rows="10"></textarea>
+                    </div>
+                    
+                </div>
+
+            </form>         
+
+        </section>
+
+    {% endblock container %}
+
+    {% block footer %}
+    {% endblock footer %}
