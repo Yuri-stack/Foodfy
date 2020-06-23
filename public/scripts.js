@@ -42,7 +42,7 @@ for(item of menuItems){
         item.classList.add("active")
     }
     if(currentPage.includes("/admin")){
-        item.classList.add("none")
+        item.remove()
     }
 }
 
@@ -56,3 +56,73 @@ if(currentPage.includes("/admin")){
         "instructors/2".include("2") = True
         "instructors/2".include("k") = False
 */
+
+/* ======================================================================================= */
+
+/* Lógica para adicionar campos dinâmicos*/
+
+const AddField = {  //ARRUMAR
+
+    add(parentSelector){
+        const parent = document.querySelector(parentSelector)
+
+        if(parent){
+            const fields = document.querySelectorAll("input");
+
+            const lastField = fields[fields.length - 1];
+
+            if (lastField && lastField.value === '') return false;
+
+            const newField = lastField && lastField.cloneNode(true);
+
+            newField.value = '';
+
+            parent.appendChild(newField);
+
+            return newField;
+
+        }
+
+        return false
+    },
+
+    listen(){
+        const addIngredient = document.querySelector(".fieldIngredient")
+        const addPreparation = document.querySelector(".fieldPreparation")
+
+        if(addIngredient){
+            document
+                .querySelector('fieldIngredient')
+                .addEventListener("click", function(){
+                    AddField.add('#newIngredient')
+                })
+        }
+
+        if(addPreparation){
+            document
+                .querySelector('fieldPreparation')
+                .addEventListener("click", () => { AddField.add('#newPreparation') })
+        }
+    }
+}
+
+AddField.listen()
+
+// function addDinamicField() {
+//     const dinamicField = document.querySelector(".dinamicField");
+//     const fields = document.querySelectorAll(".fields");
+  
+//     // Realiza um clone do último ingrediente adicionado
+//     const newField = fields[fields.length - 1].cloneNode(true);
+  
+//     // Não adiciona um novo input se o último tem um valor vazio
+//     if (newField.children[0].value == "") return false;
+  
+//     // Deixa o valor do input vazio
+//     newField.children[0].value = "";
+//     dinamicField.appendChild(newField);
+//   }
+  
+//   document
+//     .querySelector(".addField")
+//     .addEventListener("click", addDinamicField);

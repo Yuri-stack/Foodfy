@@ -324,13 +324,11 @@ button[type="submit"].btn-delete {
     margin-bottom: 30px;
 }
 
-.item a{
-    text-decoration: none;
+.item button{
+    background-color: transparent;
     color: var(--color-rocket);
-}
-
-.item div:nth-child(2){
-    margin-bottom: 10px;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
 form div:first-child{

@@ -1,7 +1,7 @@
 {% extends "layout.njk" %} 
 
     {% block head %}
-        <title>Receita - {{ recipe.title }}</title>
+        <title>Receita - {{ recipe.name }}</title>
     {% endblock %}
 
     {% block container %}
@@ -9,7 +9,7 @@
         <section class="recipe-intro">
 
             <div class="recipe-intro-text">
-                <h1>Receita: Triplo bacon burger</h1>
+                <h1>Receita: {{ recipe.name }}</h1>
             </div>
 
             <div class="recipe-intro-btn">
@@ -21,28 +21,21 @@
         <section class="recipe-details-container-admin">
     
         <div class="recipe-img">
-            <img src="https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/burger.png" alt="Imagem de Triplo bacon burger">
-            {# <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}"> #}
+            <img src="{{ recipe.image_url }}" alt="Imagem de {{ recipe.name }}">
         </div>
 
         <div class="recipe-name">
-            <h1>Triplo bacon burger</h1>
-            <h3>por Jorge Relato</h3>
-            {# <h1>{{ recipe.title }}</h1> #}
-            {# <h3>por {{ recipe.author }}</h3> #}
+            <h1>{{ recipe.name }}</h1>
+            <h3>por {{ recipe.author }}</h3>
         </div>
 
             <h1>Ingredientes</h1>
 
         <div class="recipe-info">
             <ul>
-                {# {% for item in recipe.ingredients %}
+                {% for item in recipe.ingredients %}
                     <li>{{ item }}</li>
-                {% endfor %} #}
-
-                <li>3 kg de carne moída (escolha uma carne magra e macia)</li>
-                <li>300 g de bacon moído</li>
-                <li>1 ovo</li>
+                {% endfor %}
             </ul>
         </div>
 
@@ -50,12 +43,9 @@
 
         <div class="recipe-info">
             <ul>
-                {# {% for item in recipe.preparation %}
+                {% for item in recipe.preparation %}
                     <li>{{ item }}</li>
-                {% endfor %} #}
-                <li>3 kg de carne moída (escolha uma carne magra e macia)</li>
-                <li>300 g de bacon moído</li>
-                <li>1 ovo</li>
+                {% endfor %}
             </ul>                     
         </div>
 
@@ -63,12 +53,11 @@
 
         <div class="recipe-info">
             <p>
-                {# {% if(recipe.information == "")%}
+                {% if(recipe.information == "")%}
                     Não há informações adicionais para essa receita.
                 {% else %}
-                    {{ recipe.information | striptags(true) | escape | nl2br }}
-                {% endif %} #}
-                Não há informações adicionais para essa receita.
+                    {{ recipe.information }}
+                {% endif %}
             </p>
         </div>
 
