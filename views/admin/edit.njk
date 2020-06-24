@@ -2,7 +2,7 @@
 
     {% block head %}
         <title>Foodfy - Administração</title>
-    {% endblock %}
+    {% endblock %} 
 
     {% block container %}
 
@@ -23,46 +23,10 @@
 
             <form id="form-save" method="post" action="">
 
-                <input type="hidden" name="id">
+                <input type="hidden" name="id" value="{{ recipe.id }}">
 
-                <div class="item">
-
-                    <div>Imagem da receita</div>
-                    <div>
-                        <input type="url" name="" placeholder="Insira a URL da imagem" value="" required>
-                    </div>
-
-                </div>
-
-                <div class="item">
-
-                    <div>Ingredientes</div>
-                    <div>
-                        <input type="text" name="" placeholder="Insira os ingredientes" value="" required>
-                    </div>
-                    <a href="#">Adicionar novo ingrediente</a>
-                    
-                </div>
-
-                <div class="item">
-
-                    <div>Modo de Preparo</div>
-                    <div>
-                        <input type="text" name="" placeholder="Insira os passos da receita" value="" required>
-                    </div>
-                    <a href="#">Adicionar novo passo</a>
-                    
-                </div>
-
-                <div class="item">
-
-                    <div>Informações adicionais</div>
-                    <div>
-                        <textarea name="" id="" rows="10"></textarea>
-                    </div>
-                    
-                </div>
-
+                {% include 'admin/fields.njk' %}
+                
             </form>         
 
         </section>

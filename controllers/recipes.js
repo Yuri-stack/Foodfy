@@ -77,7 +77,20 @@ exports.show = function(req, res){
     return res.render('admin/details_recipe', {recipe : recipe})
 } 
 
-// //Função para CARREGAR INFORMAÇÕES PARA EDITAR
-// exports.edit = function(req, res){
-//     return res.render('admin/edit', {recipe : data})
-// }
+//Função para CARREGAR INFORMAÇÕES PARA EDITAR
+exports.edit = function(req, res){
+
+    const { id } = req.params
+
+    const foundRecipe = data.recipes.find(function(recipe){
+        return recipe.id == id
+    })
+
+    if(!foundRecipe) return res.send("Receita não encontrada")
+
+    const recipe = {
+        ...foundRecipe
+    }
+
+    return res.render('admin/edit', {recipe : recipe})
+}

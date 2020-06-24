@@ -61,17 +61,24 @@ if(currentPage.includes("/admin")){
 
 /* Lógica para adicionar campos dinâmicos*/
 
-const AddField = {  //ARRUMAR
+const AddField = {  
 
     add(parentSelector){
         const parent = document.querySelector(parentSelector)
 
         if(parent){
-            const fields = document.querySelectorAll("input");
+            const fields = parent.querySelectorAll("input");
+
+            // let campo = 
+            // console.log(fields) //ELE ESTÁ PEGANDO TODOS OS IMPUTS DA TELA
+            // // console.log(pai)
+            // // console.log(fields.closest("#newIngredient"))
 
             const lastField = fields[fields.length - 1];
 
-            if (lastField && lastField.value === '') return false;
+            // console.log(lastField)
+
+            if (lastField && lastField.value === '') return false;  //O ERRO TÁ AQUI ARRUMAR
 
             const newField = lastField && lastField.cloneNode(true);
 
@@ -92,21 +99,22 @@ const AddField = {  //ARRUMAR
 
         if(addIngredient){
             document
-                .querySelector('fieldIngredient')
-                .addEventListener("click", function(){
-                    AddField.add('#newIngredient')
-                })
+                .querySelector('.fieldIngredient')
+                .addEventListener("click", () => { AddField.add('#newIngredient') })
         }
 
         if(addPreparation){
             document
-                .querySelector('fieldPreparation')
+                .querySelector('.fieldPreparation')
                 .addEventListener("click", () => { AddField.add('#newPreparation') })
         }
     }
 }
 
+// O PROBLEMA É QUE ELE SEMPRE PEGA O CAMPO DE PREPARAÇÃO, MESMO QUE EU CLIQUE NO INGREDIENTE
+
 AddField.listen()
+// console.log(AddField.listen())
 
 // function addDinamicField() {
 //     const dinamicField = document.querySelector(".dinamicField");

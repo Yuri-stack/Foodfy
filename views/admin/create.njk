@@ -22,70 +22,7 @@
 
             <form id="form-save" method="POST" action="/admin/recipes">
 
-                <div class="item">
-
-                    <div>Imagem da receita</div>
-                    <div>
-                        <input type="url" name="image_url" placeholder="Insira a URL da imagem" value="" required>
-                    </div>
-
-                </div>
-
-                <div class="item">
-                    <div>Nome da Receita</div>
-                    <div>
-                        <input type="text" name="name" placeholder="Insira o nome da Receita" value="" required>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div>Nome do Autor</div>
-                    <div>
-                        <input type="text" name="author" placeholder="Insira o nome do Autor" value="" required>
-                    </div>
-                </div>
-
-                <div class="item">
-
-                    <div>Ingredientes</div>
-
-                    <div>
-
-                        <div id="newIngredient">
-                            <input type="text" name="ingredients[]" placeholder="Insira os ingredientes" value="" required>
-                        </div>
-
-                    </div>
-
-                    <button type="button" class="fieldIngredient">Adicionar novo ingrediente</button>
-
-                </div>
-
-
-                <div class="item">
-
-                    <div>Modo de Preparo</div>
-
-                    <div class="fieldPreparation">
-
-                        <div id="newPreparation">
-                            <input type="text" name="preparation[]" placeholder="Insira os passos da receita" value="" required>
-                        </div>
-
-                    </div>
-
-                    <button type="button">Adicionar novo passo</button>
-                    
-                </div>
-
-                <div class="item">
-
-                    <div>Informações adicionais</div>
-                    <div>
-                        <textarea name="information" id="" rows="10"></textarea>
-                    </div>
-                    
-                </div>
+                {% include 'admin/fields.njk' %}
 
             </form>         
 
