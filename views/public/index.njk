@@ -20,16 +20,16 @@
 
             <section class="recipes-container"> 
 
-            {% for recipe in recipes%}
+            {% for recipe in recipes %}
 
                 <div class="recipes" id="{{ recipe.id }}"> 
 
                     <div class="recipes-img">
-                        <img src="{{ recipe.mini }}" alt="Imagem de {{ recipe.title }}">
+                        <img src="{{ recipe.image_url }}" alt="Imagem de {{ recipe.name }}">
                     </div>
 
                     <div class="recipes-name">
-                        <p>{{ recipe.title }}</p>
+                        <p>{{ recipe.name }}</p>
                     </div>
 
                     <div class="recipes-author">

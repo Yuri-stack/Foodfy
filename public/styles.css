@@ -113,7 +113,8 @@ nav a.active{
     gap: 20px;
 }
 
-.recipes img{
+.recipes-img img{
+    width: 300px;
     height: 140px;
     border-radius: 15px;
     cursor: pointer;

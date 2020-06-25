@@ -4,6 +4,7 @@ const recipes = document.querySelectorAll(".recipes")
 
     for(let i = 0; i < recipes.length; i++) {
         recipes[i].addEventListener('click', function() {
+            i++
             window.location.href = `/recipes/${i}`;
         });
     }
@@ -69,16 +70,9 @@ const AddField = {
         if(parent){
             const fields = parent.querySelectorAll("input");
 
-            // let campo = 
-            // console.log(fields) //ELE ESTÁ PEGANDO TODOS OS IMPUTS DA TELA
-            // // console.log(pai)
-            // // console.log(fields.closest("#newIngredient"))
-
             const lastField = fields[fields.length - 1];
 
-            // console.log(lastField)
-
-            if (lastField && lastField.value === '') return false;  //O ERRO TÁ AQUI ARRUMAR
+            if (lastField && lastField.value === '') return false;  
 
             const newField = lastField && lastField.cloneNode(true);
 
@@ -111,26 +105,5 @@ const AddField = {
     }
 }
 
-// O PROBLEMA É QUE ELE SEMPRE PEGA O CAMPO DE PREPARAÇÃO, MESMO QUE EU CLIQUE NO INGREDIENTE
 
 AddField.listen()
-// console.log(AddField.listen())
-
-// function addDinamicField() {
-//     const dinamicField = document.querySelector(".dinamicField");
-//     const fields = document.querySelectorAll(".fields");
-  
-//     // Realiza um clone do último ingrediente adicionado
-//     const newField = fields[fields.length - 1].cloneNode(true);
-  
-//     // Não adiciona um novo input se o último tem um valor vazio
-//     if (newField.children[0].value == "") return false;
-  
-//     // Deixa o valor do input vazio
-//     newField.children[0].value = "";
-//     dinamicField.appendChild(newField);
-//   }
-  
-//   document
-//     .querySelector(".addField")
-//     .addEventListener("click", addDinamicField);
