@@ -10,7 +10,7 @@ server.use(express.static('public'))                //configurando para o expres
 server.use(methodOverride('_method'))               //essa parte identifica nas action´s dos form a query String: _method, para poder sobreescrever POST e GET
 server.use(routes)                                  //config para poder usar o arquivo de rotas
 
-server.set("view engine", "njk")//config que diz qual engine estamos usando
+server.set("view engine", "njk")                    //config que diz qual engine estamos usando
 
 nunjucks.configure('views', {
     express: server,

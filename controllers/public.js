@@ -26,7 +26,6 @@ exports.show = function(req, res){
         ...foundRecipe
     }
 
-    // return res.render('details_recipe', { recipe : recipe })
     return res.render('public/details_recipe', { recipe })
 }
 

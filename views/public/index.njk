@@ -1,47 +1,47 @@
 {% extends "layout.njk" %}
 
-        {% block container %}
+    {% block container %}
 
-            <section class="banner">
-                <div class="info-banner">
-                    <h1>As melhores receitas</h1>
-                    <p>Aprenda a construir os melhores pratos com receitas criadas por 
-                        profissionais do mundo inteiro.</p>
+        <section class="banner">
+            <div class="info-banner">
+                <h1>As melhores receitas</h1>
+                <p>Aprenda a construir os melhores pratos com receitas criadas por 
+                    profissionais do mundo inteiro.</p>
+            </div>
+
+            <div class="info-banner-img">
+                <img src="assets/chef.png" alt="Chef da Foodfy">
+            </div>
+        </section>
+
+        <section class="recipes-title">
+            <h2>Mais acessadas</h2>
+        </section>
+
+        <section class="recipes-container"> 
+
+        {% for recipe in recipes %}
+
+            <div class="recipes" id="{{ recipe.id }}"> 
+
+                <div class="recipes-img">
+                    <img src="{{ recipe.image_url }}" alt="Imagem de {{ recipe.name }}">
                 </div>
 
-                <div class="info-banner-img">
-                    <img src="assets/chef.png" alt="Chef da Foodfy">
-                </div>
-            </section>
-
-            <section class="recipes-title">
-                <h2>Mais acessadas</h2>
-            </section>
-
-            <section class="recipes-container"> 
-
-            {% for recipe in recipes %}
-
-                <div class="recipes" id="{{ recipe.id }}"> 
-
-                    <div class="recipes-img">
-                        <img src="{{ recipe.image_url }}" alt="Imagem de {{ recipe.name }}">
-                    </div>
-
-                    <div class="recipes-name">
-                        <p>{{ recipe.name }}</p>
-                    </div>
-
-                    <div class="recipes-author">
-                        <p>{{ recipe.author }}</p>
-                    </div>
-
+                <div class="recipes-name">
+                    <p>{{ recipe.name }}</p>
                 </div>
 
-            {% endfor %}
+                <div class="recipes-author">
+                    <p>{{ recipe.author }}</p>
+                </div>
 
-            </section>     
-            
+            </div>
+
+        {% endfor %}
+
+        </section>     
+        
     {% endblock %}
 
 </html>
