@@ -10,11 +10,12 @@
         Application to manage recipes and chefs.<br>Made with Express, Nunjucks, CSS and PostGres.
     </p>
 </div>
-<!-- <div align="center">
-    <img src="public/assets/index.png" alt="Index" width="120">
-    <img src="public/assets/recipes.png" alt="Recipe Page" width="120">
-    <img src="public/assets/admin.png" alt="Admin Page" width="120">
-</div>  -->
+<p align="center">
+    <img src="public/assets/index.png" alt="Index" width="400">
+    <img src="public/assets/recipes.png" alt="Recipe Page" width="400" >
+    <br>
+    <img src="public/assets/admin.png" alt="Admin Page" width="400">
+</p>
 
 <div>
 
@@ -41,7 +42,8 @@
 
 - [X] MVC Model
 - [X] Individual pages for each recipe
-- [ ] Creation and connection to the database
+- [X] Database creation
+<!-- - [ ] Creation and connection to the database -->
 - [ ] Applying CRUD for chefs and recipes
 - [ ] Relationships between tables
 - [ ] Search filters
