@@ -12,7 +12,7 @@ server.use(routes)                                  //config para poder usar o a
 
 server.set("view engine", "njk")                    //config que diz qual engine estamos usando
 
-nunjucks.configure('views', {
+nunjucks.configure('src/app/views', {
     express: server,
     autoescape: false,
     noCache: true  

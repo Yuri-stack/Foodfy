@@ -1,8 +1,8 @@
 const express = require('express')
 const routes = express.Router()
 
-const public = require('./controllers/public')
-const recipes = require('./controllers/recipes')
+const public = require('./app/controllers/public')
+const recipes = require('./app/controllers/recipes')
 
 //Rotas Públicas
 routes.get('/', function(req, res){ return res.redirect('/index') })
