@@ -43,11 +43,10 @@
 - [X] MVC Model
 - [X] Individual pages for each recipe
 - [X] Database creation
-<!-- - [ ] Creation and connection to the database -->
 - [ ] Applying CRUD for chefs and recipes
 - [ ] Relationships between tables
 - [ ] Search filters
-
+<!-- - [ ] Creation and connection to the database -->
 ## Getting started
 
 Coming soon

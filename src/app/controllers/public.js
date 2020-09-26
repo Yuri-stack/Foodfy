@@ -1,33 +1,20 @@
-//Variavéis
+module.exports = {
 
-const data = require('../data.json')
+    //Função para LISTAR as receitas no Index
+    index(req, res){
+        return res.render('public/index')
+    },
 
-//Função para LISTAR as receitas no Index
-exports.index = function(req, res){
-    return res.render('public/index', {recipes : data.recipes })
-}
+    //Função para LISTAR as receitas na pag. Receitas
+    list(req, res){
+        return res.render('public/recipes')
+    },
 
-//Função para LISTAR as receitas na pag. Receitas
-exports.list = function(req, res){
-    return res.render('public/recipes', { recipes : data.recipes })
-}
+    //Função para MOSTRAR os detalhes das receitas
+    show(req, res){
 
-//Função para MOSTRAR os detalhes das receitas
-exports.show = function(req, res){
-    const { id } = req.params
-
-    const foundRecipe = data.recipes.find(function(recipe){
-        return recipe.id == id
-    })
-
-    if(!foundRecipe) return res.send('Receita não encontrada')
-
-    const recipe = {
-        ...foundRecipe
+        return
+    
     }
 
-    return res.render('public/details_recipe', { recipe })
 }
-
-
-
