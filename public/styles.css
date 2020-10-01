@@ -41,6 +41,7 @@ header .none{
 
 header.black-menu{
     background-color: var(--color-blackGray);
+    color: #FFF;
 }
 
 nav{
@@ -50,7 +51,7 @@ nav{
 
 nav a{
     text-decoration: none;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 26px;
     color: var(--color-blackgray);
     margin-left: 30px;
@@ -293,21 +294,21 @@ footer p{
     color: var(--color-rocket);
 }
 
-.recipe-intro{
+.intro{
     margin-top: 55px;
     margin-bottom: 24px;
     font-size: 24px;
 }
 
-.recipe-intro-text{
+.intro-text{
     display: inline-block;
 }
 
-.recipe-intro-btn{
+.intro-btn{
     float: right;
 }
 
-.recipe-intro-btn a, button[type="submit"]{
+.intro-btn a, button[type="submit"]{
     background-color: var(--color-rocket);
     padding: 8px 16px;
     text-decoration: none;

@@ -42,9 +42,9 @@ for(item of menuItems){
     if(currentPage.includes(item.getAttribute("href"))){
         item.classList.add("active")
     }
-    if(currentPage.includes("/admin")){
-        item.remove()
-    }
+    // if(currentPage.includes("/admin")){
+    //     item.remove()
+    // }
 }
 
 if(currentPage.includes("/admin")){

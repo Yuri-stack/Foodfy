@@ -1,18 +1,14 @@
-{% extends "layout.njk" %}
-
-    {% block head %}
-        <title>Foodfy - Administração</title> 
-    {% endblock %}
+{% extends "layouts/admin.njk" %} 
 
     {% block container %}
 
-        <section class="recipe-intro">
+        <section class="intro">
 
-            <div class="recipe-intro-text">
-                <h1>Gerenciar receitas</h1>
+            <div class="intro-text">
+                <h1>Gerenciar Receitas</h1>
             </div>
 
-            <div class="recipe-intro-btn">
+            <div class="intro-btn">
                 <a href="/admin/recipes/create">Criar Nova Receita</a>
             </div>
 
@@ -49,6 +45,3 @@
         </section>
 
     {% endblock container %}
-
-    {% block footer %}
-    {% endblock footer %}

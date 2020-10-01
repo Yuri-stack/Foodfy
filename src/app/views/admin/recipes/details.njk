@@ -1,4 +1,4 @@
-{% extends "layout.njk" %} 
+{% extends "layouts/admin.njk" %} 
 
     {% block head %}
         <title>Receita - {{ recipe.name }}</title>
@@ -6,13 +6,13 @@
 
     {% block container %}
 
-        <section class="recipe-intro">
+        <section class="intro">
 
-            <div class="recipe-intro-text">
+            <div class="intro-text">
                 <h1>Receita: {{ recipe.name }}</h1>
             </div>
 
-            <div class="recipe-intro-btn">
+            <div class="intro-btn">
                 <a href="{{ recipe.id }}/edit">Editar Receita</a>
             </div>
             

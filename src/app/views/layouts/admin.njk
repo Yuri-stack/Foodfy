@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% block head %}
+            <title>Foodfy - Administração</title> 
+        {% endblock %}
+
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="/styles.css">
+    </head>
+
+    <body>
+
+        {% block header %}
+
+            <header>
+            <div>
+                <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
+            </div>
+            
+            <nav>
+                <a href="/admin/recipes">RECEITAS</a>
+                <a href="/admin/chefs">CHEFS</a>
+            </nav>
+        </header>
+
+        {% endblock header %}
+
+        <section class="wrapper">
+
+            {% block container %}
+
+            {% endblock %}
+        
+        </section>  
+
+        {% block footer %}
+
+            <footer>
+                <p>Todos os direitos reservados, receitas Foodfy</p>
+            </footer>
+            
+        {% endblock footer %}
+
+        <script src="/scripts.js"></script>
+
+    </body>
+</html>

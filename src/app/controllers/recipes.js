@@ -2,12 +2,12 @@ module.exports = {
 
     //Função para LISTAR as receitas no Index da Administração
     index(req, res){
-        return res.render('admin/index')
+        return res.render('admin/recipes/index')
     },
 
     //Função para REDIRECIONAR para a pag de Create
     redirectCreate(req, res){
-        return res.render('admin/create')
+        return res.render('admin/recipes/create')
     },
 
     //Função para CADASTRAR uma nova receita

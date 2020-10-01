@@ -1,4 +1,4 @@
-{% extends "layout.njk" %}
+{% extends "layouts/admin.njk" %} 
 
     {% block head %}
         <title>Foodfy - Administração</title>
@@ -6,13 +6,13 @@
 
     {% block container %}
 
-        <section class="recipe-intro">
+        <section class="intro">
 
-            <div class="recipe-intro-text">
-                <h1>Criando receita</h1>
+            <div class="intro-text">
+                <h1>Criando Receita</h1>
             </div>
 
-            <div class="recipe-intro-btn">
+            <div class="intro-btn">
                 <button class="btn-salve" type="submit" form="form-save">Salvar Receita</button>
             </div>
 
@@ -22,7 +22,7 @@
 
             <form id="form-save" method="POST" action="/admin/recipes">
 
-                {% include 'admin/fields.njk' %}
+                {% include 'admin/recipes/fields.njk' %}
 
             </form>         
 
