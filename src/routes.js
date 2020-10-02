@@ -23,6 +23,7 @@ routes.delete("/admin/recipes", recipes.delete);                // Deletar uma r
 
 // Rotas para a Administração das Receitas
 routes.get("/admin/chefs", chefs.index);                    // Mostrar a lista de chefs
-routes.get("/admin/chefs/create", chefs.redirectCreate);    // Mostrar formulário de novos chefs
+routes.get("/admin/chefs/create", chefs.redirectCreate);    // Mostrar formulário de novo chef
+routes.post("/admin/chefs", chefs.post);                    // Cadastrar um novo chef
 
 module.exports = routes

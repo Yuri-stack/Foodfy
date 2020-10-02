@@ -1,15 +1,15 @@
-{% extends "layout.njk" %}
+{% extends "layouts/public.njk" %} 
 
     {% block head %}
         <title>Foodfy - Página não encontrada</title>
-    {% endblock head %}
+    {% endblock %}
 
     {% block container %}
 
         <div class="notFound">
             <h1>Nosso chef procurou em todos os livros de receitas e não encontrou sua página :’( </h1>  
             
-            <img src="assets/chef.png" alt="Chef da Foodfy">
+            <img src="/assets/chef.png" alt="Chef da Foodfy">
             <p>A página que você está procurando não foi encontrada.</p>
             <p>Volte para a página anterior ou tente refazer sua busca.</p>
         </div>
