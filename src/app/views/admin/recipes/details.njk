@@ -13,53 +13,53 @@
             </div>
 
             <div class="intro-btn">
-                <a href="{{ recipe.id }}/edit">Editar Receita</a>
+                 <a href="1/edit">Editar Receita</a>
             </div>
             
         </section>
 
         <section class="recipe-details-container-admin">
     
-        <div class="recipe-img">
-            <img src="{{ recipe.image_url }}" alt="Imagem de {{ recipe.name }}">
-        </div>
+            <div class="recipe-img">
+                <img src="{{ recipe.image_url }}" alt="Imagem de {{ recipe.name }}">
+            </div>
 
-        <div class="recipe-name">
-            <h1>{{ recipe.name }}</h1>
-            <h3>por {{ recipe.author }}</h3>
-        </div>
+            <div class="recipe-name">
+                <h1>{{ recipe.name }}</h1>
+                <h3>por {{ recipe.author }}</h3>
+            </div>
 
-            <h1>Ingredientes</h1>
+                <h1>Ingredientes</h1>
 
-        <div class="recipe-info">
-            <ul>
-                {% for item in recipe.ingredients %}
-                    <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
-        </div>
+            <div class="recipe-info">
+                <ul>
+                    {% for item in recipe.ingredients %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-            <h1>Modo de Preparo</h1>   
+                <h1>Modo de Preparo</h1>   
 
-        <div class="recipe-info">
-            <ul>
-                {% for item in recipe.preparation %}
-                    <li>{{ item }}</li>
-                {% endfor %}
-            </ul>                     
-        </div>
+            <div class="recipe-info">
+                <ul>
+                    {% for item in recipe.preparation %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>                     
+            </div>
 
-            <h1>Informações adicionais</h1>
+                <h1>Informações adicionais</h1>
 
-        <div class="recipe-info">
-            <p>
-                {% if(recipe.information == "")%}
-                    Não há informações adicionais para essa receita.
-                {% else %}
-                    {{ recipe.information }}
-                {% endif %}
-            </p>
-        </div>
+            <div class="recipe-info">
+                <p>
+                    {% if(recipe.information == "")%}
+                        Não há informações adicionais para essa receita.
+                    {% else %}
+                        {{ recipe.information }}
+                    {% endif %}
+                </p>
+            </div>
 
         </section>
 

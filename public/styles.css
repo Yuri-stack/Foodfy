@@ -2,7 +2,8 @@
 
 :root{
     --color-blackGray: #111111;
-    --color-graySoft: #777777;
+    --color-graySoft: #666666;
+    --color-graySoft2: #777777;
     --color-gray: #444444;
     --color-rocket: #6558C3;
     --color-deleteRed: #DC4747;
@@ -47,6 +48,7 @@ header.black-menu{
 nav{
     line-height: 90px;
     height: 90px;
+    margin-left: 50px;
 }
 
 nav a{
@@ -232,33 +234,117 @@ footer p{
     margin-bottom: 20px;
 }
 
-/* Pag. 404*/
+/* Pag. Chefs */
 
-.notFound{
+.chefs_container{   /* Seção que envolver os cards dos chefs */
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 20px;
+}
+
+.card_secondary{    /* Div que representa cada Card*/
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    grid-gap: 20px;
+    width: 100%;    /*Tem 100% de largura para que o nome do Chef fique em uma linha*/
+}
+/*
+.card_img {     /*Configuração padrão para a imagem do Card
+    max-width: 300px;
+    border-radius: 15px;
+    min-height: 120px;
+    width: 300px;
+    height: 120px;
+    object-fit: cover;  /*Prop. especifica como o conteúdo de um elemento deve ser ajustado à caixa estabelecida pela altura e largura usadas
+}
+*/
+.card_secondary .card_img {
+    width: 172px;   
+    height: 80px;
+    max-width: 172px;
+    min-height: 80px;
+}
+
+.card_secondary .card_img_rounded {
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    object-fit: cover;
+}
+
+.card_secondary .card_img {
+    border-radius: 5%;
+    height: 80px;
+    width: 172px;
+    object-fit: cover;
+    border: 1px solid #111;
+}
+
+a.card,
+a.card_secondary {
+    text-decoration: none;
+}
+
+.card .card_info {
+    margin-top: 20px;
+}
+
+.card_info_title {
+    color: #111111;
+    font-size: 18px;
+    display: block;
+}
+
+.card_info_subtitle {
+    margin-top: 5px;
+    color: var(--color-graySoft2);
+    font-size: 14px;
+}
+
+.card_info_view a{
+    margin-top: 10px;
+    display: block;
+    color: var(--color-rocket);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* Pag. Detalhe Chef */
+
+.author-img-rounded{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.author-info{
+    margin: 30px auto;
     text-align: center;
 }
 
-.notFound h1{
-    font-size: 24px;
-    line-height: 34px;
+.author-info-title {
+    color: var(--color-blackGray);
+    font-size: 36px;
     font-weight: bold;
+    display: block;
 }
 
-.notFound p{
-    /* max-width: 600px; */
-    margin: 5px auto;
-    font-size: 18px;
-    line-height: 28px;
-}
-
-.notFound img{
-    margin: 38px auto;
+.author-info-subtitle{
+    font-size: 20px;
+    color: var(--color-graySoft2);
+    text-align: center;
+    display: block;
 }
 
 /* Área de Administração */
 
-.recipes-container-admin{
-    margin: 0;
+.recipes_container{ 
+    margin-top: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
@@ -274,6 +360,7 @@ footer p{
     width: 172px;
     height: 80px;
     border-radius: 15px;
+    border: 1px solid #111111;
 }
 
 .recipes-name-admin{
@@ -295,13 +382,13 @@ footer p{
 }
 
 .intro{
-    margin-top: 55px;
+    margin-top: 50px;
     margin-bottom: 24px;
-    font-size: 24px;
 }
 
 .intro-text{
     display: inline-block;
+    font-size: 24px;
 }
 
 .intro-btn{
@@ -350,6 +437,28 @@ form input, textarea{
     border-radius: 4px;
 }
 
+/* Pag. 404*/
+
+.notFound{
+    text-align: center;
+}
+
+.notFound h1{
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: bold;
+}
+
+.notFound p{
+    /* max-width: 600px; */
+    margin: 5px auto;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.notFound img{
+    margin: 38px auto;
+}
 
 /* Responsividade */
 

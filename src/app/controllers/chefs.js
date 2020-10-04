@@ -8,10 +8,12 @@ module.exports = {
         return res.render('admin/chefs/index.njk')
     },
 
+    //Função para REDIRECIONAR para a pag de Create
     redirectCreate(req, res){
         return res.render('admin/chefs/create.njk')
     },
 
+    //Função para CADASTRAR um novo Chef
     post(req, res){
 
         const keys = Object.keys(req.body)          //Aqui eu pego todos os campos(keys) do formulário de chefs
@@ -43,6 +45,22 @@ module.exports = {
             return res.redirect(`/chefs/${results.rows[0].id}`)
         })
 
-    }
+    },
+
+    //Função para MOSTRAR os detalhes da receitas
+    show(req, res){
+
+        return res.render('admin/chefs/details.njk')
+
+    },
+
+    //Função para CARREGAR INFORMAÇÕES PARA EDITAR
+    edit(req, res){
+
+        return res.render('admin/chefs/edit.njk')
+
+    },
+
+
 
 }

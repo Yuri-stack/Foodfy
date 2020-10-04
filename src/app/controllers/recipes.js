@@ -30,14 +30,14 @@ module.exports = {
     //Função para MOSTRAR os detalhes da receitas
     show(req, res){
 
-        return
+        return res.render('admin/recipes/details.njk')   
 
     },
 
     //Função para CARREGAR INFORMAÇÕES PARA EDITAR
     edit(req, res){
 
-        return
+        return res.render('admin/recipes/edit.njk')
 
     },
 

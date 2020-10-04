@@ -1,0 +1,101 @@
+{% extends "layouts/admin.njk" %} 
+
+    {% block head %}
+        <title>Chef - Nome do Chef {{ chef.name }}</title>
+    {% endblock %}
+
+    {% block container %}
+
+        <section class="intro">
+
+            <div class="intro-text">
+                <h1>Chef: Nome do Chef {{ chef.name }}</h1>
+            </div>
+
+            <div class="intro-btn">
+                <a href="1/edit">Editar Chef</a>
+            </div>
+            
+        </section>
+
+        <section>
+    
+            <img 
+                class="author-img-rounded"
+                src="https://conteudo.imguol.com.br/c/entretenimento/fa/2015/09/11/paola-carosella-1442002659696_615x300.jpg" alt="Imagem de {{ recipe.name }}">
+
+            <div class="author-info">
+                <span class="author-info-title">Paola Carosella</span>
+                <span class="author-info-subtitle">4 Receitas</span>
+            </div>
+
+        </section>
+
+        <section>
+
+            <div class="intro-text"> 
+                <h1>Receitas</h1>
+            </div>
+
+        </section>
+
+        <section class="recipes_container">
+
+            <div class="card_secondary">
+
+                <img class="card_img"
+                    src="https://conteudo.imguol.com.br/c/entretenimento/fa/2015/09/11/paola-carosella-1442002659696_615x300.jpg" alt="">
+
+                <div class="card_info">
+                    <span class="card_info_title">Nome da Receita</span>
+                    <span class="card_info_subtitle">Nome do Autor</span>
+                    <span class="card_info_view">
+                        <a href="/admin/recipes/{{ recipe.id }}">
+                            Visualizar
+                        </a>
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="card_secondary">
+
+                <img class="card_img"
+                    src="https://conteudo.imguol.com.br/c/entretenimento/fa/2015/09/11/paola-carosella-1442002659696_615x300.jpg" alt="">
+
+                <div class="card_info">
+                    <span class="card_info_title">Nome da Receita</span>
+                    <span class="card_info_subtitle">Nome do Autor</span>
+                    <span class="card_info_view">
+                        <a href="/admin/recipes/{{ recipe.id }}">
+                            Visualizar
+                        </a>
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="card_secondary">
+
+                <img class="card_img"
+                    src="https://conteudo.imguol.com.br/c/entretenimento/fa/2015/09/11/paola-carosella-1442002659696_615x300.jpg" alt="">
+
+                <div class="card_info">
+                    <span class="card_info_title">Nome da Receita</span>
+                    <span class="card_info_subtitle">Nome do Autor</span>
+                    <span class="card_info_view">
+                        <a href="/admin/recipes/{{ recipe.id }}">
+                            Visualizar
+                        </a>
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>  
+
+    {% endblock %}
+
+</html>

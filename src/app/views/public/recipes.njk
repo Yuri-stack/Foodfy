@@ -1,4 +1,4 @@
-{% extends "layouts/public.njk" %} 
+{% extends "layouts/public.njk" %}  
 
         {% block head%}
             <title>Receitas</title>
@@ -8,24 +8,32 @@
 
             <section class="recipes-container">
 
-            {% for recipe in recipes %}
+            {# {% for recipe in recipes %} #}
                 
                 <div class="recipes" id="{{ recipe.id }}">
                 
                     <div class="page-recipes-img">
-                        <img src="{{ recipe.image_url }}" alt="Imagem de {{ recipe.name }}">
+                        <img src="https://conteudo.imguol.com.br/c/entretenimento/fa/2015/09/11/paola-carosella-1442002659696_615x300.jpg" alt="Imagem de {{ recipe.name }}">
                     </div>
 
                     <div class="recipes-name">
-                        <p>{{ recipe.name }}</p>
+                        <p>Nome</p>
                     </div>
+
+                    {# <div class="recipes-name">
+                        <p>{{ recipe.name }}</p>
+                    </div> #}
 
                     <div class="recipes-author">
-                        <p>{{ recipe.author }}</p>
+                        <p>Nome Autor</p>
                     </div>
+
+                    {# <div class="recipes-author">
+                        <p>{{ recipe.author }}</p>
+                    </div> #}
                 </div>
 
-            {% endfor %}
+            {# {% endfor %} #}
 
             </section>
 

@@ -9,6 +9,7 @@ const chefs = require('./app/controllers/chefs')
 routes.get('/', function(req, res){ return res.redirect('/index') })
 routes.get('/about', function(req,res){ return res.render('public/about') })
 routes.get('/index', public.index)
+routes.get('/chefs', function(req, res){ return res.render('public/chefs')})
 routes.get('/recipes', public.list)
 routes.get('/recipes/:id', public.show)
 
@@ -22,8 +23,10 @@ routes.put("/admin/recipes", recipes.put);                      // Editar uma re
 routes.delete("/admin/recipes", recipes.delete);                // Deletar uma receita
 
 // Rotas para a Administração das Receitas
-routes.get("/admin/chefs", chefs.index);                    // Mostrar a lista de chefs
-routes.get("/admin/chefs/create", chefs.redirectCreate);    // Mostrar formulário de novo chef
-routes.post("/admin/chefs", chefs.post);                    // Cadastrar um novo chef
+routes.get("/admin/chefs", chefs.index);                        // Mostrar a lista de chefs
+routes.get("/admin/chefs/create", chefs.redirectCreate);        // Mostrar formulário de novo chef
+routes.get("/admin/chefs/:id", chefs.show);                     // Exibir detalhes de um chef
+routes.get("/admin/chefs/:id/edit", chefs.edit);                // Mostrar formulário de edição de chef
+routes.post("/admin/chefs", chefs.post);                        // Cadastrar um novo chef
 
 module.exports = routes
