@@ -9,29 +9,29 @@
         <section class="intro">
 
             <div class="intro-text">
-                <h1>Editando receita</h1>
+                <h1>Editando Chef</h1>
             </div>
 
             <div class="intro-btn">
                 <button class="btn-delete" type="submit" form="form-delete">Deletar</button>
-                <button class="btn-salve" type="submit" form="form-save">Salvar Receita</button>
+                <button class="btn-salve" type="submit" form="form-save">Salvar Chef</button>
             </div>
 
         </section>
 
         <section class="details-admin">
 
-            <form id="form-save" method="post" action="/admin/recipes?_method=PUT">
+            <form id="form-save" method="post" action="/admin/chef?_method=PUT">
 
-                <input type="hidden" name="id" value="{{ recipe.id }}">
+                <input type="hidden" name="id" value="{{ chef.id }}">
 
                 {% include 'admin/chefs/fields.njk' %}
                 
             </form>  
 
-            <form id="form-delete" method="post" action="/admin/recipes?_method=DELETE">
+            <form id="form-delete" method="post" action="/admin/chef?_method=DELETE">
             
-                <input type="hidden" name="id" value="{{ recipe.id }}">
+                <input type="hidden" name="id" value="{{ chef.id }}">
             
             </form>     
 

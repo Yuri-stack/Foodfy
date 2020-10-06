@@ -1,7 +1,7 @@
 {% extends "layouts/admin.njk" %} 
 
     {% block head %}
-        <title>Chef - Nome do Chef {{ chef.name }}</title>
+        <title>Chef {{ chef.name }}</title>
     {% endblock %}
 
     {% block container %}
@@ -9,11 +9,11 @@
         <section class="intro">
 
             <div class="intro-text">
-                <h1>Chef: Nome do Chef {{ chef.name }}</h1>
+                <h1>Chef: {{ chef.name }}</h1>
             </div>
 
             <div class="intro-btn">
-                <a href="1/edit">Editar Chef</a>
+                <a href="{{ chef.id }}/edit">Editar Chef</a>
             </div>
             
         </section>
@@ -22,10 +22,10 @@
     
             <img 
                 class="author-img-rounded"
-                src="https://conteudo.imguol.com.br/c/entretenimento/fa/2015/09/11/paola-carosella-1442002659696_615x300.jpg" alt="Imagem de {{ recipe.name }}">
+                src="{{ chef.avatar_url }}" alt="Imagem de {{ chef.name }}">
 
             <div class="author-info">
-                <span class="author-info-title">Paola Carosella</span>
+                <span class="author-info-title">{{ chef.name }}</span>
                 <span class="author-info-subtitle">4 Receitas</span>
             </div>
 
