@@ -1,7 +1,7 @@
 const Chef = require('../models/Chef')
 
 module.exports = {
-
+ 
     //Função para LISTAR as receitas no Index da Administração
     index(req, res){
 
@@ -55,6 +55,32 @@ module.exports = {
             return res.render('admin/chefs/edit', { chef })
         })
 
+
+    },
+
+    //Função para ATUALIZAR
+    put(req, res){
+
+        const keys = Object.keys(req.body)          //Aqui eu pego todos os campos(keys) do formulário de chefs
+
+        for(key of keys){                           //verificando se cada key está preenchidas
+            if(req.body[key] == ""){                //é o mesmo que fazer req.body.(cada item do vetor) == ""
+                return res.send("Please fill in all the fields!") 
+            }
+        }
+
+        Chef.update(req.body, function() {
+            return res.redirect(`/admin/chefs/${req.body.id}`)
+        })
+
+    },
+
+    //Função para APAGAR
+    delete(req, res){
+
+        Chef.delete(req.body.id, function() {
+            return res.redirect(`/admin/chefs`)
+        })
 
     }
 

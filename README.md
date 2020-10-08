@@ -41,7 +41,7 @@
 ## Explored and implemented concepts
 
 - [X] MVC Model
-- [X] Individual pages for each recipe
+- [X] Individual pages for each recipe and chef
 - [X] Database creation
 - [X] Creation and connection to the database
 - [ ] Applying CRUD for chefs and recipes

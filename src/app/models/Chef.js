@@ -7,13 +7,13 @@ module.exports = {
     all(callback){
 
         db.query(`SELECT * FROM chefs`, function(err, results){
-            if(err) return res.send("Database Error!")
+            if(err) throw `Database Error! ${err}`
 
             callback(results.rows)
         })
 
     },
-
+ 
     //Função para CRIAR um novo Chef
     create(data, callback){         //data aqui é o req.body
 
@@ -33,7 +33,7 @@ module.exports = {
         ]
 
         db.query(query, values, function(err, results){
-            if(err) return res.send("Database Error!")
+            if(err) throw `Database Error! ${err}`
 
             callback(results.rows[0])
 
@@ -51,5 +51,39 @@ module.exports = {
                 callback(results.rows[0])
         })
 
+    },
+
+    //Função para atualizar um Instrutor
+    update(data, callback){
+
+        const query = `
+            UPDATE chefs SET
+                name = ($1),
+                avatar_url = ($2)
+            WHERE id = $3
+        `
+
+        const values = [
+            data.name,
+            data.avatar_url,
+            data.id
+        ]
+
+        db.query(query, values, function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            callback()
+        })
+
+    },
+
+    //Função para apagar um Instrutor
+    delete( id, callback ){
+
+        db.query(`DELETE FROM chefs WHERE id = $1`, [id], function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            return callback()
+        })
     }
 }

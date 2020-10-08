@@ -21,17 +21,18 @@
 
         <section class="details-admin">
 
-            <form id="form-save" method="post" action="/admin/chef?_method=PUT">
+            <form id="form-save" method="post" action="/admin/chefs?_method=PUT">
 
                 <input type="hidden" name="id" value="{{ chef.id }}">
+                {# utilizando esse campo para poder mandar o ID para o backend, quando formos atualizar algum registro #}
 
                 {% include 'admin/chefs/fields.njk' %}
                 
-            </form>  
+            </form>
 
-            <form id="form-delete" method="post" action="/admin/chef?_method=DELETE">
+            <form id="form-delete" method="post" action="/admin/chefs?_method=DELETE">
             
-                <input type="hidden" name="id" value="{{ chef.id }}">
+                 <input type="hidden" name="id" value="{{ chef.id }}">
             
             </form>     
 

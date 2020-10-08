@@ -28,5 +28,7 @@ routes.get("/admin/chefs/create", chefs.redirectCreate);        // Mostrar formu
 routes.get("/admin/chefs/:id", chefs.show);                     // Exibir detalhes de um chef
 routes.get("/admin/chefs/:id/edit", chefs.edit);                // Mostrar formulário de edição de chef
 routes.post("/admin/chefs", chefs.post);                        // Cadastrar um novo chef
+routes.put('/admin/chefs', chefs.put);                          // Editar um chef
+routes.delete("/admin/chefs", chefs.delete);                    // Deletar um chef
 
 module.exports = routes
