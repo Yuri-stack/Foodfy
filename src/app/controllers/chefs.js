@@ -3,10 +3,10 @@ const Chef = require('../models/Chef')
 module.exports = {
  
     //Função para LISTAR as receitas no Index da Administração
-    index(req, res){
+    index(req, res){ 
 
         Chef.all(function(chefs){
-            return res.render('admin/chefs/index.njk', { chefs })
+            return res.render('admin/chefs/index', { chefs })
         })
 
     },
@@ -28,7 +28,7 @@ module.exports = {
         }
 
         Chef.create(req.body, function(chef){
-            return res.redirect(`/chefs/${ chef.id }`)
+            return res.redirect(`/admin/chefs/${ chef.id }`)
         })
 
     },
@@ -36,7 +36,7 @@ module.exports = {
     //Função para MOSTRAR os detalhes da receitas
     show(req, res){
 
-        Chef.find(req.params.id, function(chef){
+        Chef.chefRecipes(req.params.id, function(chef){
             
             if(!chef) return res.send("Chef not found")
 

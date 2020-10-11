@@ -47,6 +47,7 @@
 - [ ] Applying CRUD for chefs and recipes
 - [ ] Relationships between tables
 - [ ] Search filters
+<!-- - [ ] Applying CRUD for chefs and recipes -->
 ## Getting started
 
 Coming soon

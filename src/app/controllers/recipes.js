@@ -1,13 +1,23 @@
+const Recipe = require('../models/Recipe')
+
 module.exports = {
 
     //Função para LISTAR as receitas no Index da Administração
     index(req, res){
-        return res.render('admin/recipes/index')
+        
+        Recipe.all(function(recipes){
+            return res.render('admin/recipes/index', { recipes })
+        })
+
     },
 
     //Função para REDIRECIONAR para a pag de Create
     redirectCreate(req, res){
-        return res.render('admin/recipes/create')
+
+        Recipe.chefSelectOptions(function(options){
+            return res.render('admin/recipes/create', { chefOptions : options })
+        })
+
     },
 
     //Função para CADASTRAR uma nova receita
@@ -21,23 +31,36 @@ module.exports = {
             }
         }
 
-        let { image_url, name, author, ingredients, preparation, information} = req.body   //desestruturando o req.body
-
-        return
+        Recipe.create(req.body, function(recipe){
+            return res.redirect(`/admin/recipes/${ recipe.id }`)
+        })
 
     },
 
     //Função para MOSTRAR os detalhes da receitas
     show(req, res){
 
-        return res.render('admin/recipes/details.njk')   
+        Recipe.find(req.params.id, function(recipe){
+
+            if(!recipe) return res.send("Recipe not found")
+
+            return res.render('admin/recipes/details', { recipe })   
+        })
 
     },
 
     //Função para CARREGAR INFORMAÇÕES PARA EDITAR
     edit(req, res){
 
-        return res.render('admin/recipes/edit.njk')
+        Recipe.find(req.params.id, function(recipe){
+
+            if(!recipe) return res.send("Recipe not found")
+
+            Recipe.chefSelectOptions(function(options){
+                return res.render('admin/recipes/edit', { recipe, chefOptions : options })
+            })
+
+        })
 
     },
 
@@ -52,14 +75,18 @@ module.exports = {
             }
         }
 
-        return
+        Recipe.update(req.body, function(){
+            return res.redirect(`/admin/recipes/${req.body.id}`)
+        })
 
     },
 
     //Função para APAGAR as receitas
     delete(req, res){
 
-        return
+         Recipe.delete(req.body.id, function(){
+            return res.redirect(`/admin/recipes`)
+         })
     
     }
 

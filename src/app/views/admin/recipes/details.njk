@@ -1,7 +1,7 @@
 {% extends "layouts/admin.njk" %} 
 
     {% block head %}
-        <title>Receita - {{ recipe.name }}</title>
+        <title>Receita - {{ recipe.title }}</title>
     {% endblock %}
 
     {% block container %}
@@ -9,11 +9,11 @@
         <section class="intro">
 
             <div class="intro-text">
-                <h1>Receita: {{ recipe.name }}</h1>
+                <h1>Receita: {{ recipe.title }}</h1>
             </div>
 
             <div class="intro-btn">
-                 <a href="1/edit">Editar Receita</a>
+                 <a href="{{ recipe.id }}/edit">Editar Receita</a>
             </div>
             
         </section>
@@ -21,12 +21,12 @@
         <section class="recipe-details-container-admin">
     
             <div class="recipe-img">
-                <img src="{{ recipe.image_url }}" alt="Imagem de {{ recipe.name }}">
+                <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
             </div>
 
             <div class="recipe-name">
-                <h1>{{ recipe.name }}</h1>
-                <h3>por {{ recipe.author }}</h3>
+                <h1>{{ recipe.title }}</h1>
+                <h3>por {{ recipe.chef_name }}</h3>
             </div>
 
                 <h1>Ingredientes</h1>

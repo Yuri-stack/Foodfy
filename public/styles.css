@@ -427,7 +427,7 @@ form div:first-child{
     font-weight: bold;
 }
 
-form input, textarea{
+form input, textarea, select{
     width: 95%;
     color: #555;
     padding: 15px 20px;

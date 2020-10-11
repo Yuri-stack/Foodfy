@@ -2,7 +2,7 @@
 
         <div>Imagem da receita</div>
         <div>
-            <input type="url" name="image_url" placeholder="Insira a URL da imagem" value="{{ recipe.image_url }}" required>
+            <input type="url" name="image_url" placeholder="Insira a URL da imagem" value="{{ recipe.image }}" required>
         </div>
 
     </div>
@@ -10,14 +10,21 @@
     <div class="item">
         <div>Nome da Receita</div>
         <div>
-            <input type="text" name="name" placeholder="Insira o nome da Receita" value="{{ recipe.name }}" required>
+            <input type="text" name="title" placeholder="Insira o nome da Receita" value="{{ recipe.title }}" required>
         </div>
     </div>
 
     <div class="item">
-        <div>Nome do Autor</div>
+        <div>Nome do Chef</div>
+
         <div>
-            <input type="text" name="author" placeholder="Insira o nome do Autor" value="{{ recipe.author }}" required>
+            <select name="chef">
+                    {% for chef in chefOptions %}
+                        <option value="{{ chef.id }}" {% if recipes.chefs_id == "chef.id" %} selected {% endif%}>
+                            {{ chef.name }}
+                        </option>
+                    {% endfor %}
+            </select>
         </div>
     </div>
 
