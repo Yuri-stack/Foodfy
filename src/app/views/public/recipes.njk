@@ -8,32 +8,27 @@
 
             <section class="recipes-container">
 
-            {# {% for recipe in recipes %} #}
+            {% for recipe in recipes %}
                 
                 <div class="recipes" id="{{ recipe.id }}">
                 
                     <div class="page-recipes-img">
-                        <img src="https://conteudo.imguol.com.br/c/entretenimento/fa/2015/09/11/paola-carosella-1442002659696_615x300.jpg" alt="Imagem de {{ recipe.name }}">
+                        <a href="/recipes/{{ recipe.id }}">
+                            <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.name }}">
+                        </a>
                     </div>
 
                     <div class="recipes-name">
-                        <p>Nome</p>
+                        <p>{{ recipe.title }}</p>
                     </div>
-
-                    {# <div class="recipes-name">
-                        <p>{{ recipe.name }}</p>
-                    </div> #}
 
                     <div class="recipes-author">
-                        <p>Nome Autor</p>
+                        <p>{{ recipe.chef_name }}</p>
                     </div>
 
-                    {# <div class="recipes-author">
-                        <p>{{ recipe.author }}</p>
-                    </div> #}
                 </div>
 
-            {# {% endfor %} #}
+            {% endfor %}
 
             </section>
 

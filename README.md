@@ -44,10 +44,10 @@
 - [X] Individual pages for each recipe and chef
 - [X] Database creation
 - [X] Creation and connection to the database
+- [X] Relationships between tables
 - [ ] Applying CRUD for chefs and recipes
-- [ ] Relationships between tables
 - [ ] Search filters
-<!-- - [ ] Applying CRUD for chefs and recipes -->
+
 ## Getting started
 
 Coming soon

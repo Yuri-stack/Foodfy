@@ -25,15 +25,15 @@
             <div class="recipes" id="{{ recipe.id }}"> 
 
                 <div class="recipes-img">
-                    <img src="{{ recipe.image_url }}" alt="Imagem de {{ recipe.name }}">
+                    <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
                 </div>
 
                 <div class="recipes-name">
-                    <p>{{ recipe.name }}</p>
+                    <p>{{ recipe.title }}</p>
                 </div>
 
                 <div class="recipes-author">
-                    <p>{{ recipe.author }}</p>
+                    <p>{{ recipe.chef_name }}</p>
                 </div>
 
             </div>

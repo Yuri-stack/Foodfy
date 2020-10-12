@@ -1,9 +1,9 @@
- const db = require('../../config/db')
- const { date } = require('../../lib/utils')
+const db = require('../../config/db')
+const { date } = require('../../lib/utils')
 
- module.exports = {
+module.exports = {
 
-    //Função para SELECIONAR todas as receitas
+    //Função para SELECIONAR todas as Receitas
     all(callback){
 
         db.query(`
@@ -67,7 +67,7 @@
 
     },
 
-    //Função para atualizar uma Receita
+    //Função para ATUALIZAR uma Receita
     update(data, callback){
 
         const query = `
@@ -99,7 +99,7 @@
 
     },
 
-    //Função para apagar uma Receita
+    //Função para APAGAR uma Receita
     delete(id, callback){
 
         db.query(`DELETE FROM recipes WHERE id = $1`, [id], function(err, results){
@@ -110,7 +110,7 @@
 
     },
 
-    //Função que traz os dados do Chef para o Form do Recipes
+    //Função que CARREGA os nomes dos Chefs para o Form das Receitas
     chefSelectOptions(callback){
 
         db.query(`SELECT name, id FROM chefs`, function(err, results){

@@ -1,8 +1,8 @@
 const Chef = require('../models/Chef')
 
-module.exports = {
+module.exports = { 
  
-    //Função para LISTAR as receitas no Index da Administração
+    //Função para LISTAR os Chefs no Index da Administração
     index(req, res){ 
 
         Chef.all(function(chefs){
@@ -11,7 +11,7 @@ module.exports = {
 
     },
 
-    //Função que REDIRECIONA para a página de criação
+    //Função para REDIRECIONAR para a página de criação
     redirectCreate(req, res){
         return res.render('admin/chefs/create.njk')
     },
@@ -33,7 +33,7 @@ module.exports = {
 
     },
 
-    //Função para MOSTRAR os detalhes da receitas
+    //Função para MOSTRAR os detalhes do Chef
     show(req, res){
 
         Chef.chefRecipes(req.params.id, function(chef){
@@ -45,7 +45,7 @@ module.exports = {
 
     },
 
-    //Função para CARREGAR INFORMAÇÕES PARA EDITAR
+    //Função para CARREGAR informações para editar
     edit(req, res){
 
         Chef.find(req.params.id, function(chef){
