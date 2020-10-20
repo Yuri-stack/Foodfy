@@ -36,11 +36,15 @@ module.exports = {
     //Função para MOSTRAR os detalhes do Chef
     show(req, res){
 
-        Chef.chefRecipes(req.params.id, function(chef){
-            
+        Chef.find(req.params.id, function(chef){
+
             if(!chef) return res.send("Chef not found")
 
-            return res.render("admin/chefs/details", { chef })
+                Chef.chefRecipes(req.params.id, function(recipes){
+
+                    return res.render('admin/chefs/details', { chef, recipes })
+            })
+
         })
 
     },

@@ -105,7 +105,9 @@ module.exports = {
     //Função para RETORNAR os Chefs com suas respectivas Receitas
     chefRecipes(id, callback){
 
-        let query = ""
+        let 
+            query = ""
+            countRecipe = ""
             // recipeQuery = ""
 
         // recipeQuery = `(
@@ -119,17 +121,44 @@ module.exports = {
         //     FROM recipes
         //     LEFT JOIN chefs ON (recipes.chef_id = chefs.id)`
         
+        // countRecipe = `
+        //     SELECT count(recipes) 
+        //     FROM chefs
+        //     LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+        //     WHERE chefs.id = $1
+        //     GROUP BY chefs.id
+        // `
+
+        // query = `
+        //     SELECT chefs.*, ${countRecipe} AS total_recipes
+        //     FROM chefs
+        //     LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+        //     WHERE chefs.id = $1
+        //     GROUP BY chefs.id, recipes.id
+        // `
+
+
         query = `
-            SELECT chefs.*, count(recipes) AS total_recipes
+            SELECT recipes.*
             FROM chefs
             LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
             WHERE chefs.id = $1
-            GROUP BY chefs.id
+            GROUP BY chefs.id, recipes.id
         `
+
+        // query = `
+        // SELECT recipes.title
+        //   FROM recipes
+        //   LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+        //   WHERE chefs.id = $1
+        //   GROUP BY recipes.id
+        // `
+
         db.query(query, [id], function(err, results){
                 if(err) throw `Database Error! ${err}`
 
-                callback(results.rows[0])
+                // console.log(results.rows)
+                callback(results.rows)
             }
         )
 
