@@ -10,6 +10,16 @@ module.exports = {
         })
     },
 
+    //Função para REDIRECIONAR para a Pag. Index
+    redirectIndex(req, res){ 
+        return res.redirect('/index') 
+    },
+
+    //Função para REDIRECIONAR para a Pag. Sobre
+    redirectAbout(req,res){ 
+        return res.render('public/about') 
+    },
+
     //Função para LISTAR as receitas na Pag. Receitas
     listRecipes(req, res){
 

@@ -82,8 +82,16 @@ module.exports = {
     //Função para APAGAR
     delete(req, res){
 
-        Chef.delete(req.body.id, function() {
-            return res.redirect(`/admin/chefs`)
+        Chef.find(req.body.id, function(chef){
+
+            if(chef.total_recipes >= 1){
+                return res.send('Chefs que possuem receitas não podem ser apagados')
+            }
+
+            Chef.delete(req.body.id, function() {
+                return res.redirect(`/admin/chefs`)
+            })
+
         })
 
     }

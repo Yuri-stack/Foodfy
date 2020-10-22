@@ -6,12 +6,12 @@ const recipes = require('./app/controllers/recipes')
 const chefs = require('./app/controllers/chefs')
 
 // Rotas Públicas
-routes.get('/', function(req, res){ return res.redirect('/index') })
-routes.get('/about', function(req,res){ return res.render('public/about') })
-routes.get('/index', public.index)
-routes.get('/chefs', public.listChef)
-routes.get('/recipes', public.listRecipes)
-routes.get('/recipes/:id', public.showRecipes)
+routes.get('/', public.redirectIndex)           // Redirecionar para a Pag. Index
+routes.get('/about', public.redirectAbout)      // Redirecionar para a Pag. About
+routes.get('/index', public.index)              // Mostrar a lista de receitas no Index
+routes.get('/chefs', public.listChef)           // Mostrar a lista de chefs
+routes.get('/recipes', public.listRecipes)      // Mostrar a lista de receitas
+routes.get('/recipes/:id', public.showRecipes)  // Exibir detalhes de uma receita
 
 // Rotas para a Administração das Receitas
 routes.get("/admin/recipes", recipes.index)                    // Mostrar a lista de receitas
