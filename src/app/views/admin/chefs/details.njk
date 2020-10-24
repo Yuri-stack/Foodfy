@@ -41,26 +41,34 @@
 
         <section class="recipes_container">
 
-            {% for recipeItem in recipes %}
+            {% if recipes[0].id == null %}
 
-                <div class="card_secondary">
+                Este Chef ainda não possui receitas.
 
-                    <img class="card_img"
-                        src="{{ recipeItem.image }}" alt="{{ recipeItem.title }}">
+            {% else %}
 
-                    <div class="card_info">
-                        <span class="card_info_title">{{ recipeItem.title }}</span>
-                        <span class="card_info_subtitle">Por {{ chef.name }}</span>
-                        <span class="card_info_view">
-                            <a href="/admin/recipes/{{ recipeItem.id }}">
-                                Visualizar
-                            </a>
-                        </span>
+                {% for recipeItem in recipes %}
+
+                    <div class="card_secondary">
+
+                        <img class="card_img"
+                            src="{{ recipeItem.image }}" alt="{{ recipeItem.title }}">
+
+                        <div class="card_info">
+                            <span class="card_info_title">{{ recipeItem.title }}</span>
+                            <span class="card_info_subtitle">Por {{ chef.name }}</span>
+                            <span class="card_info_view">
+                                <a href="/admin/recipes/{{ recipeItem.id }}">
+                                    Visualizar
+                                </a>
+                            </span>
+                        </div>
+
                     </div>
 
-                </div>
-            
-            {% endfor %}
+                {% endfor %}
+
+            {% endif %}
 
         </section>
 
