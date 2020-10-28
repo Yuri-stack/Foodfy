@@ -6,33 +6,35 @@
 
         {% block container %}
 
+        <main> 
+
             <section class="recipes-container">
 
-            {% for recipe in recipes %}
-                
-                <div class="recipes" id="{{ recipe.id }}">
-                
-                    <div class="page-recipes-img">
-                        <a href="/recipes/{{ recipe.id }}">
-                            <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.name }}">
-                        </a>
+                {% for recipe in recipes %}
+
+                    <div class="card" id="{{ recipe.id }}"> 
+
+                        <div>
+                            <a href="/recipes/{{ recipe.id }}">
+                                <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
+                            </a>
+                        </div>
+        
+                        <div class="info_title">
+                            <p>{{ recipe.title }}</p>
+                        </div>
+        
+                        <div class="info_subtitle">
+                            <p>{{ recipe.chef_name }}</p>
+                        </div>
+        
                     </div>
+                    
+                {% endfor %}
 
-                    <div class="recipes-name">
-                        <p>{{ recipe.title }}</p>
-                    </div>
+            </section>  
 
-                    <div class="recipes-author">
-                        <p>{{ recipe.chef_name }}</p>
-                    </div>
-
-                </div>
-
-            {% endfor %}
-
-            </section>
-
-        </section>  
+        </main>
 
         {% endblock %}
 

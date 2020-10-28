@@ -149,58 +149,6 @@ footer p{
     text-align: center;
 }
 
-
-/* 
-
-
-header div{
-    margin-left: 15%;
-}
-
-header div a img.invert{
-    filter: invert(100%);
-}
-
-header .none{
-    opacity: 0;
-    pointer-events: none;
-}
-
-header.black-menu{
-    background-color: var(--color-grayHard);
-    color: #FFF;
-}
-
-nav{
-    line-height: 90px;
-    height: 90px;
-    margin-left: 50px;
-}
-
-nav a{
-    text-decoration: none;
-    font-size: 15px;
-    line-height: 26px;
-    color: var(--color-grayHard);
-    margin-left: 30px;
-}
-
-nav a.active{
-    font-weight: bold;
-}
-
-footer{
-    padding: 24px;
-    background: #EEEEEE;
-    margin-top: 20px;
-}
-
-footer p{
-    font-size: 14px;
-    color: #999999;
-    text-align: center;
-} */
-
 /* =========================== ABOUT/SOBRE =============================== */
 
 .about-container h2, h3{
@@ -223,29 +171,9 @@ footer p{
     line-height: 28px;
 }
 
-/* Receitas/Recipes */
+/* =========================== RECIPES DETAILS / DETALHE RECEITA =============================== */
 
-.page-recipes-img img{
-    width: 300px;
-    height: 140px;
-    border-radius: 15px;
-    cursor: pointer;
-}
-
-/* Pag. Receita Detalhes / Recipe Details Page */
-
-.recipe h1{
-    font-size: 24px;
-    color: var(--color-grayHard);
-}
-
-.recipe .visibility{
-    background: none;
-    color: #999999;
-    font-size: 12px;
-}
-
-.recipe-img img{
+.recipe-principal img{
     border-radius: 15px;
     width: 940px;
     height: 280px;
@@ -254,11 +182,11 @@ footer p{
 .recipe-name{
     margin: 0 auto;
     text-align: center;
-    margin: 50px auto;
+    margin: 50px auto 30px;
 }
 
 .recipe-name h1{
-    font-size: 36px;
+    font-size: 24px;
     color: var(--color-grayHard);
 }
 
@@ -275,10 +203,6 @@ footer p{
     margin-bottom: 39px;
 }
 
-.hide{
-    display: none;
-}
-
 .recipe-info ul{
     margin-left: 18px;
 }
@@ -288,6 +212,18 @@ footer p{
     color: var(--color-grayHard);
     margin-bottom: 20px;
 }
+
+.recipe-container .visibility{
+    background: none;
+    color: #999999;
+    font-size: 12px;
+}
+
+.hide{
+    display: none;
+}
+
+/* =========================== PAGE CHEFS / PÁGINA CHEFS =============================== */
 
 /* Pag. Chefs */
 
