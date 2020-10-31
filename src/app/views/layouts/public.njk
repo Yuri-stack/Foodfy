@@ -8,6 +8,7 @@
             <title>Foodfy</title>
         {% endblock %}
 
+        <link rel="icon" href="img/favicon.png"/>       
         <link rel="stylesheet" href="/styles.css">
     </head>
 
@@ -48,17 +49,25 @@
 
         {% endblock header %}
 
-        {% block container %}
+        <main>
 
-        {% endblock %}
-
-        {% block footer %}
-
-            <footer>
-                <p>Todos os direitos reservados, receitas Foodfy</p>
-            </footer>
+            {% block banner %}
             
-        {% endblock footer %}
+            {% endblock  %}
+
+            {% block container %}
+
+            {% endblock %}
+
+            {% block footer %}
+
+                <footer>
+                    <p>Todos os direitos reservados, receitas Foodfy</p>
+                </footer>
+                
+            {% endblock footer %}
+
+        </main>
 
         <script src="/scripts.js"></script>
 

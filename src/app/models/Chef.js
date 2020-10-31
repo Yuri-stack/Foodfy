@@ -6,7 +6,7 @@ module.exports = {
     //Função para SELECIONAR todos os Chefs
     all(callback){
 
-        let query = `
+        const query = `
             SELECT * 
             FROM chefs
             ORDER BY chefs.id ASC
@@ -50,7 +50,7 @@ module.exports = {
     //Função para RETORNAR os dados dos Chefs
     find(id, callback){
 
-        let query = `
+        const query = `
             SELECT chefs.*, count(recipes) AS total_recipes
             FROM chefs
             LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
@@ -95,7 +95,11 @@ module.exports = {
     //Função para APAGAR um Chef
     delete( id, callback ){
 
-        db.query(`DELETE FROM chefs WHERE id = $1`, [id], function(err, results){
+        const query = `
+            DELETE FROM chefs WHERE id = $1
+        `
+
+        db.query(query, [id], function(err, results){
             if(err) throw `Database Error! ${err}`
 
             return callback()
@@ -105,40 +109,7 @@ module.exports = {
     //Função para RETORNAR os Chefs com suas respectivas Receitas
     chefRecipes(id, callback){
 
-        let 
-            query = ""
-            countRecipe = ""
-            // recipeQuery = ""
-
-        // recipeQuery = `(
-        //     SELECT recipes.id, image, title, chefs.name AS chef_name
-        //     FROM recipes
-        //     LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        //     ) AS recipes
-        //     `
-
-        // SELECT recipes.*, chefs.name AS chef_name
-        //     FROM recipes
-        //     LEFT JOIN chefs ON (recipes.chef_id = chefs.id)`
-        
-        // countRecipe = `
-        //     SELECT count(recipes) 
-        //     FROM chefs
-        //     LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
-        //     WHERE chefs.id = $1
-        //     GROUP BY chefs.id
-        // `
-
-        // query = `
-        //     SELECT chefs.*, ${countRecipe} AS total_recipes
-        //     FROM chefs
-        //     LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
-        //     WHERE chefs.id = $1
-        //     GROUP BY chefs.id, recipes.id
-        // `
-
-
-        query = `
+        const query = `
             SELECT recipes.*
             FROM chefs
             LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
@@ -146,21 +117,10 @@ module.exports = {
             GROUP BY chefs.id, recipes.id
         `
 
-        // query = `
-        // SELECT recipes.title
-        //   FROM recipes
-        //   LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        //   WHERE chefs.id = $1
-        //   GROUP BY recipes.id
-        // `
-
         db.query(query, [id], function(err, results){
-                if(err) throw `Database Error! ${err}`
+            if(err) throw `Database Error! ${err}`
 
-                // console.log(results.rows)
-                callback(results.rows)
-            }
-        )
-
+            callback(results.rows)
+        })
     }, 
 }

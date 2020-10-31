@@ -59,7 +59,6 @@ module.exports = {
             return res.render('admin/chefs/edit', { chef })
         })
 
-
     },
 
     //Função para ATUALIZAR

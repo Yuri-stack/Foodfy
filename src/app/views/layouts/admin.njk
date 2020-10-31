@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"> 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,40 +10,53 @@
 
         <link rel="icon" href="img/favicon.png"/>
         <link rel="stylesheet" href="/styles.css">
-    </head>
+    </head> 
 
     <body>
 
         {% block header %}
 
             <header>
-                <div>
-                    <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
+
+                <div class="container">
+
+                    <div>
+                        <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
+                    </div>
+
+                    <div>
+
+                        <nav>
+                            <a href="/admin/recipes">RECEITAS</a>
+                            <a href="/admin/chefs">CHEFS</a>
+                        </nav>
+
+                    </div>
+        
+                    {# <div>
+                        <form action="" method="get">
+                            <input type="text" name="filter" placeholder="Buscar uma receita">
+                            <button type="submit">Buscar</button>
+                        </form>
+                    </div> #}
+
                 </div>
                 
-                <nav>
-                    <a href="/admin/recipes">RECEITAS</a>
-                    <a href="/admin/chefs">CHEFS</a>
-                </nav>
             </header>
 
         {% endblock header %}
 
-        <section class="wrapper">
+        <main>
 
             {% block container %}
 
             {% endblock %}
         
-        </section>  
+            {% block footer %}
 
-        {% block footer %}
+            {% endblock footer %}
 
-            <footer>
-                <p>Todos os direitos reservados, receitas Foodfy</p>
-            </footer>
-            
-        {% endblock footer %}
+        </main>
 
         <script src="/scripts.js"></script>
 

@@ -1,25 +1,25 @@
 {% extends "layouts/admin.njk" %} 
 
     {% block head %}
-        <title>Foodfy - Administração</title>
+        <title>Foodfy - Administração</title> 
     {% endblock %} 
 
     {% block container %}
 
-        <section class="intro">
+        <section class="control">
 
-            <div class="intro-text">
+            <div>
                 <h1>Editando Chef</h1>
             </div>
 
-            <div class="intro-btn">
+            <div>   
                 <button class="btn-delete" type="submit" form="form-delete">Deletar</button>
                 <button class="btn-salve" type="submit" form="form-save">Salvar Chef</button>
             </div>
 
         </section>
 
-        <section class="details-admin">
+        <section class="details-chefs container">
 
             <form id="form-save" method="post" action="/admin/chefs?_method=PUT">
 
@@ -32,7 +32,7 @@
 
             <form id="form-delete" method="post" action="/admin/chefs?_method=DELETE">
             
-                 <input type="hidden" name="id" value="{{ chef.id }}">
+                <input type="hidden" name="id" value="{{ chef.id }}">
             
             </form>     
 
@@ -48,7 +48,7 @@
                     }
                 })
 
-            </script>  
+            </script> 
 
         </section>
 

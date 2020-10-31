@@ -6,109 +6,56 @@
 
         {% block container %}
 
-            <main>
+            <section class="recipe container">
 
-                <section class="recipe-container">
+                <section class="recipe-principal">
 
-                    <section class="recipe-principal">
+                    <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
 
-                        <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
-
-                        <div class="recipe-name">
-                            <h1>{{ recipe.title }}</h1>
-                            <h3>por {{ recipe.chef_name }}</h3>
-                        </div>
-
-                    </section>
-
-                    <h1>Ingredientes <button class="visibility">ESCONDER</button></h1>
-
-                    <section class="recipe-info">
-
-                        <ul>
-                            {% for item in recipe.ingredients %}
-                                <li>{{ item }}</li>
-                            {% endfor %}
-                        </ul>
-
-                    </section>
-
-                    <h1>Modo de Preparo <button class="visibility">ESCONDER</button></h1> 
-
-                    <section class="recipe-info">
-
-                        <ul>
-                            {% for item in recipe.preparation %}
-                                <li>{{ item }}</li>
-                            {% endfor %}
-                        </ul> 
-
-                    </section>  
-
-                    <h1>Informações adicionais <button class="visibility">ESCONDER</button></h1>
-
-                    <section class="recipe-info">
-                        <p>
-                            {% if(recipe.information == "")%}
-                                Não há informações adicionais para essa receita.
-                            {% else %}
-                                {{ recipe.information | striptags(true) | escape | nl2br }}
-                            {% endif %}
-                        </p>
-                    </section>
+                    <div class="recipe-intro">
+                        <span class="info-title">{{ recipe.title }}</span>
+                        <span class="info-subtitle">por {{ recipe.chef_name }}</span>
+                    </div>
 
                 </section>
 
-            </main>
+                <h1>Ingredientes <button class="visibility">ESCONDER</button></h1>
 
-            {# <section class="recipe-details-container">
+                <section class="recipe-info">
 
-                <div class="recipe">
-                
-                    <div class="recipe-img">
-                        <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
-                    </div>
+                    <ul>
+                        {% for item in recipe.ingredients %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
 
-                    <div class="recipe-name">
-                        <h1>{{ recipe.title }}</h1>
-                        <h3>por {{ recipe.chef_name }}</h3>
-                    </div>
+                </section>
 
-                        <h1>Ingredientes <button class="visibility">ESCONDER</button></h1>
+                <h1>Modo de Preparo <button class="visibility">ESCONDER</button></h1> 
 
-                    <div class="recipe-info">
-                        <ul>
-                            {% for item in recipe.ingredients %}
-                                <li>{{ item }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                <section class="recipe-info">
 
-                        <h1>Modo de Preparo <button class="visibility">ESCONDER</button></h1>   
+                    <ul>
+                        {% for item in recipe.preparation %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul> 
 
-                    <div class="recipe-info">
-                        <ul>
-                            {% for item in recipe.preparation %}
-                                <li>{{ item }}</li>
-                            {% endfor %}
-                        </ul>                     
-                    </div>
+                </section>  
 
-                        <h1>Informações adicionais <button class="visibility">ESCONDER</button></h1>
+                <h1>Informações adicionais <button class="visibility">ESCONDER</button></h1>
 
-                    <div class="recipe-info">
-                        <p>
-                            {% if(recipe.information == "")%}
-                                Não há informações adicionais para essa receita.
-                            {% else %}
-                                {{ recipe.information | striptags(true) | escape | nl2br }}
-                            {% endif %}
-                        </p>
-                    </div>
+                <section class="recipe-info">
+                    <p>
+                        {% if(recipe.information == "")%}
+                            Não há informações adicionais para essa receita.
+                        {% else %}
+                            {{ recipe.information | striptags(true) | escape | nl2br }}
+                        {% endif %}
+                    </p>
+                </section>
 
-                </div>
-
-            </section> #}
+            </section>
 
         {% endblock %}
 

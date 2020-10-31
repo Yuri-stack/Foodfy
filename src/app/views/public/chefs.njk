@@ -2,24 +2,19 @@
 
     {% block container %}
 
-        <section class="chefs_container">
-
+        <section class="chefs container">
+            
             {% for chef in chefs %}
 
-                <div class="card_secondary">
+                <div class="card-horizontal">
 
-                    <img class="card_img_rounded" 
+                    <img class="img_circular" 
                         src="{{ chef.avatar_url }}" 
                     >
 
                     <div class="card_info">
-                        <span class="card_info_title">{{ chef.name }}</span>
-                        <span class="card_info_subtitle">{{ chef.total_recipes }} receitas</span>
-                        {# <span class="card_info_view">
-                            <a href="/admin/chefs/{{ chef.id }}">
-                                Visualizar
-                            </a>
-                        </span> #}
+                        <span class="info_title">{{ chef.name }}</span>
+                        <span class="info_subtitle">{{ chef.total_recipes }} receitas</span>
                     </div>
 
                 </div>

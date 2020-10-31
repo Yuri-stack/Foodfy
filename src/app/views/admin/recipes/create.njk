@@ -6,25 +6,25 @@
 
     {% block container %}
 
-        <section class="intro">
+        <section class="control">
 
-            <div class="intro-text">
+            <div>
                 <h1>Criando Receita</h1>
             </div>
 
-            <div class="intro-btn">
+            <div>
                 <button class="btn-salve" type="submit" form="form-save">Salvar Receita</button>
             </div>
 
         </section>
 
-        <section class="details-admin">
-
+        <section class="recipe container">
+        
             <form id="form-save" method="POST" action="/admin/recipes">
 
                 {% include 'admin/recipes/fields.njk' %}
 
-            </form>         
+            </form>
 
         </section>
 

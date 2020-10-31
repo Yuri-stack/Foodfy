@@ -1,6 +1,6 @@
 {% extends "layouts/public.njk" %} 
 
-    {% block container %}
+    {% block banner %}
 
         <section class="banner">
             
@@ -11,44 +11,46 @@
                         profissionais do mundo inteiro.</p>
                 </div>
                 <div class="banner-img">
-                   <img src="assets/chef.png" alt="Chef da Foodfy">
+                    <img src="assets/chef.png" alt="Chef da Foodfy">
                 </div>
             </div>
 
         </section>
 
-        <main>
+    {% endblock banner %}
 
+    {% block container %}
+
+        <section class="title">
             <h2>Mais acessadas</h2>
+        </section>
 
-            <section class="recipes-container">
+        <section class="recipes container">
 
-                {% for recipe in recipes %}
+            {% for recipe in recipes %}
 
-                    <div class="card" id="{{ recipe.id }}"> 
+                <div class="card" id="{{ recipe.id }}"> 
 
-                        <div>
-                            <a href="/recipes/{{ recipe.id }}">
-                                <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
-                            </a>
-                        </div>
-        
-                        <div class="info_title">
-                            <p>{{ recipe.title }}</p>
-                        </div>
-        
-                        <div class="info_subtitle">
-                            <p>{{ recipe.chef_name }}</p>
-                        </div>
-        
+                    <div>
+                        <a href="/recipes/{{ recipe.id }}">
+                            <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
+                        </a>
                     </div>
+    
+                    <div class="info_title">
+                        <p>{{ recipe.title }}</p>
+                    </div>
+    
+                    <div class="info_subtitle">
+                        <p>{{ recipe.chef_name }}</p>
+                    </div>
+    
+                </div>
 
-                {% endfor %}
-                
-            </section>
+            {% endfor %}
             
-        </main>
-
+        </section>
+            
     {% endblock %}
 
 </html>

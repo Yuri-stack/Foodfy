@@ -5,7 +5,7 @@ module.exports = {
     //Função para SELECIONAR todas as Receitas
     allRecipes(callback){
 
-        let query = `
+        const query = `
             SELECT recipes.*, chefs.name AS chef_name
             FROM recipes
             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
@@ -22,7 +22,7 @@ module.exports = {
     //Função para SELECIONAR todos os Chefs
     allChefs(callback){
 
-        let query = `
+        const query = `
             SELECT chefs.*, count(recipes) AS total_recipes
             FROM chefs
             LEFT JOIN recipes ON (chefs.id = recipes.chef_id) 
@@ -39,7 +39,7 @@ module.exports = {
     //Função para RETORNAR os dados das Receitas
     showRecipes(id, callback){
 
-        let query = `
+        const query = `
             SELECT recipes.*, chefs.name AS chef_name
             FROM recipes
             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)

@@ -4,12 +4,16 @@ const { date } = require('../../lib/utils')
 module.exports = {
 
     //Função para SELECIONAR todas as Receitas
-    all(callback){
+    all(callback){ 
 
-        db.query(`
+        const query = `
             SELECT recipes.*, chefs.name AS chef_name
             FROM recipes
-            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)`, function(err, results){
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+            ORDER BY recipes.id ASC        
+        `
+
+        db.query(query, function(err, results){
                 if(err) throw `Database error! ${err}`
 
                 callback(results.rows)
@@ -51,19 +55,21 @@ module.exports = {
 
     },
 
-    //Função para RETORNAR as Receitas
+    //Função para RETORNAR os dados das Receitas
     find(id, callback){
 
-        db.query(`
+        const query = `
             SELECT recipes.*, chefs.name AS chef_name
             FROM recipes
             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-            WHERE recipes.id = $1`, [id], function(err, results){
-                if(err) throw `Database Error! ${err}`
+            WHERE recipes.id = $1
+        `
 
-                callback(results.rows[0])
-            }
-        )
+        db.query(query, [id], function(err, results){
+            if(err) throw `Database error! ${err}`
+
+            callback(results.rows[0])
+    })
 
     },
 
@@ -102,7 +108,11 @@ module.exports = {
     //Função para APAGAR uma Receita
     delete(id, callback){
 
-        db.query(`DELETE FROM recipes WHERE id = $1`, [id], function(err, results){
+        const query = `
+            DELETE FROM recipes WHERE id = $1
+        `
+
+        db.query(query, [id], function(err, results){
             if(err) throw `Database Error! ${err}`
 
             callback()
@@ -113,7 +123,11 @@ module.exports = {
     //Função que CARREGA os nomes dos Chefs para o Form das Receitas
     chefSelectOptions(callback){
 
-        db.query(`SELECT name, id FROM chefs`, function(err, results){
+        const query = `
+            SELECT name, id FROM chefs
+        `
+
+        db.query(query, function(err, results){
             if(err) throw `Database error! ${err}`
 
             callback(results.rows)

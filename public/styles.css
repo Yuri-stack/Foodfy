@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 :root{
-    --color-graySoft: #666666;
+    --color-graySoft: #666666; 
     --color-graySoft2: #777777;
     --color-gray: #444444;
     --color-grayHard: #111111;
@@ -17,15 +17,22 @@
     font-family: "Roboto", sans-serif;
 }
 
-html,
-body {
-    height: 100vh;
-}
-
 /* MENU */
 
 header{
     height: 80px;
+}
+
+header.black-menu {
+    background-color: var(--color-grayHard);
+}
+
+header.black-menu img{
+    filter: invert(100%);
+}
+
+header.black-menu .container a{
+    color: white;
 }
 
 header .container {
@@ -50,6 +57,16 @@ header .container nav a{
 
 header .container nav a.active{
     font-weight: bold;
+}
+
+/* CONTAINER */
+
+.container {
+    max-width: 940px;
+    margin: 0 auto 50px;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
 }
 
 /* BANNER */
@@ -95,13 +112,24 @@ section.banner .container .banner-img{
 /* MAIN */
 
 main{
-    margin: 0 auto;
-    max-width: 940px;
+    min-height: 87vh;
+    position: relative;
+    padding-bottom: 62px;
+    overflow: hidden;
 }
 
-.recipes-container{
-    margin: 0;
-    margin-top: 10px;
+.title{
+    max-width: 940px;
+    margin: 0 auto 20px;
+    width: 100%;
+    /* overflow-x: hidden; */
+    /* position: relative; */
+}
+
+/* CONTAINER DAS RECEITAS 3X */
+
+.recipes{
+    margin: 10px auto 50px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
@@ -130,17 +158,68 @@ main{
     margin: 20px 0 5px;
 }
 
-.card .info_subtitle{
+.card .info_subtitle {
     font-size: 14px;
     color: var(--color-graySoft);
 }
 
-/* FOOTER */
+/* CARDS HORIZONTAIS*/
 
-footer{
-    padding: 24px;
+.card-horizontal{   /* Div que representa cada Card*/
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    grid-gap: 20px;
+    width: 100%;    /*Tem 100% de largura para que o nome do Chef fique em uma linha*/
+}
+
+.card-horizontal .img_circular {
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    object-fit: cover;   /*Prop. especifica como o conteúdo de um elemento deve ser ajustado à caixa estabelecida pela altura e largura usadas*/
+}
+
+.card-horizontal .img_rounded{
+    border-radius: 5%;
+    max-width: 172px;
+    min-height: 80px;
+    object-fit: cover;
+}
+
+a.card,
+a.card-horizontal {
+    text-decoration: none;
+}
+
+.card_info .info_title{
+    color: #111111;
+    font-size: 18px;
+    display: block;
+}
+
+.card_info .info_subtitle{
+    margin-top: 5px;
+    color: var(--color-graySoft2);
+    font-size: 14px;
+}
+
+.card_info .info_view a{
+    margin-top: 10px;
+    display: block;
+    color: var(--color-rocket);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* RODAPÉ /  FOOTER */
+
+footer {
     background: #EEEEEE;
-    margin-top: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 24px;
 }
 
 footer p{
@@ -151,21 +230,21 @@ footer p{
 
 /* =========================== ABOUT/SOBRE =============================== */
 
-.about-container h2, h3{
+.about h2, h3{
     margin-bottom: 20px;
     color: var(--color-grayHard);
 }
 
-.about-container h2{
+.about h2{
     font-size: 24px;
 }
 
-.about-container h3{
+.about h3{
     margin-top: 30px;
     font-size: 20px;
 }
 
-.about-container p{
+.about p{
     font-size: 18px;
     color: var(--color-graySoft);
     line-height: 28px;
@@ -179,20 +258,9 @@ footer p{
     height: 280px;
 }
 
-.recipe-name{
-    margin: 0 auto;
-    text-align: center;
+.recipe-intro{
     margin: 50px auto 30px;
-}
-
-.recipe-name h1{
-    font-size: 24px;
-    color: var(--color-grayHard);
-}
-
-.recipe-name h3{
-    font-size: 20px;
-    color: var(--color-graySoft);
+    text-align: center;
 }
 
 .recipe-info{
@@ -213,7 +281,7 @@ footer p{
     margin-bottom: 20px;
 }
 
-.recipe-container .visibility{
+.recipe .visibility{
     background: none;
     color: #999999;
     font-size: 12px;
@@ -225,85 +293,16 @@ footer p{
 
 /* =========================== PAGE CHEFS / PÁGINA CHEFS =============================== */
 
-/* Pag. Chefs */
-
-.chefs_container{   /* Seção que envolver os cards dos chefs */
+.chefs{
     margin-top: 15px;
     display: grid;
     grid-template-columns: repeat(4,1fr);
     grid-gap: 20px;
 }
 
-.card_secondary{    /* Div que representa cada Card*/
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    grid-gap: 20px;
-    width: 100%;    /*Tem 100% de largura para que o nome do Chef fique em uma linha*/
-}
-/*
-.card_img {     /*Configuração padrão para a imagem do Card
-    max-width: 300px;
-    border-radius: 15px;
-    min-height: 120px;
-    width: 300px;
-    height: 120px;
-    object-fit: cover;  /*Prop. especifica como o conteúdo de um elemento deve ser ajustado à caixa estabelecida pela altura e largura usadas
-}
-*/
-.card_secondary .card_img {
-    width: 172px;   
-    height: 80px;
-    max-width: 172px;
-    min-height: 80px;
-}
-
-.card_secondary .card_img_rounded {
-    border-radius: 50%;
-    height: 64px;
-    width: 64px;
-    object-fit: cover;
-}
-
-.card_secondary .card_img {
-    border-radius: 5%;
-    height: 80px;
-    width: 172px;
-    object-fit: cover;
-}
-
-a.card,
-a.card_secondary {
-    text-decoration: none;
-}
-
-.card .card_info {
-    margin-top: 20px;
-}
-
-.card_info_title {
-    color: #111111;
-    font-size: 18px;
-    display: block;
-}
-
-.card_info_subtitle {
-    margin-top: 5px;
-    color: var(--color-graySoft2);
-    font-size: 14px;
-}
-
-.card_info_view a{
-    margin-top: 10px;
-    display: block;
-    color: var(--color-rocket);
-    font-size: 14px;
-    text-decoration: none;
-}
-
 /* Pag. Detalhe Chef */
 
-.author-img-rounded{
+.chef-principal .img_circular{
     width: 200px;
     height: 200px;
     object-fit: cover;
@@ -312,80 +311,26 @@ a.card_secondary {
     margin: 0 auto;
 }
 
-.author-info{
+.chef-intro{
     margin: 30px auto;
     text-align: center;
 }
 
-.author-info-title {
-    color: var(--color-grayHard);
-    font-size: 36px;
-    font-weight: bold;
-    display: block;
+/* =========================== ADMIN PAGE =============================== */
+
+.control{
+    max-width: 940px;
+    margin: 50px auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.author-info-subtitle{
-    font-size: 20px;
-    color: var(--color-graySoft2);
-    text-align: center;
-    display: block;
-}
-
-/* Área de Administração */
-
-.recipes_container{ 
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.recipes-admin{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 20px;
-}
-
-.recipes-admin img{
-    width: 172px;
-    height: 80px;
-    border-radius: 15px;
-    border: 1px solid #111111;
-}
-
-.recipes-name-admin{
-    font-size: 18px;
-    line-height: 28px;
-}
-
-.recipes-author-admin{
-    font-size: 14px;
-    line-height: 24px;
-    color: var(--color-graySoft);
-}
-
-.recipes-view-admin a{
-    text-decoration: none;
-    font-size: 14px;
-    line-height: 24px;
-    color: var(--color-rocket);
-}
-
-.intro{
-    margin-top: 50px;
-    margin-bottom: 24px;
-}
-
-.intro-text{
-    display: inline-block;
+.control h1{
     font-size: 24px;
 }
 
-.intro-btn{
-    float: right;
-}
-
-.intro-btn a, button[type="submit"]{
+.control a, button[type="submit"]{
     background-color: var(--color-rocket);
     padding: 8px 16px;
     text-decoration: none;
@@ -399,7 +344,30 @@ button[type="submit"].btn-delete {
     background-color: var(--color-deleteRed);
 }
 
-/*Página de Edição de Receitas - Administração*/
+.info-title {
+    color: var(--color-grayHard);
+    font-size: 36px;
+    font-weight: bold;
+    display: block;
+}
+
+.info-subtitle{
+    font-size: 20px;
+    color: var(--color-graySoft2);
+    text-align: center;
+    display: block;
+}
+
+/* =========================== RECIPES ADMIN PAGE =============================== */
+
+.recipes-admin{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Edição de Receitas */
 
 .item{
     margin-bottom: 30px;
@@ -418,7 +386,7 @@ form div:first-child{
 }
 
 form input, textarea, select{
-    width: 95%;
+    width: 100%;
     color: #555;
     padding: 15px 20px;
     font-size: 16px;
@@ -427,7 +395,7 @@ form input, textarea, select{
     border-radius: 4px;
 }
 
-/* Pag. 404*/
+/* =========================== PAGE 404 =============================== */
 
 .notFound{
     text-align: center;
