@@ -23,9 +23,21 @@ module.exports = {
     //Função para LISTAR as receitas na Pag. Receitas
     listRecipes(req, res){
 
-        Public.allRecipes(function(recipes){
-            return res.render('public/recipes', { recipes })
-        })
+        const { filter } = req.query
+
+        if(filter){
+
+            Public.findBy(filter, function(recipes){
+                return res.render('public/search', { recipes, filter })
+            })
+
+        }else{
+
+            Public.allRecipes(function(recipes){
+                return res.render('public/recipes', { recipes })
+            })
+
+        }
     },
 
     //Função para MOSTRAR os detalhes das receitas

@@ -22,7 +22,7 @@ routes.post("/admin/recipes", recipes.post)                    // Cadastrar nova
 routes.put("/admin/recipes", recipes.put)                      // Editar uma receita
 routes.delete("/admin/recipes", recipes.delete)                // Deletar uma receita
 
-// Rotas para a Administração das Receitas
+// Rotas para a Administração dos Chefs
 routes.get("/admin/chefs", chefs.index)                        // Mostrar a lista de chefs
 routes.get("/admin/chefs/create", chefs.redirectCreate)        // Mostrar formulário de novo chef
 routes.get("/admin/chefs/:id", chefs.show)                     // Exibir detalhes de um chef

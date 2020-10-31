@@ -1,1 +1,64 @@
 {% extends "layouts/public.njk" %}
+
+    {% block header %}
+
+        <header>
+
+            <div class="container">
+
+                <div class="header">
+                    <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
+
+                    <nav>
+                        <a href="/about">Sobre</a>
+                        <a href="/recipes">Receitas</a>
+                        <a href="/chefs">Chefs</a>
+                    </nav>
+                </div>
+
+                <div class="filter">
+                    <form action="/recipes" method="GET">
+                        <input type="text" name="filter" value={{filter}} placeholder="Buscar uma receita">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </header>
+
+    {% endblock header %}
+
+    {% block container %}
+
+        <section class="title">
+            <h2>Buscando por "{{ filter }}"</h2>
+        </section>
+
+        <section class="recipes container">
+
+            {% for recipe in recipes %}
+
+                <div class="card" id="{{ recipe.id }}"> 
+
+                    <div>
+                        <a href="/recipes/{{ recipe.id }}">
+                            <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
+                        </a>
+                    </div>
+    
+                    <div class="info_title">
+                        <p>{{ recipe.title }}</p>
+                    </div>
+    
+                    <div class="info_subtitle">
+                        <p>{{ recipe.chef_name }}</p>
+                    </div>
+    
+                </div>
+                
+            {% endfor %}
+
+        </section>  
+
+    {% endblock %}

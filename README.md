@@ -46,7 +46,7 @@
 - [X] Creation and connection to the database
 - [X] Relationships between tables
 - [X] Applying CRUD for chefs and recipes
-- [ ] Search filters
+- [X] Search filters
 - [ ] Pagination
 
 ## Getting started
