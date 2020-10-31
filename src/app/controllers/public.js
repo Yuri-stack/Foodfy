@@ -23,7 +23,7 @@ module.exports = {
     //Função para LISTAR as receitas na Pag. Receitas
     listRecipes(req, res){
 
-        const { filter } = req.query
+        let { page, limit, filter } = req.query
 
         if(filter){
 
@@ -33,11 +33,38 @@ module.exports = {
 
         }else{
 
-            Public.allRecipes(function(recipes){
-                return res.render('public/recipes', { recipes })
-            })
+            page = page || 1
+            limit = limit || 5
+            let offset = limit * (page - 1)
+
+            const params = {
+                filter, 
+                limit, 
+                offset, 
+                callback(recipes){
+                    return res.render('public/recipes', { recipes })
+                }
+            }
+
+            Public.paginate(params)
 
         }
+        
+        // const { filter } = req.query
+
+        // if(filter){
+
+        //     Public.findBy(filter, function(recipes){
+        //         return res.render('public/search', { recipes, filter })
+        //     })
+
+        // }else{
+
+        //     Public.allRecipes(function(recipes){
+        //         return res.render('public/recipes', { recipes })
+        //     })
+
+        // }
     },
 
     //Função para MOSTRAR os detalhes das receitas
