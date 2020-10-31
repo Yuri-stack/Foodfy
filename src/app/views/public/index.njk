@@ -1,5 +1,36 @@
 {% extends "layouts/public.njk" %} 
 
+    {% block header %}
+
+        <header>
+
+            <div class="container">
+
+                <div class="header">
+                    <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
+
+                    <nav>
+                        <a href="/about">Sobre</a>
+                        <a href="/recipes">Receitas</a>
+                        <a href="/chefs">Chefs</a>
+                        {# <a href="/admin/recipes">Receitas Temp.</a>
+                        <a href="/admin/chefs">Chefs Temp.</a> #}
+                    </nav>
+                </div>
+
+                <div class="filter">
+                    <form action="/search" method="GET">
+                        <input type="text" name="filter" placeholder="Buscar uma receita">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </header>
+
+    {% endblock header %}
+
     {% block banner %}
 
         <section class="banner">

@@ -3,6 +3,7 @@
 :root{
     --color-graySoft: #666666; 
     --color-graySoft2: #777777;
+    --color-graySoft3: #999999;
     --color-gray: #444444;
     --color-grayHard: #111111;
     --color-rocket: #6558C3;
@@ -40,6 +41,12 @@ header .container {
     align-items: center;
     max-width: 940px;
     margin: auto;
+    justify-content: space-between;
+}
+
+header .header{
+    display: flex;
+    align-items: center;
 }
 
 header .container nav{
@@ -57,6 +64,32 @@ header .container nav a{
 
 header .container nav a.active{
     font-weight: bold;
+}
+
+/* FILTRO / FILTER */
+
+.filter form{
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    align-items: center;
+    margin-right: 5%;
+}
+
+.filter form input,
+.filter form button{
+    height: 37px;
+    margin: 0;
+}
+
+.filter form button{
+    margin-left: 5%;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.filter form input{
+    color: var(--color-graySoft3);
+    font-size: 14px;
 }
 
 /* CONTAINER */
@@ -122,8 +155,6 @@ main{
     max-width: 940px;
     margin: 0 auto 20px;
     width: 100%;
-    /* overflow-x: hidden; */
-    /* position: relative; */
 }
 
 /* CONTAINER DAS RECEITAS 3X */
@@ -224,7 +255,7 @@ footer {
 
 footer p{
     font-size: 14px;
-    color: #999999;
+    color: var(--color-graySoft3);
     text-align: center;
 }
 
@@ -283,7 +314,7 @@ footer p{
 
 .recipe .visibility{
     background: none;
-    color: #999999;
+    color: var(--color-graySoft3);
     font-size: 12px;
 }
 
