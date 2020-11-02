@@ -24,18 +24,6 @@ header{
     height: 80px;
 }
 
-header.black-menu {
-    background-color: var(--color-grayHard);
-}
-
-header.black-menu img{
-    filter: invert(100%);
-}
-
-header.black-menu .container a{
-    color: white;
-}
-
 header .container {
     display: flex;
     align-items: center;
@@ -64,6 +52,22 @@ header .container nav a{
 
 header .container nav a.active{
     font-weight: bold;
+}
+
+header.black-menu{
+    background-color: var(--color-grayHard);
+}
+
+header.black-menu .container {
+    justify-content: left;
+}
+
+header.black-menu img{
+    filter: invert(100%);
+}
+
+header.black-menu .container a{
+    color: white;
 }
 
 /* FILTRO / FILTER */
@@ -160,10 +164,11 @@ main{
 /* CONTAINER DAS RECEITAS 3X */
 
 .recipes{
-    margin: 10px auto 50px;
+    margin: 10px auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
+    height: 500px;
 }
 
 /* CARDS */
@@ -243,7 +248,7 @@ a.card-horizontal {
     text-decoration: none;
 }
 
-/* RODAPÉ /  FOOTER */
+/* RODAPÉ / FOOTER */
 
 footer {
     background: #EEEEEE;
@@ -257,6 +262,31 @@ footer p{
     font-size: 14px;
     color: var(--color-graySoft3);
     text-align: center;
+}
+
+/* PAGINAÇÃO / PAGINATION */
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+
+
+/* .pagination{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
+    background-color: #DC4747;
+} */
+
+.pagination a, 
+.pagination span{
+    text-decoration: none;
+    margin-right: 16px;
 }
 
 /* =========================== ABOUT/SOBRE =============================== */

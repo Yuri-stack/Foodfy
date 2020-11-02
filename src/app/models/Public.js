@@ -9,7 +9,7 @@ module.exports = {
             SELECT recipes.*, chefs.name AS chef_name
             FROM recipes
             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-            ORDER BY recipes.id ASC
+            ORDER BY recipes.id ASC LIMIT 6
         `
 
         db.query(query, function(err, results){
@@ -55,17 +55,23 @@ module.exports = {
     },
 
     //Função para FILTRAR as Receitas
-    findBy(filter, callback){
+    findBy(params, callback){
+
+        const { filter, limit, offset } = params
+
+        let totalQuery = `(
+            SELECT count(*) FROM recipes
+        ) AS total` 
 
         const query = `
-            SELECT recipes.*, chefs.name AS chef_name
+            SELECT recipes.*, ${totalQuery}, chefs.name AS chef_name
             FROM recipes
             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
             WHERE recipes.title ILIKE '%${filter}%'
-            ORDER BY recipes.id ASC
+            ORDER BY recipes.id ASC LIMIT $1 OFFSET $2
         `
 
-        db.query(query, function(err, results){
+        db.query(query, [limit, offset], function(err, results){
             if(err) throw `Database error! ${err}`
             callback(results.rows)
         })
@@ -77,22 +83,34 @@ module.exports = {
 
         const { filter, limit, offset, callback} = params
 
-        let query = `
-            SELECT recipes.*, chefs.name AS chef_name
-            FROM recipes
-            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        `
+        let query = "",
+            filterQuery = "",
+            totalQuery = `(
+                SELECT count(*) FROM recipes
+            ) AS total
+            `
 
         if( filter ){
-            query = `${query} WHERE recipes.title ILIKE '%${filter}%'`
+            filterQuery = `WHERE recipes.title ILIKE '%${filter}%'`
+
+            totalQuery = `(
+                SELECT count(*) FROM recipes
+                ${filterQuery}
+            ) AS total`
         }
 
-        query = `${query} ORDER BY recipes.id ASC LIMIT $1 OFFSET $2`
+        query = `
+            SELECT recipes.*, ${totalQuery}, chefs.name AS chef_name
+            FROM recipes
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+            ${filterQuery}
+            ORDER BY recipes.id ASC LIMIT $1 OFFSET $2
+        `
 
         db.query(query, [limit, offset], function(err, results){
             if (err) throw `Database Error! ${err}`
 
-            callback(results.rows, filter)
+            callback(results.rows)
         })
 
 

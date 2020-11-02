@@ -47,7 +47,7 @@
 - [X] Relationships between tables
 - [X] Applying CRUD for chefs and recipes
 - [X] Search filters
-- [ ] Pagination
+- [X] Pagination
 
 ## Getting started
 

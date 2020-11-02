@@ -25,24 +25,38 @@ module.exports = {
 
         let { page, limit, filter } = req.query
 
+        page = page || 1
+        limit = limit || 6
+        let offset = limit * (page - 1)
+
         if(filter){
 
-            Public.findBy(filter, function(recipes){
-                return res.render('public/search', { recipes, filter })
+            const params = { filter, limit, offset }
+
+            Public.findBy(params, function(recipes){
+
+                const pagination = {
+                    total: Math.ceil(recipes[0].total / limit), 
+                    page
+                }
+
+                return res.render('public/search', { recipes, pagination, filter })
             })
 
         }else{
-
-            page = page || 1
-            limit = limit || 5
-            let offset = limit * (page - 1)
 
             const params = {
                 filter, 
                 limit, 
                 offset, 
                 callback(recipes){
-                    return res.render('public/recipes', { recipes })
+
+                    const pagination = {
+                        total: Math.ceil(recipes[0].total / limit), 
+                        page
+                    }
+
+                    return res.render('public/recipes', { recipes, pagination, filter })
                 }
             }
 
@@ -50,21 +64,6 @@ module.exports = {
 
         }
         
-        // const { filter } = req.query
-
-        // if(filter){
-
-        //     Public.findBy(filter, function(recipes){
-        //         return res.render('public/search', { recipes, filter })
-        //     })
-
-        // }else{
-
-        //     Public.allRecipes(function(recipes){
-        //         return res.render('public/recipes', { recipes })
-        //     })
-
-        // }
     },
 
     //Função para MOSTRAR os detalhes das receitas

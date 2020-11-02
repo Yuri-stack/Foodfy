@@ -44,7 +44,65 @@ if(currentPage.includes("/admin")){
 
 /* ======================================================================================= */
 
+/* Lógica para a PAGINAÇÃO */
 
+function paginate(selectedPage, totalPages){
+
+    let pages = [],
+        oldPage
+
+    for(let currentPage = 1; currentPage <= totalPages; currentPage++){
+
+        const firsAndLastPage = currentPage == 1 || currentPage == totalPages
+        const pagesAfterSelectedPage = currentPage <= selectedPage + 2
+        const pagesBeforeSelectedPage = currentPage >= selectedPage - 2
+
+        if(firsAndLastPage || pagesBeforeSelectedPage && pagesAfterSelectedPage){
+
+            if(oldPage && currentPage - oldPage > 2){
+                pages.push("...")
+            }
+
+            if(oldPage && currentPage - oldPage == 2){
+                pages.push(oldPage + 1)
+            }
+
+                pages.push(currentPage)
+
+                oldPage = currentPage
+
+            }   
+        }
+
+    console.log(pages)
+
+    return pages
+
+}
+
+function createPagination(pagination){
+    const page = +pagination.dataset.page
+    const total = +pagination.dataset.total
+    const pages = paginate(page, total)
+    
+    let elements = ""
+    
+    for(let page of pages){
+        if(String(page).includes("...")){
+            elements += `<span>${page}</span>`
+        }else{
+            elements += `<a href="?page=${page}">${page}</a>`
+        }
+    }
+    
+    pagination.innerHTML = elements
+}
+
+const pagination = document.querySelector(".pagination")
+
+if(pagination){
+    createPagination(pagination)
+}
 
 /* ======================================================================================= */
 
@@ -56,6 +114,7 @@ const AddField = {
         const parent = document.querySelector(parentSelector)
 
         if(parent){
+
             const fields = parent.querySelectorAll("input");
 
             const lastField = fields[fields.length - 1];
@@ -92,6 +151,5 @@ const AddField = {
         }
     }
 }
-
 
 AddField.listen()

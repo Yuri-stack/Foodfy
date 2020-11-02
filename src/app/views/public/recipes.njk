@@ -35,30 +35,32 @@
 
         {% block container %}
 
-            <section class="recipes container">
+        <section class="recipes container">
 
-                {% for recipe in recipes %}
+            {% for recipe in recipes %}
 
-                    <div class="card" id="{{ recipe.id }}"> 
+                <div class="card" id="{{ recipe.id }}"> 
 
-                        <div>
-                            <a href="/recipes/{{ recipe.id }}">
-                                <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
-                            </a>
-                        </div>
-        
-                        <div class="info_title">
-                            <p>{{ recipe.title }}</p>
-                        </div>
-        
-                        <div class="info_subtitle">
-                            <p>{{ recipe.chef_name }}</p>
-                        </div>
-        
+                    <div>
+                        <a href="/recipes/{{ recipe.id }}">
+                            <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
+                        </a>
                     </div>
-                    
-                {% endfor %}
+    
+                    <div class="info_title">
+                        <p>{{ recipe.title }}</p>
+                    </div>
+    
+                    <div class="info_subtitle">
+                        <p>{{ recipe.chef_name }}</p>
+                    </div>
+    
+                </div>
+                
+            {% endfor %}
 
-            </section>  
+        </section>
 
+        <section class="pagination" data-page={{pagination.page}} data-total={{pagination.total}}></section>
+        
         {% endblock %}
