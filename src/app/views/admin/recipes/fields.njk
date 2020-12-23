@@ -1,8 +1,17 @@
     <div class="item">
 
         <div>Imagem da receita</div>
-        <div>
-            <input type="url" name="image_url" placeholder="Insira a URL da imagem" value="{{ recipe.image }}" required>
+        <div id="photo-container">
+
+            <div id="photos-upload">
+                <input 
+                    id="photos-input" type="file" name="photos" 
+                    accept="image/*" onchange="PhotosUpload.handleFileInput(event)" multiple >
+                <i class="material-icons">add</i>
+            </div>
+
+            <div id="photos-preview"></div>
+
         </div>
 
     </div>
