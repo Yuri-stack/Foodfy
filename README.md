@@ -48,7 +48,7 @@
 - [X] Applying CRUD for chefs and recipes
 - [X] Search filters
 - [X] Pagination
-- [ ] Upload images
+- [ ] Image Manager
 
 ## Getting started
 

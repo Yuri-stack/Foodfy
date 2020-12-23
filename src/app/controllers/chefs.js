@@ -3,11 +3,12 @@ const Chef = require('../models/Chef')
 module.exports = { 
  
     //Função para LISTAR os Chefs no Index da Administração
-    index(req, res){ 
+    async index(req, res){ 
 
-        Chef.all(function(chefs){
-            return res.render('admin/chefs/index', { chefs })
-        })
+        const results = await Chef.all()
+        const chefs = results.rows
+
+        return res.render('admin/chefs/index', { chefs })
 
     },
 
@@ -34,30 +35,32 @@ module.exports = {
     },
 
     //Função para MOSTRAR os detalhes do Chef
-    show(req, res){
+    async show(req, res){
 
-        Chef.find(req.params.id, function(chef){
+        const { id } = req.params
 
-            if(!chef) return res.send("Chef not found")
+        let results = await Chef.find(id)
+        const chef = results.rows[0]
 
-                Chef.chefRecipes(req.params.id, function(recipes){
+        if(!chef) return res.send("Chef not found")
 
-                    return res.render('admin/chefs/details', { chef, recipes })
-            })
+        results = await Chef.chefRecipes(id)
+        const recipes = results.rows
 
-        })
-
+        return res.render('admin/chefs/details', { chef, recipes })
     },
 
     //Função para CARREGAR informações para editar
-    edit(req, res){
+    async edit(req, res){
 
-        Chef.find(req.params.id, function(chef){
+        const { id } = req.params
 
-            if(!chef) return res.send("Chef not found")
+        let results = await Chef.find(id)
+        const chef = results.rows[0]
 
-            return res.render('admin/chefs/edit', { chef })
-        })
+        if(!chef) return res.send("Chef not found")
+
+        return res.render('admin/chefs/edit', { chef })
 
     },
 
@@ -79,20 +82,18 @@ module.exports = {
     },
 
     //Função para APAGAR
-    delete(req, res){
+    async delete(req, res){
 
-        Chef.find(req.body.id, function(chef){
+        const { id } = req.body
 
-            if(chef.total_recipes >= 1){
-                return res.send('Chefs que possuem receitas não podem ser apagados')
-            }
+        const chef = await Chef.find(id)
 
-            Chef.delete(req.body.id, function() {
-                return res.redirect(`/admin/chefs`)
-            })
+        if(chef.total_recipes >= 1){
+            return res.send('Chefs que possuem receitas não podem ser apagados')
+        }
 
-        })
-
+        await Chef.delete(id)
+        return res.redirect(`/admin/chefs`)
     }
 
 }
