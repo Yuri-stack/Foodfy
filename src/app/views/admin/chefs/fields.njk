@@ -5,11 +5,26 @@
         </div>
     </div>
     
-    <div class="item">
+    <div class="item"> 
+
+        <div>Avatar</div>
+       
+        <div id="avatar-upload">
+            <input 
+                id="photo-avatar" type="file" name="photo"
+                accept="image/*" onchange="PhotosUpload.handleFileInput(event)">
+            <p class="button">Enviar Avatar</p>
+        </div>
+
+        <div id="photos-preview"></div>
+
+    </div>
+
+    {# <div class="item">
 
         <div>Avatar</div>
         <div>
             <input type="url" name="avatar_url" placeholder="Insira a URL do avatar" value="{{ chef.avatar_url }}" required>
         </div>
 
-    </div>
+    </div> #}

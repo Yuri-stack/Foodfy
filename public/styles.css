@@ -391,7 +391,7 @@ footer p{
     font-size: 24px;
 }
 
-.control a, button[type="submit"]{
+.control a, button[type="submit"], .button {
     background-color: var(--color-rocket);
     padding: 8px 16px;
     text-decoration: none;
@@ -428,9 +428,39 @@ button[type="submit"].btn-delete {
     gap: 20px;
 }
 
+/* =========================== CREATE CHEFS ADMIN PAGE ============================= */
+
+/* Campo de Upload de Imagens / Upload Photos Fields */
+
+.item #avatar-upload {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 125px;
+    margin-top: 8px;
+}
+
+.item #avatar-upload p {
+    box-shadow: 0 2px 2px -6px var(--color-gray);
+    width: 100%;
+    text-align: center;
+    cursor: pointer; 
+}
+
+.item #photo-avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
 /* =========================== CREATE RECIPES ADMIN PAGE ============================= */
 
-/**/
+/* Container das Campos de Imagem / Image Fields Container */
 
 #photo-container{
     display: grid;

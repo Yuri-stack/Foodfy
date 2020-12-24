@@ -162,6 +162,7 @@ const PhotosUpload = {
 
     input: "",
     preview: document.querySelector('#photos-preview'),
+    previewChef: document.querySelector('photo-preview'),
     uploadLimit: 5,
     files: [],
 
@@ -203,7 +204,7 @@ const PhotosUpload = {
             return true
         }
 
-        const photosDiv = []
+        const photosDiv = [] 
         preview.childNodes.forEach(item => {
             if(item.classList && item.classList.value == "photo"){
                 photosDiv.push(item)
