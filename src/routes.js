@@ -12,7 +12,7 @@ routes.get('/about', public.redirectAbout)      // Redirecionar para a Pag. Abou
 routes.get('/index', public.index)              // Mostrar a lista de receitas no Index
 routes.get('/chefs', public.listChef)           // Mostrar a lista de chefs
 routes.get('/recipes', public.listRecipes)      // Mostrar a lista de receitas
-routes.get('/recipes/:id', public.showRecipes)  // Exibir detalhes de uma receita
+routes.get('/recipes/:id', public.showRecipe)  // Exibir detalhes de uma receita
 
 // Rotas para a Administração das Receitas
 routes.get("/admin/recipes", recipes.index)                             // Mostrar a lista de receitas

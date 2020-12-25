@@ -3,11 +3,13 @@ const Public = require('../models/Public')
 module.exports = {
 
     //Função para LISTAR as receitas no Index
-    index(req, res){
+    async index(req, res){
 
-        Public.allRecipes(function(recipes){
-            return res.render('public/index', { recipes })
-        })
+        const results = await Public.allRecipes()
+        const recipes = results.rows
+
+        return res.render('public/index', { recipes })
+
     },
 
     //Função para REDIRECIONAR para a Pag. Index
@@ -21,7 +23,7 @@ module.exports = {
     },
 
     //Função para LISTAR as receitas na Pag. Receitas
-    listRecipes(req, res){
+    async listRecipes(req, res){
 
         let { page, limit, filter } = req.query
 
@@ -33,58 +35,49 @@ module.exports = {
 
             const params = { filter, limit, offset }
 
-            Public.findBy(params, function(recipes){
+            const results = await Public.findBy(params)
+            const recipes = results.rows
 
-                const pagination = {
-                    total: Math.ceil(recipes[0].total / limit), 
-                    page
-                }
+            const pagination = { total: Math.ceil(recipes[0].total / limit), page }
 
-                return res.render('public/search', { recipes, pagination, filter })
-            })
+            return res.render('public/search', { recipes, pagination, filter })
 
         }else{
 
-            const params = {
-                filter, 
-                limit, 
-                offset, 
-                callback(recipes){
+            const params = { filter, limit, offset }
 
-                    const pagination = {
-                        total: Math.ceil(recipes[0].total / limit), 
-                        page
-                    }
+            const results = await Public.paginate(params)
+            const recipes = results.rows
 
-                    return res.render('public/recipes', { recipes, pagination, filter })
-                }
-            }
+            const pagination = { total: Math.ceil(recipes[0].total / limit), page }
 
-            Public.paginate(params)
+            return res.render('public/recipes', { recipes, pagination, filter })
 
         }
         
     },
 
     //Função para MOSTRAR os detalhes das receitas
-    showRecipes(req, res){
+    async showRecipe(req, res){
 
-        Public.showRecipes(req.params.id, function(recipe){
+        const { id } = req.params
 
-            if(!recipe) return res.send("Recipe not found")
+        const results = await Public.showRecipe(id)
+        const recipe = results.rows[0]
 
-            return res.render("public/details", { recipe })
+        if(!recipe) return res.send("Recipe not found")
 
-        })
-    
+        return res.render("public/details", { recipe })
+
     },
 
     //Função para LISTAR os Chefs
-    listChef(req, res){
+    async listChef(req, res){
 
-        Public.allChefs(function(chefs){
-            return res.render('public/chefs', { chefs })
-        })
+        const results = await Public.allChefs()
+        const chefs = results.rows
+
+        return res.render('public/chefs', { chefs })
 
     }
 

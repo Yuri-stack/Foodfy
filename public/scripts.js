@@ -74,8 +74,6 @@ function paginate(selectedPage, totalPages){
             }   
         }
 
-    console.log(pages)
-
     return pages
 
 }
