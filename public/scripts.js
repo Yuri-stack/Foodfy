@@ -160,7 +160,7 @@ const PhotosUpload = {
 
     input: "",
     preview: document.querySelector('#photos-preview'),
-    previewChef: document.querySelector('photo-preview'),
+    previewChef: document.querySelector('#photo-preview'),
     uploadLimit: 5,
     files: [],
 
@@ -259,5 +259,48 @@ const PhotosUpload = {
         PhotosUpload.input.files = PhotosUpload.getAllFiles()           // o input é recarregado com o método 
 
         photoDiv.remove()
+    },
+
+    removeOldPhoto(event){
+        const photoDiv = event.target.parentNode
+
+        if(photoDiv.id){
+            const removedFiles = document.querySelector('input[name="removed_file"]')
+            if(removedFiles){
+                removedFiles.value += `${photoDiv.id},`
+            }
+        }
+
+        photoDiv.remove()
     }
 }
+
+// const ChefPhotoUpload = {
+
+//     uploadLimit: 1,
+
+//     handleFileInput(event){
+//         const { file: fileList } = event.target
+//         const { uploadLimit } = ChefPhotoUpload
+
+//         if(fileList.length > uploadLimit){
+//             alert('Envie no máximo 1 foto')
+//             event.preventDefault()
+//             return 
+//         }
+
+//         Array.from(fileList).forEach( file => {
+//             const reader = new FileReader()
+
+//             reader.onload = () => {
+//                 const image = new Image()
+//                 image.src = String(reader.result)
+
+//                 const container = document.createElement('div')
+//             }
+
+//             reader.readAsDataURL(file)
+//         })
+//     }
+
+// }

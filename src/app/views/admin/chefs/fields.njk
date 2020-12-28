@@ -16,15 +16,25 @@
             <p class="button">Enviar Avatar</p>
         </div>
 
-        <div id="photos-preview"></div>
+        <div id="photos-preview">
 
-    </div>
+            {% if files %}
+                {% for image in files %}
 
-    {# <div class="item">
+                    <div class="photo" id={{image.id}}>
 
-        <div>Avatar</div>
-        <div>
-            <input type="url" name="avatar_url" placeholder="Insira a URL do avatar" value="{{ chef.avatar_url }}" required>
+                        <img src="{{image.src}}" alt="{{image.name}}">
+                        <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">
+                            close
+                            {# precisa arrumar o metodo para excluir #}
+                        </i>
+
+                    </div>
+
+                {% endfor %}
+                <input type="hidden" name="removed_file">
+            {% endif %}
+
         </div>
 
-    </div> #}
+    </div>

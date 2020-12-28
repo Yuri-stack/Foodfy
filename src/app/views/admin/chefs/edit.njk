@@ -21,7 +21,7 @@
 
         <section class="details-chefs container">
 
-            <form id="form-save" method="post" action="/admin/chefs?_method=PUT">
+            <form id="form-save" method="post" action="/admin/chefs?_method=PUT" enctype="multipart/form-data">
 
                 <input type="hidden" name="id" value="{{ chef.id }}">
                 {# utilizando esse campo para poder mandar o ID para o backend, quando formos atualizar algum registro #}

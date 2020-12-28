@@ -22,7 +22,11 @@
 
             <section class="chef-principal">
 
-                <img class="img_circular" src="{{ chef.avatar_url }}" alt="Imagem de {{ chef.name }}">
+                {% if not files[0] %}
+                    <img class="img_circular" src="http://placehold.it/500x500?text=Chef sem foto">
+                {% else %}
+                    <img class="img_circular" src="{{ files[0].src }}" alt="Imagem de {{ chef.name }}">
+                {% endif %}
 
                 <div class="chef-intro">
                     <span class="info-title">{{ chef.name }}</span>

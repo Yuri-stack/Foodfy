@@ -3,20 +3,21 @@ CREATE DATABASE foodfy;
 CREATE TABLE chefs (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
-  avatar_url TEXT NOT NULL ,
-  created_at TIMESTAMP NOT NULL
+  created_at TIMESTAMP NOT NULL,
+
+  file_id INTEGER NOT NULL 
+  REFERENCES files(id)
+  ON UPDATE CASCADE
 );
 
 CREATE TABLE recipes (
   id SERIAL PRIMARY KEY,
-  chef_id INTEGER,
-  image TEXT NOT NULL,
+  chef_id INTEGER REFERENCES chefs(id),
   title TEXT NOT NULL,
   ingredients TEXT[] NOT NULL,
   preparation TEXT[] NOT NULL,
   information TEXT NOT NULL,
-  created_at TIMESTAMP NOT NULL,
-  FOREIGN KEY (chef_id) REFERENCES chefs(id)
+  created_at TIMESTAMP NOT NULL
 );
 
 CREATE TABLE files (
@@ -26,12 +27,15 @@ CREATE TABLE files (
 );
 
 CREATE TABLE recipe_files (
-  id SERIAL PRIMARY KEY
-  recipe_id INTEGER REFERENCES recipes(id)
-  file_id INTEGER REFERENCES files(id)
+  id SERIAL PRIMARY KEY,
+
+  recipe_id INTEGER NOT NULL 
+  REFERENCES recipes(id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+
+  file_id INTEGER NOT NULL 
+  REFERENCES files(id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
 );
-
-ALTER TABLE recipes DROP COLUMN image;
-ALTER TABLE chefs DROP COLUMN avatar_url;
-
-ALTER TABLE chefs ADD file_id INTEGER REFERENCES files(id);
