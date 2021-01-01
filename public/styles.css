@@ -11,7 +11,7 @@
 }
 
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; 
     margin: 0;
     border: 0;
     padding: 0;
@@ -457,6 +457,51 @@ button[type="submit"].btn-delete {
     height: 100%;
     opacity: 0;
 }
+/* precisa arrumar esses estilos*/
+.item #photo-preview {
+    display: grid;
+    width: 150px;
+    height: 150px;
+    margin: 5px 0 0 0;
+}
+
+.item #photo-preview img {
+    width: 150px;
+    height: 150px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #DDDDDD;
+}
+
+#photo-preview .photo {
+    position: relative;
+}
+
+#photo-preview .photo i {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: rgba(255, 255, 255, 0.8);
+    color: red;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 200%;
+    cursor: pointer;
+
+    transition: opacity 200ms;
+    opacity: 0;
+}
+
+#photo-preview .photo:hover i{
+    opacity: 1;
+}
 
 /* =========================== CREATE RECIPES ADMIN PAGE ============================= */
 
@@ -511,7 +556,7 @@ button[type="submit"].btn-delete {
     opacity: 0;
 }
 
-/* Campo de Vizualição das Imagens / View Photos Fields */
+/* Campo de Vizualição das Imagens das Receitas / View Photos Fields */
 
 .item #photos-preview {
     display: grid;

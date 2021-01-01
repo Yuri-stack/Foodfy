@@ -12,11 +12,11 @@
         <div id="avatar-upload">
             <input 
                 id="photo-avatar" type="file" name="photo"
-                accept="image/*" onchange="PhotosUpload.handleFileInput(event)">
+                accept="image/*" onchange="ChefPhotoUpload.handleFileInput(event)">
             <p class="button">Enviar Avatar</p>
         </div>
 
-        <div id="photos-preview">
+        <div id="photo-preview">
 
             {% if files %}
                 {% for image in files %}
@@ -24,7 +24,7 @@
                     <div class="photo" id={{image.id}}>
 
                         <img src="{{image.src}}" alt="{{image.name}}">
-                        <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">
+                        <i class="material-icons" onclick="ChefPhotoUpload.removeOldPhoto(event)">
                             close
                             {# precisa arrumar o metodo para excluir #}
                         </i>

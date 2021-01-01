@@ -152,15 +152,11 @@ const AddField = {
 
 AddField.listen()
 
-/* ======================================================================================= */
-
-/* Lógica para fazer o upload das fotos dos arquivos*/
-
+/* Lógica para fazer o upload das fotos das Receitas*/
 const PhotosUpload = {
 
     input: "",
     preview: document.querySelector('#photos-preview'),
-    previewChef: document.querySelector('#photo-preview'),
     uploadLimit: 5,
     files: [],
 
@@ -275,32 +271,117 @@ const PhotosUpload = {
     }
 }
 
-// const ChefPhotoUpload = {
+/* Lógica para fazer o upload das fotos dos Chefs*/
+const ChefPhotoUpload = {
 
-//     uploadLimit: 1,
+    input: "",
+    uploadLimit: 1,
+    previewChef: document.querySelector('#photo-preview'),
+    files: [],
 
-//     handleFileInput(event){
-//         const { file: fileList } = event.target
-//         const { uploadLimit } = ChefPhotoUpload
+    handleFileInput(event){
+        const { files: fileList } = event.target
 
-//         if(fileList.length > uploadLimit){
-//             alert('Envie no máximo 1 foto')
-//             event.preventDefault()
-//             return 
-//         }
+        ChefPhotoUpload.input = event.target
 
-//         Array.from(fileList).forEach( file => {
-//             const reader = new FileReader()
+        if(ChefPhotoUpload.hasLimit(event)) return 
 
-//             reader.onload = () => {
-//                 const image = new Image()
-//                 image.src = String(reader.result)
+        Array.from(fileList).forEach( file => {
 
-//                 const container = document.createElement('div')
-//             }
+            ChefPhotoUpload.files.push(file)
 
-//             reader.readAsDataURL(file)
-//         })
-//     }
+            const reader = new FileReader()
 
-// }
+            reader.onload = () => {
+                const image = new Image()
+                image.src = String(reader.result)
+
+                const div = ChefPhotoUpload.getContainer(image)
+                ChefPhotoUpload.previewChef.appendChild(div)
+            }
+
+            reader.readAsDataURL(file)
+        })
+
+        ChefPhotoUpload.input.files = ChefPhotoUpload.getAllFiles()
+    },
+
+    hasLimit(event){
+        const { uploadLimit, input, previewChef } = ChefPhotoUpload
+        const { files: fileList } = input
+
+        if( fileList.length > uploadLimit ){
+            alert(`Envie no máximo ${uploadLimit} foto`)
+            event.preventDefault()
+            return true
+        }
+
+        const photoDiv = []
+        previewChef.childNodes.forEach(item => {
+            if(item.classList && item.classList.value == "photo"){
+                photoDiv.push(item)
+            }
+        })
+
+        const totalPhotos = fileList.length + photoDiv.length
+        if(totalPhotos > uploadLimit){
+            alert('Você atingiu o máximo de fotos')
+            event.preventDefault()
+            return true
+        }
+
+        return false
+    },
+
+    getAllFiles(){
+        const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer()
+        
+        ChefPhotoUpload.files.forEach(file => dataTransfer.items.add(file))
+        
+        return dataTransfer.files
+    },
+
+    getContainer(image){
+        const container = document.createElement('div')
+        container.classList.add('photo')
+
+        container.onclick = ChefPhotoUpload.removePhoto
+
+        container.appendChild(image)
+        container.appendChild(ChefPhotoUpload.getRemoveButton())
+
+        return container
+    },
+
+    getRemoveButton(){
+        const button = document.createElement('i')
+        button.classList.add('material-icons')
+        button.innerHTML = "close"
+        return button
+    },
+
+    removePhoto(event){
+        const photoDiv = event.target.parentNode
+        const photosArray = Array.from(ChefPhotoUpload.previewChef.children)
+        const index = photosArray.indexOf(photoDiv)
+
+        ChefPhotoUpload.files.splice(index, 1)
+        ChefPhotoUpload.input.files = ChefPhotoUpload.getAllFiles()
+
+        photoDiv.remove()
+    },
+
+    removeOldPhoto(event){
+        const photoDiv = event.target.parentNode
+
+        if(photoDiv.id){
+            const removedFiles = document.querySelector('input[name="removed_file"]')
+            if(removedFiles){
+                removedFiles.value += `${photoDiv.id},`
+            }
+        }
+
+        photoDiv.remove()
+    }
+
+}

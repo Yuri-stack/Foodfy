@@ -1,23 +1,23 @@
 const Recipe = require('../models/Recipe')
 
-module.exports = {
+module.exports = { 
 
     //Função para LISTAR as receitas no Index da Administração
-    index(req, res){
-        
-        Recipe.all(function(recipes){
-            return res.render('admin/recipes/index', { recipes })
-        })
+    async index(req, res){
 
+        const results = await Recipe.all()
+        const recipes = results.rows
+        
+        return res.render('admin/recipes/index', { recipes })
     },
 
     //Função para REDIRECIONAR para a pag de Create
-    redirectCreate(req, res){
+    async redirectCreate(req, res){
 
-        Recipe.chefSelectOptions(function(options){
-            return res.render('admin/recipes/create', { chefOptions : options })
-        })
-
+        const results = await Recipe.chefSelectOptions()
+        const options = results.rows
+        
+        return res.render('admin/recipes/create', { chefNames : options })
     },
 
     //Função para CADASTRAR uma nova receita
@@ -25,8 +25,8 @@ module.exports = {
 
         const keys = Object.keys(req.body).pop()    //Aqui eu pego todos os campos(keys) do formulário de receitas, exceto o último que é opcional
 
-        for(key of keys){                           //verificando se cada key está preenchidas
-            if(req.body[key] == ""){                //é o mesmo que fazer req.body.(cada item do vetor) == ""
+        for(key of keys){                           
+            if(req.body[key] == ""){                
                 return res.send("Por favor, preencha todos os campos!") 
             }
         }

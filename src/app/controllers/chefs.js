@@ -9,7 +9,7 @@ module.exports = {
         const results = await Chef.all()
         const chefs = results.rows
 
-        if(!chefs) return res.send("Chefs not found!")
+        // if(!chefs) return res.send("Chefs not found!")
 
         async function getImage(chefId){
             let results = await Chef.chefFiles(chefId)
@@ -125,7 +125,7 @@ module.exports = {
         const newFilesPromise = req.files.map(file => File.create(file))
         results = await Promise.all(newFilesPromise)
 
-        const fileId = results[0].rows[0].id
+        const fileId = results[0].rows[0].id    //ajustar pois necessitamos mudar a foto caso for alterar o nome do chf
         const { name, id } = req.body
 
         await Chef.update(name, fileId, id)
@@ -144,60 +144,7 @@ module.exports = {
 
         return res.redirect(`/admin/chefs/${id}`)
 
-        //ESSA PARTE É COLOCADA APÓS ARRUMAR A PARTE DOS MULTIPLOS ARQUIVOS DE FOTOS
-
-        // let results = await File.create(req.files)
-
-        // const fileId = results[0].rows[0].id
-        // const { name, id } = req.body
-
-        // await Chef.update(name, fileId, id)
-
-        // await File.delete(req.body.removed_file)
-
-        // return res.redirect(`/admin/chefs/${id}`)
     },
-
-    // async put(req, res){
-
-    //     const keys = Object.keys(req.body)
-
-    //     for(key of keys){
-    //         if(req.body[key] == "" && key != "removed_file"){
-    //             return res.send("Please fill in all the fields!")
-    //         }
-    //     }
-
-    //     // Lógica para SALVAR as novas imagens carregadas durante a Atualização
-
-    //     let results;
-
-    //     if(req.files.length == 0)
-    //         return res.send("Please, send at least one photo")
-            
-    //     const newFilesPromise = req.files.map(file => File.create(file))
-    //     results = await Promise.all(newFilesPromise)
-
-    //     // Lógica para Excluir as imagens do BD
-    //     if(req.body.removed_file){
-    //                                                                 //Ex: o campo envia 1,2,3
-    //         const removedFile = req.body.removed_file.split(",")    //aqui ele transformar em array [1,2,3,]
-    //         const lastIndex = removedFile.length - 1                
-    //         removedFile.splice(lastIndex, 1)                        //aqui fica desse jeito [1,2,3]
-
-    //         const removedFilePromises = removedFile.map(id => File.delete(id))
-
-    //         await Promise.all(removedFilePromises)
-    //     }
-
-    //     const { name, id } = req.body
-    //     const fileId = results[0].rows[0].id
-
-    //     await Chef.update(name, fileId, id)
-
-    //     return res.redirect(`/admin/chefs/${id}`)
-
-    // },
 
     //Função para APAGAR
     async delete(req, res){
