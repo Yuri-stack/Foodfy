@@ -91,6 +91,23 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
+    },
+
+    //Função para RETORNAR as Receitas suas respectivas Imagens
+    recipeFiles(id){
+
+        try {
+            const query =`
+            SELECT files.* FROM files 
+            LEFT JOIN recipe_files ON (files.id = recipe_files.file_id)
+            LEFT JOIN recipes ON (recipes.id = recipe_files.recipe_id) 
+            WHERE recipes.id = $1`;
+
+            return db.query(query, [id]);
+
+        } catch (error) {
+            console.error(error);
+        }
     }
 
  }

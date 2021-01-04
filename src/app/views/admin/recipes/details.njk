@@ -22,7 +22,11 @@
 
             <section class="recipe-principal">
 
-                <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
+                {% if not files[0] %}
+                    <img src="http://placehold.it/500x500?text=Chef sem foto">
+                {% else %}
+                    <img src="{{ files[0].src }}" alt="Imagem de {{ recipe.title }}">
+                {% endif %}
 
                 <div class="recipe-intro">
                     <span class="info-title">{{ recipe.title }}</span>

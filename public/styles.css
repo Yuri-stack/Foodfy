@@ -317,6 +317,7 @@ footer p{
     border-radius: 15px;
     width: 940px;
     height: 280px;
+    object-fit: cover;
 }
 
 .recipe-intro{
@@ -467,7 +468,7 @@ button[type="submit"].btn-delete {
 
 .item #photo-preview img {
     width: 150px;
-    height: 150px;
+    height: 150px; 
     border-radius: 4px;
     object-fit: cover;
     border: 1px solid #DDDDDD;

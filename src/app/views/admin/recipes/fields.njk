@@ -1,6 +1,6 @@
     <div class="item">
 
-        <div>Imagem da receita</div>
+        <div>Imagem da receita</div> 
         <div id="photo-container">
 
             <div id="photos-upload">
@@ -10,7 +10,25 @@
                 <i class="material-icons">add</i>
             </div>
 
-            <div id="photos-preview"></div>
+            <div id="photos-preview">
+
+                {% if files %}
+                    {% for image in files %}
+
+                        <div class="photo" id={{image.id}}>
+
+                            <img src="{{ image.src }}" alt="{{ image.name }}">
+                            <i class="material-icons" onclick="ChefPhotoUpload.removeOldPhoto(event)">
+                                close
+                            </i>
+
+                        </div>
+
+                    {% endfor %}
+                <input type="hidden" name="removed_file">
+            {% endif %}
+
+            </div>
 
         </div>
 

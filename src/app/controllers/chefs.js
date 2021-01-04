@@ -9,8 +9,6 @@ module.exports = {
         const results = await Chef.all()
         const chefs = results.rows
 
-        // if(!chefs) return res.send("Chefs not found!")
-
         async function getImage(chefId){
             let results = await Chef.chefFiles(chefId)
             const files = results.rows.map(file => 
@@ -44,7 +42,7 @@ module.exports = {
 
         for(key of keys){                           //verificando se cada key está preenchidas
             if(req.body[key] == ""){                //é o mesmo que fazer req.body.(cada item do vetor) == ""
-                return res.send("Please fill in all the fields!") 
+                return res.send("Por favor, preencha todos os campos!") 
             }
         }
 
@@ -146,7 +144,7 @@ module.exports = {
 
     },
 
-    //Função para APAGAR
+    //Função para APAGAR - OK
     async delete(req, res){
 
         const { id } = req.body
