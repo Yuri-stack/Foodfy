@@ -20,20 +20,32 @@
 
         <section class="recipe container">
 
-            <section class="recipe-principal">
-
-                {% if not files[0] %}
-                    <img src="http://placehold.it/500x500?text=Chef sem foto">
-                {% else %}
-                    <img src="{{ files[0].src }}" alt="Imagem de {{ recipe.title }}">
-                {% endif %}
-
-                <div class="recipe-intro">
-                    <span class="info-title">{{ recipe.title }}</span>
-                    <span class="info-subtitle">por {{ recipe.chef_name }}</span>
+            <div class="gallery">
+                <div class="highlight">
+                    {% if not files[0] %}
+                        <img src="http://placehold.it/500x500?text=Chef sem foto">
+                    {% else %}
+                        <img src="{{ files[0].src }}" alt="Imagem de {{ recipe.title }}">
+                    {% endif %}
                 </div>
 
-            </section>
+                <div class="gallery-preview">
+                    {% for image in files %}
+                        <img 
+                            src="{{ image.src }}" alt="{{ image.name }}"
+                            {% if loop.index0 == 0 %}
+                                class="active"
+                            {%endif%}
+                            onclick="ImageGallery.setImage(event)"
+                        >
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="recipe-intro">
+                <span class="info-title">{{ recipe.title }}</span>
+                <span class="info-subtitle">por {{ recipe.chef_name }}</span>
+            </div>
 
             <h1>Ingredientes</h1>
 

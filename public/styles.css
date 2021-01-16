@@ -313,15 +313,15 @@ footer p{
 
 /* =========================== RECIPES DETAILS / DETALHE RECEITA =============================== */
 
-.recipe-principal img{
+/* .recipe-principal img{
     border-radius: 15px;
     width: 940px;
     height: 280px;
     object-fit: cover;
-}
+} */
 
 .recipe-intro{
-    margin: 50px auto 30px;
+    margin: auto 30px;
     text-align: center;
 }
 
@@ -605,6 +605,42 @@ button[type="submit"].btn-delete {
 #photos-preview .photo:hover i{
     opacity: 1;
 }
+
+/* =========================== SHOW RECIPES ADMIN PAGE =============================== */
+
+.gallery .highlight > img{
+    border-radius: 15px;
+    width: 940px;
+    height: 280px;
+    object-fit: cover;
+}
+
+.gallery .gallery-preview{
+    display: flex;
+    justify-content: flex-end;
+    height: 50px;
+}
+
+.gallery .gallery-preview img{
+    height: 50px;
+    width: 50px;
+
+    margin-left: 10px;
+    border-radius: 3.5px;
+    border: 1px solid #DDDDDD;
+
+    object-fit: cover;
+    opacity: 0.5;
+
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.gallery .gallery-preview img:hover,
+.gallery .gallery-preview img.active{
+    opacity: 1;
+}
+
 
 /* =========================== EDIT RECIPES ADMIN PAGE =============================== */
 
