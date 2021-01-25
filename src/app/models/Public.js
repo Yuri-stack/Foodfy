@@ -1,12 +1,10 @@
 const db = require('../../config/db')
 
-module.exports = {
+module.exports = { 
 
     //Função para SELECIONAR todas as Receitas
     allRecipes(){
-
         try {
-
             const query = `
                 SELECT recipes.*, chefs.name AS chef_name
                 FROM recipes
@@ -24,9 +22,7 @@ module.exports = {
 
     //Função para SELECIONAR todos os Chefs
     allChefs(){
-
         try {
-        
             const query = `
                 SELECT chefs.*, count(recipes) AS total_recipes
                 FROM chefs
@@ -45,9 +41,7 @@ module.exports = {
 
     //Função para RETORNAR os dados das Receitas
     showRecipe(id){
-
         try {
-
             const query = `
                 SELECT recipes.*, chefs.name AS chef_name
                 FROM recipes
@@ -65,9 +59,7 @@ module.exports = {
 
     //Função para FILTRAR as Receitas
     findBy(params){
-
         try {
-            
             const { filter, limit, offset } = params
 
             let totalQuery = `(
@@ -92,9 +84,7 @@ module.exports = {
 
     //Função relacionado a PAGINAÇÃO das Receitas
     paginate(params){
-
         try {
-
             const { filter, limit, offset } = params
 
             let query = "",

@@ -310,11 +310,11 @@ const ChefPhotoUpload = {
         const { uploadLimit, input, previewChef } = ChefPhotoUpload
         const { files: fileList } = input
 
-        if( fileList.length > uploadLimit ){
-            alert(`Envie no máximo ${uploadLimit} foto`)
-            event.preventDefault()
-            return true
-        }
+        // if( fileList.length > uploadLimit ){
+        //     alert(`Envie no máximo ${uploadLimit} foto`)
+        //     event.preventDefault()
+        //     return true
+        // }
 
         const photoDiv = []
         previewChef.childNodes.forEach(item => {

@@ -3,7 +3,7 @@ const File = require('../models/File')
 
 module.exports = { 
  
-    //Função para LISTAR os Chefs no Index da Administração - OK
+    //Função para LISTAR os Chefs no Index da Administração
     async index(req, res){ 
 
         const results = await Chef.all()
@@ -14,9 +14,7 @@ module.exports = {
             const files = results.rows.map(file => 
                 `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
             )
-
             return files[0]
-
         }
 
         const chefsPromises = chefs.map(async chef => {
@@ -30,12 +28,12 @@ module.exports = {
 
     },
 
-    //Função para REDIRECIONAR para a página de criação - OK
+    //Função para REDIRECIONAR para a página de criação
     redirectCreate(req, res){
         return res.render('admin/chefs/create.njk')
     },
 
-    //Função para CADASTRAR um novo Chef  - OK
+    //Função para CADASTRAR um novo Chef 
     async post(req, res){
 
         const keys = Object.keys(req.body)          //Aqui eu pego todos os campos(keys) do formulário de chefs
@@ -62,7 +60,7 @@ module.exports = {
 
     },
 
-    //Função para MOSTRAR os detalhes de um Chef  - OK
+    //Função para MOSTRAR os detalhes de um Chef 
     async show(req, res){
 
         const { id } = req.params
@@ -84,7 +82,7 @@ module.exports = {
         return res.render('admin/chefs/details', { chef, recipes, files })
     },
 
-    //Função para CARREGAR informações para editar  - Precisa das imagens das receitas
+    //Função para CARREGAR informações para editar - Precisa arrumar o bug de não reconhecer a img (Fix-5.13)
     async edit(req, res){
 
         const { id } = req.params
@@ -107,7 +105,7 @@ module.exports = {
 
     },
 
-    //Função para ATUALIZAR - Arrumar os multiplos arquivos enviados
+    //Função para ATUALIZAR - Arrumar os multiplos arquivos enviados (Fix-5.14)
     async put(req, res){
 
         const keys = Object.keys(req.body)
@@ -123,7 +121,7 @@ module.exports = {
         const newFilesPromise = req.files.map(file => File.create(file))
         results = await Promise.all(newFilesPromise)
 
-        const fileId = results[0].rows[0].id    //ajustar pois necessitamos mudar a foto caso for alterar o nome do chf
+        const fileId = results[0].rows[0].id    // (Fix-5.13) ajustar pois necessitamos mudar a foto caso for alterar o nome do chf
         const { name, id } = req.body
 
         await Chef.update(name, fileId, id)
@@ -144,7 +142,7 @@ module.exports = {
 
     },
 
-    //Função para APAGAR - OK
+    //Função para APAGAR
     async delete(req, res){
 
         const { id } = req.body
