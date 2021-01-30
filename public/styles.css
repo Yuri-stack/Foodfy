@@ -218,8 +218,8 @@ main{
 
 .card-horizontal .img_rounded{
     border-radius: 5%;
-    max-width: 172px;
-    min-height: 80px;
+    width: 172px;
+    height: 80px;
     object-fit: cover;
 }
 

@@ -1,5 +1,6 @@
 const Chef = require('../models/Chef')
 const File = require('../models/File')
+const Recipe = require('../models/Recipe')
 
 module.exports = { 
  
@@ -70,16 +71,34 @@ module.exports = {
 
         if(!chef) return res.send("Chef not found / Chef não encontrado")
 
-        results = await Chef.chefRecipes(id)
-        const recipes = results.rows
-
+        //Lógica para buscar as imagens dos chefs
         results = await Chef.chefFiles(id)
         const files = results.rows.map(file => ({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
         }))
 
-        return res.render('admin/chefs/details', { chef, recipes, files })
+        //Lógica para buscar as receitas do Chef 
+        results = await Chef.chefRecipes(id)
+        const recipes = results.rows
+
+        //Lógica para buscar as imagens das receitas
+        async function getImage(recipeId){
+            let results = await Recipe.recipeFiles(recipeId)
+            const filesRecipes = results.rows.map(file => 
+                `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`    
+            )
+            return filesRecipes[0]
+        }
+
+        const recipesPromises = recipes.map(async recipe => {
+            recipe.src = await getImage(recipe.id)
+            return recipe
+        })
+
+        const recipeAll = await Promise.all(recipesPromises)
+
+        return res.render('admin/chefs/details', { chef, files, recipes:recipeAll })
     },
 
     //Função para CARREGAR informações para editar - Precisa arrumar o bug de não reconhecer a img (Fix-5.13)
