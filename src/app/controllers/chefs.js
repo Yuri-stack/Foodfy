@@ -113,9 +113,8 @@ module.exports = {
 
         //Carrega a imagem do Chef
         results = await Chef.chefFiles(id)
-        let files = results.rows
         
-        files = files.map(file => ({
+        let files = results.rows.map(file => ({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
         }))
@@ -124,7 +123,7 @@ module.exports = {
 
     },
 
-    //Função para ATUALIZAR - Arrumar os multiplos arquivos enviados (Fix-5.14)
+    //Função para ATUALIZAR
     async put(req, res){
 
         const keys = Object.keys(req.body)
@@ -135,16 +134,6 @@ module.exports = {
             }
         }
 
-        // Lógica para SALVAR as novas imagens carregadas durante a Atualização
-
-        const newFilesPromise = req.files.map(file => File.create(file))
-        results = await Promise.all(newFilesPromise)
-
-        const fileId = results[0].rows[0].id    // (Fix-5.13) ajustar pois necessitamos mudar a foto caso for alterar o nome do chf
-        const { name, id } = req.body
-
-        await Chef.update(name, fileId, id)
-
         // Lógica para Excluir as imagens do BD
         if(req.body.removed_file){
                                                                     //Ex: o campo envia 1,2,3
@@ -152,11 +141,31 @@ module.exports = {
             const lastIndex = removedFile.length - 1                
             removedFile.splice(lastIndex, 1)                        //aqui fica desse jeito [1,2,3]
 
-            const removedFilePromises = removedFile.map(id => File.delete(id))
-
-            await Promise.all(removedFilePromises)
+            await File.delete(removedFile[0]) 
+            
+            // const removedFilePromises = removedFile.map(id => File.delete(id))
+            // Promise.all(removedFilePromises)
         }
 
+        // Lógica para SALVAR as novas imagens carregadas durante a Atualização
+        const { name, id } = req.body
+
+        if(req.file.length == 0){
+            return res.send('Please, send at least one image')
+        }
+
+        const fileChef = {
+            filename: req.file.filename,
+            path: req.file.path
+        }
+
+        let results = await File.create(fileChef)
+        let fileId = results.rows[0].id    // (Fix-5.13) ajustar pois necessitamos mudar a foto caso for alterar o nome do chf
+
+        // const newFilesPromise = req.file.map(file => File.create({...file})) 
+        // results = await Promise.all(newFilesPromise)
+
+        await Chef.update(name, fileId, id)
         return res.redirect(`/admin/chefs/${id}`)
 
     },

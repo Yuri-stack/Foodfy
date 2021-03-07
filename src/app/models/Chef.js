@@ -90,7 +90,7 @@ module.exports = {
 
     },
 
-    //Função para RETORNAR aos Chefs suas respectivas Imagens
+    //Função para RETORNAR aos Chefs sua respectiva imagem
     chefFiles(id){
 
         try {

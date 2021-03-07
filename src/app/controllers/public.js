@@ -1,5 +1,5 @@
-const Chef = require('../models/Chef')
 const Public = require('../models/Public')
+const Chef = require('../models/Chef')
 const Recipe = require('../models/Recipe')
 
 module.exports = { 

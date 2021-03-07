@@ -164,7 +164,10 @@ const PhotosUpload = {
         const { files: filesList } = event.target
         PhotosUpload.input = event.target
 
-        if(PhotosUpload.hasLimit(event)) return
+        if(PhotosUpload.hasLimit(event)){
+            PhotosUpload.updateInputFiles()
+            return
+        }
         
         Array.from(filesList).forEach(file => {
 
@@ -178,13 +181,12 @@ const PhotosUpload = {
 
                 const div = PhotosUpload.getContainer(image)    //chama o método e passa a image para ele
                 PhotosUpload.preview.appendChild(div)
-
             }
 
             reader.readAsDataURL(file)
         })
 
-        PhotosUpload.input.files = PhotosUpload.getAllFiles()
+        PhotosUpload.updateInputFiles()
     },
 
     hasLimit(event){
@@ -248,12 +250,15 @@ const PhotosUpload = {
 
     removePhoto(event){
         const photoDiv = event.target.parentNode                        // o event.target é o I, o parentNode é um item acima, ou seja, a DIV class Photo
-        const photosArray = Array.from(PhotosUpload.preview.children)   // carrega as fotos no photosArray
-        const index = photosArray.indexOf(photoDiv)                     // busca o index do item/foto clicado
-
+        const newFiles = Array.from(PhotosUpload.preview.children)      
+            .filter(function(file) {
+                if(file.classList.contains('photo') && !file.getAttribute('id')) return true
+            })                                                          // carrega as fotos no photosArray
+        
+        const index = newFiles.indexOf(photoDiv)                        // busca o index do item/foto clicado
         PhotosUpload.files.splice(index, 1)                             // encontra o item do array e remove ele
-        PhotosUpload.input.files = PhotosUpload.getAllFiles()           // o input é recarregado com o método 
 
+        PhotosUpload.updateInputFiles()
         photoDiv.remove()
     },
 
@@ -268,6 +273,10 @@ const PhotosUpload = {
         }
 
         photoDiv.remove()
+    },
+
+    updateInputFiles(){
+        PhotosUpload.input.files = PhotosUpload.getAllFiles()           // o input é recarregado com o método 
     }
 }
 
@@ -275,18 +284,20 @@ const PhotosUpload = {
 const ChefPhotoUpload = {
 
     input: "",
-    uploadLimit: 1,
     previewChef: document.querySelector('#photo-preview'),
+    uploadLimit: 1,
     files: [],
 
     handleFileInput(event){
         const { files: fileList } = event.target
-
         ChefPhotoUpload.input = event.target
 
-        if(ChefPhotoUpload.hasLimit(event)) return 
+        if(ChefPhotoUpload.hasLimit(event)){
+            ChefPhotoUpload.updateInputFile()
+            return
+        } 
 
-        Array.from(fileList).forEach( file => {
+        Array.from(fileList).forEach(file => {
 
             ChefPhotoUpload.files.push(file)
 
@@ -303,18 +314,19 @@ const ChefPhotoUpload = {
             reader.readAsDataURL(file)
         })
 
-        ChefPhotoUpload.input.files = ChefPhotoUpload.getAllFiles()
+        ChefPhotoUpload.updateInputFile()
     },
 
     hasLimit(event){
         const { uploadLimit, input, previewChef } = ChefPhotoUpload
         const { files: fileList } = input
 
-        // if( fileList.length > uploadLimit ){
-        //     alert(`Envie no máximo ${uploadLimit} foto`)
-        //     event.preventDefault()
-        //     return true
-        // }
+        //Validando a quantidade de fotos enviadas
+        if( fileList.length > uploadLimit ){
+            alert(`Envie no máximo ${uploadLimit} foto`)
+            event.preventDefault()
+            return true
+        }
 
         const photoDiv = []
         previewChef.childNodes.forEach(item => {
@@ -362,12 +374,15 @@ const ChefPhotoUpload = {
 
     removePhoto(event){
         const photoDiv = event.target.parentNode
-        const photosArray = Array.from(ChefPhotoUpload.previewChef.children)
-        const index = photosArray.indexOf(photoDiv)
+        const newFile = Array.from(ChefPhotoUpload.previewChef.children)
+            .filter(function(file) {
+                if(file.classList.contains('photo') && !file.getAttribute('id')) return true
+            }) 
 
+        const index = newFile.indexOf(photoDiv)
         ChefPhotoUpload.files.splice(index, 1)
-        ChefPhotoUpload.input.files = ChefPhotoUpload.getAllFiles()
-
+        
+        ChefPhotoUpload.updateInputFile()
         photoDiv.remove()
     },
 
@@ -382,6 +397,10 @@ const ChefPhotoUpload = {
         }
 
         photoDiv.remove()
+    },
+
+    updateInputFile(){
+        PhotosUpload.input.file = ChefPhotoUpload.getAllFiles()
     }
 
 }

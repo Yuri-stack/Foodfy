@@ -1,10 +1,10 @@
 const Recipe = require('../models/Recipe')
 const File = require('../models/File')
-const RecipeFile = require('../models/Recipe_Files')
+const RecipeFile = require('../models/RecipeFiles')
 
 module.exports = { 
 
-    //Função para LISTAR as receitas no Index da Administração - OK
+    //Função para LISTAR as receitas no Index da Administração
     async index(req, res){
 
         const results = await Recipe.all()
@@ -118,13 +118,6 @@ module.exports = {
             }
         }
 
-        // Lógica para SALVAR as novas imagens carregadas durante a Atualização
-        const newFilesPromise = req.files.map(file => File.create(file))
-        let results = await Promise.all(newFilesPromise)
-        
-        const files = results.map(result => result.rows[0])
-        files.map(file => RecipeFile.create(req.body.id, file.id))
-
         // Lógica para EXCLUIR as imagens do BD
         if(req.body.removed_file){
                                                                     //Ex: o campo envia 1,2,3
@@ -135,6 +128,24 @@ module.exports = {
             const removedFilePromises = removedFile.map(id => File.delete(id))
 
             await Promise.all(removedFilePromises)
+        }
+
+        // Lógica para SALVAR as novas imagens carregadas durante a Atualização
+        if(req.files.length != 0){
+
+            // Lógica para verificar se já existem 5 imagens cadastradas
+            const oldFiles = await Recipe.recipeFiles(req.body.id)
+            const totalFiles = oldFiles.rows.length + req.files.length
+
+            if(totalFiles <= 5){
+            
+                const newFilesPromise = req.files.map(file => File.create(file))
+                let results = await Promise.all(newFilesPromise)
+                
+                const files = results.map(result => result.rows[0])
+                files.map(file => RecipeFile.create(req.body.id, file.id))
+                
+            }
         }
 
         await Recipe.update(req.body)

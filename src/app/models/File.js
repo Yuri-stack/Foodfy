@@ -13,7 +13,7 @@
          return db.query(query, values)
 
       } catch (error) {
-         console.log(error)
+         console.log(error) 
       }
 
     },
