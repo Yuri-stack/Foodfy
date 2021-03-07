@@ -81,6 +81,7 @@ module.exports = {
                 LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
                 WHERE chefs.id = $1
                 GROUP BY chefs.id, recipes.id
+                ORDER BY recipes.created_at DESC
             `
             return db.query(query, [id])
 

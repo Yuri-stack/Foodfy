@@ -9,7 +9,7 @@ module.exports = {
                 SELECT recipes.*, chefs.name AS chef_name
                 FROM recipes
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-                ORDER BY recipes.id ASC LIMIT 6
+                ORDER BY recipes.created_at DESC LIMIT 6
             `
 
             return db.query(query)
@@ -71,7 +71,7 @@ module.exports = {
                 FROM recipes
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
                 WHERE recipes.title ILIKE '%${filter}%'
-                ORDER BY recipes.id ASC LIMIT $1 OFFSET $2
+                ORDER BY recipes.updated_at DESC LIMIT $1 OFFSET $2
             `
 
             return db.query(query, [limit, offset])

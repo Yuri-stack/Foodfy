@@ -57,6 +57,23 @@ module.exports = {
             const results = await Public.findBy(params)
             const recipes = results.rows
 
+            /* Função para buscar o endereço de cada img das receitas */
+            async function getImage(recipeId){
+                let results = await Recipe.recipeFiles(recipeId)
+                const files = results.rows.map(file =>
+                    `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+                )
+                return files[0]
+            }
+    
+            /* Função que atualiza o source da receita com o resultado da Função anterior */
+            const recipesPromises = recipes.map(async recipe => {
+                recipe.src = await getImage(recipe.id)
+                return recipe
+            })
+    
+            await Promise.all(recipesPromises)
+
             const pagination = { total: Math.ceil(recipes[0].total / limit), page }
 
             return res.render('public/search', { recipes, pagination, filter })
@@ -87,7 +104,7 @@ module.exports = {
 
             const pagination = { total: Math.ceil(recipes[0].total / limit), page }
 
-            return res.render('public/recipes', { recipes, pagination, filter })
+            return res.render('public/recipes', { recipes, pagination })
 
         }
         
