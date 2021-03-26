@@ -22,11 +22,11 @@ module.exports = {
     create({chef, title, ingredients, preparation, information}){
         try {
             const query = `
-                INSERT INTO recipes (chef_id,title,ingredients,preparation,information,created_at) 
+                INSERT INTO recipes (title,ingredients,preparation,information,created_at,chef_id) 
                 VALUES ($1, $2, $3, $4, $5, $6)
                 RETURNING id 
             `
-            const values = [chef, title, ingredients, preparation, information, date(Date.now()).iso]
+            const values = [title, ingredients, preparation, information, date(Date.now()).iso,chef]
             return db.query(query, values)
 
         } catch (error) {
@@ -56,14 +56,14 @@ module.exports = {
         try {
             const query = `
                 UPDATE recipes SET
-                    chef_id = ($1),
-                    title = ($2),
-                    ingredients = ($3),
-                    preparation = ($4),
-                    information = ($5)
+                    title = ($1),
+                    ingredients = ($2),
+                    preparation = ($3),
+                    information = ($4),
+                    chef_id = ($5)
                 WHERE id = ($6) 
             `
-        const values = [ chef, title, ingredients, preparation, information, id]
+        const values = [ title, ingredients, preparation, information, chef, id]
         return db.query(query, values)
             
         } catch (error) {
@@ -86,15 +86,30 @@ module.exports = {
     chefSelectOptions(){
 
         try {
-            const query = `SELECT name, id FROM chefs`
+            const query = `SELECT name, id FROM chefs ASC`
             return db.query(query)
         } catch (error) {
             console.log(error)
         }
     },
 
+    //Função para CRIAR as imagens das Receitas no Banco de Dados
+    createImageRecipe(recipeId, fileId){
+
+        try {
+            const query = `INSERT INTO recipe_files (recipe_id, file_id) VALUES ($1,$2) RETURNING id`
+            const values = [recipeId, fileId]
+
+            return db.query(query, values)
+            
+        } catch (error) {
+            console.log(error)
+        } 
+
+    },
+
     //Função para RETORNAR as Receitas suas respectivas Imagens
-    recipeFiles(id){
+    findImageRecipe(id){
 
         try {
             const query =`
@@ -107,7 +122,21 @@ module.exports = {
 
         } catch (error) {
             console.error(error);
+            console.log("Erro recipeFile")
         }
+    },
+
+    //Função para APAGAR as imagens do Banco de Dados
+    async deleteImageRecipe({ recipeId, fileId }){
+
+        try{
+            return db.query(`
+                DELETE FROM recipe_files 
+                WHERE recipe_id = $1 AND file_id = $2`, [recipeId, fileId]);
+        }catch (error) {
+            console.log(error)
+        }
+
     }
 
  }
