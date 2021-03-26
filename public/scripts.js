@@ -405,7 +405,7 @@ const ChefPhotoUpload = {
     },
 
     updateInputFile(){
-        PhotosUpload.input.file = ChefPhotoUpload.getAllFiles()
+        PhotosUpload.input.files = ChefPhotoUpload.getAllFiles()
     }
 
 }

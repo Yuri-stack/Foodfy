@@ -124,17 +124,61 @@ module.exports = {
     },
 
     //Função para ATUALIZAR
+
+    // async put(req, res){
+
+    //     const keys = Object.keys(req.body)
+
+    //     for(key of keys){
+    //         if(req.body[key] == "" && key != "removed_file"){
+    //             return res.send("Please fill in all the fields!")
+    //         }
+    //     }
+
+    //     let fileId
+
+    //     if(req.files.length != 0){ 
+
+    //     const fileChef = {
+    //         filename: req.files.filename,
+    //         path: req.files.path
+    //     }
+
+    //     let results = await File.create(fileChef)
+    //     fileId = results.rows[0].id
+
+    //     const { name, id, removed_file } = req.body
+
+    //     await Chef.update(name, fileId, id)
+
+    //     if (removed_file) {
+
+    //         const removedFile = req.body.removed_file.split(",")    //aqui ele transformar em array [1,2,3,]
+    //         const lastIndex = removedFile.length - 1                
+    //         removedFile.splice(lastIndex, 1)                        //aqui fica desse jeito [1,2,3]
+
+    //         await File.delete(removedFile[0]) 
+
+    //     }
+
+    //     return res.redirect(`/admin/chefs/${id}`);
+
+    //     }
+
+    // },
+
+    //ORIGINAL
     async put(req, res){
 
-        const keys = Object.keys(req.body)
+        const keys = Object.keys(req.body)          //Aqui eu pego todos os campos(keys) do formulário de chefs
 
-        for(key of keys){
-            if(req.body[key] == "" && key != "removed_file"){
-                return res.send("Please fill in all the fields!")
+        for(key of keys){                           //verificando se cada key está preenchidas
+            if(req.body[key] == ""){                //é o mesmo que fazer req.body.(cada item do vetor) == ""
+                return res.send("Por favor, preencha todos os campos!") 
             }
         }
 
-        // Lógica para Excluir as imagens do BD
+        // // Lógica para Excluir as imagens do BD
         if(req.body.removed_file){
                                                                     //Ex: o campo envia 1,2,3
             const removedFile = req.body.removed_file.split(",")    //aqui ele transformar em array [1,2,3,]
@@ -150,13 +194,13 @@ module.exports = {
         // Lógica para SALVAR as novas imagens carregadas durante a Atualização
         const { name, id } = req.body
 
-        if(req.file.length == 0){
+        if(req.files.length == 0){
             return res.send('Please, send at least one image')
         }
 
         const fileChef = {
-            filename: req.file.filename,
-            path: req.file.path
+            filename: req.files.filename,
+            path: req.files.path
         }
 
         let results = await File.create(fileChef)

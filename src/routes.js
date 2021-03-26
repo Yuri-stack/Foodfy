@@ -28,8 +28,8 @@ routes.get("/admin/chefs", chefs.index)                                 // Mostr
 routes.get("/admin/chefs/create", chefs.redirectCreate)                 // Mostrar formulário de novo chef
 routes.get("/admin/chefs/:id", chefs.show)                              // Exibir detalhes de um chef
 routes.get("/admin/chefs/:id/edit", chefs.edit)                         // Mostrar formulário de edição de chef
-routes.post("/admin/chefs", multer.single("photo"), chefs.post)         // Cadastrar um novo chef
-routes.put('/admin/chefs', multer.single("photo"), chefs.put)           // Editar um chef
+routes.post("/admin/chefs", multer.array("photos", 1), chefs.post)      // Cadastrar um novo chef
+routes.put('/admin/chefs', multer.array("photos", 1), chefs.put)        // Editar um chef
 routes.delete("/admin/chefs", chefs.delete)                             // Deletar um chef
 
 module.exports = routes

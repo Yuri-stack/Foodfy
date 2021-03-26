@@ -1,6 +1,6 @@
 <h1 align="center">
     <br>
-        <img src="public/assets/chef.png" alt="Index Instructors" width="240">
+        <img src="public/assets/chef.png" alt="Index" width="240">
     <br><br>
         Foodfy 
 </h1>
