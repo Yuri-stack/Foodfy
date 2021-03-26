@@ -1,6 +1,5 @@
 const Recipe = require('../models/Recipe')
 const File = require('../models/File')
-const RecipeFile = require('../models/RecipeFiles')
 
 module.exports = { 
 
@@ -59,7 +58,7 @@ module.exports = {
         const recipe = await Recipe.create(req.body)
         const recipeID = recipe.rows[0].id
 
-        await RecipeFile.create(recipeID,fileID)
+        await Recipe.createImageRecipe(recipeID,fileID)
         
         return res.redirect(`/admin/recipes/${ recipeID }`)
     },
@@ -143,7 +142,7 @@ module.exports = {
                 let results = await Promise.all(newFilesPromise)
                 
                 const files = results.map(result => result.rows[0])
-                files.map(file => RecipeFile.create(req.body.id, file.id))
+                files.map(file => Recipe.createImageRecipe(req.body.id, file.id))
                 
             }
         }
@@ -164,11 +163,11 @@ module.exports = {
 
                 const files = { recipe_id: id, file_id: file.id}
 
-                    await RecipeFile.delete(files)
+                    await Recipe.deleteImageRecipe(files)
 
-                    await File.delete(file.id);
+                    await File.delete(file.id)
 
-                    await Recipe.delete(id);
+                    await Recipe.delete(id)
             });
 
             Promise.all(filesPromise);
