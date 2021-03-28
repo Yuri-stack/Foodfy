@@ -10,7 +10,7 @@ module.exports = {
         const recipes = results.rows
 
         async function getImage(recipeID){
-            let results = await Recipe.recipeFiles(recipeID)
+            let results = await Recipe.findImageRecipe(recipeID)
             const files = results.rows.map(file => 
                 `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`    
             )
@@ -73,7 +73,7 @@ module.exports = {
 
         if(!recipe) return res.send("Recipe not found / Receita não encontrada")
 
-        results = await Recipe.recipeFiles(id)
+        results = await Recipe.findImageRecipe(id)
         const files = results.rows.map(file => ({
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`  
         }))
@@ -92,7 +92,7 @@ module.exports = {
         if(!recipe) return res.send("Recipe not found")
 
         //Carrega as imagens das Receitas
-        results = await Recipe.recipeFiles(id)
+        results = await Recipe.findImageRecipe(id)
         let files = results.rows.map(file => ({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
@@ -133,7 +133,7 @@ module.exports = {
         if(req.files.length != 0){
 
             // Lógica para verificar se já existem 5 imagens cadastradas
-            const oldFiles = await Recipe.recipeFiles(req.body.id)
+            const oldFiles = await Recipe.findImageRecipe(req.body.id)
             const totalFiles = oldFiles.rows.length + req.files.length
 
             if(totalFiles <= 5){
@@ -157,7 +157,7 @@ module.exports = {
         try {
             const { id } = req.body;
 
-            let results = await Recipe.recipeFiles(id);
+            let results = await Recipe.findImageRecipe(id);
 
             const filesPromise = results.rows.map(async file => {
 

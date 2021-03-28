@@ -12,7 +12,7 @@ module.exports = {
 
         /* Função para buscar o endereço de cada img das receitas */
         async function getImage(recipeId){
-            let results = await Recipe.recipeFiles(recipeId)
+            let results = await Recipe.findImageRecipe(recipeId)
             const files = results.rows.map(file =>
                 `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
             )
@@ -59,7 +59,7 @@ module.exports = {
 
             /* Função para buscar o endereço de cada img das receitas */
             async function getImage(recipeId){
-                let results = await Recipe.recipeFiles(recipeId)
+                let results = await Recipe.findImageRecipe(recipeId)
                 const files = results.rows.map(file =>
                     `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
                 )
@@ -87,7 +87,7 @@ module.exports = {
 
             /* Função para buscar o endereço de cada img das receitas */
             async function getImage(recipeId){
-                let results = await Recipe.recipeFiles(recipeId)
+                let results = await Recipe.findImageRecipe(recipeId)
                 const files = results.rows.map(file =>
                     `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
                 )
@@ -120,7 +120,7 @@ module.exports = {
 
         if(!recipe) return res.send("Recipe not found / Receita não encontrada")
 
-        results = await Recipe.recipeFiles(id)
+        results = await Recipe.findImageRecipe(id)
         const files = results.rows.map( file => ({
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`  
         }))
@@ -137,7 +137,7 @@ module.exports = {
 
         /* Função para buscar o endereço de cada img dos chefs */
         async function getImage(chefId){
-            let results = await Chef.chefFiles(chefId)
+            let results = await Chef.findImageChef(chefId)
             const files = results.rows.map(file =>
                 `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
             )

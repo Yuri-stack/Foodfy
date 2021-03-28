@@ -86,7 +86,7 @@ module.exports = {
     chefSelectOptions(){
 
         try {
-            const query = `SELECT name, id FROM chefs ASC`
+            const query = `SELECT name, id FROM chefs`
             return db.query(query)
         } catch (error) {
             console.log(error)

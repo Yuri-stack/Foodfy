@@ -70,8 +70,8 @@ module.exports = {
         }
     },
 
-    //Função para RETORNAR os Chefs com suas respectivas Receitas
-    chefRecipes(id){
+    //Função para RETORNAR os Chefs suas respectivas Receitas
+    findRecipesChef(id){
 
         try {
         
@@ -92,7 +92,7 @@ module.exports = {
     },
 
     //Função para RETORNAR aos Chefs sua respectiva imagem
-    chefFiles(id){
+    findImageChef(id){
 
         try {
         

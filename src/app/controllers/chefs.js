@@ -11,7 +11,7 @@ module.exports = {
         const chefs = results.rows
 
         async function getImage(chefId){
-            let results = await Chef.chefFiles(chefId)
+            let results = await Chef.findImageChef(chefId)
             const files = results.rows.map(file => 
                 `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
             )
@@ -72,19 +72,19 @@ module.exports = {
         if(!chef) return res.send("Chef not found / Chef não encontrado")
 
         //Lógica para buscar as imagens dos chefs
-        results = await Chef.chefFiles(id)
+        results = await Chef.findImageChef(id)
         const files = results.rows.map(file => ({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
         }))
 
         //Lógica para buscar as receitas do Chef 
-        results = await Chef.chefRecipes(id)
+        results = await Chef.findRecipesChef(id)
         const recipes = results.rows
 
         //Lógica para buscar as imagens das receitas
         async function getImage(recipeId){
-            let results = await Recipe.recipeFiles(recipeId)
+            let results = await Recipe.findImageRecipe(recipeId)
             const filesRecipes = results.rows.map(file => 
                 `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`    
             )
@@ -112,7 +112,7 @@ module.exports = {
         if(!chef) return res.send("Chef not found")
 
         //Carrega a imagem do Chef
-        results = await Chef.chefFiles(id)
+        results = await Chef.findImageChef(id)
         
         let files = results.rows.map(file => ({
             ...file,
