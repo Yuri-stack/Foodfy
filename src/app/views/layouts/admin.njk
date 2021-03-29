@@ -8,8 +8,8 @@
             <title>Foodfy Administração</title> 
         {% endblock %}
 
-        <link rel="stylesheet" href="/styles.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        {% include "layouts/styles.njk" %}
+        
     </head> 
 
     <body>
@@ -29,16 +29,10 @@
                         <nav>
                             <a href="/admin/recipes">RECEITAS</a>
                             <a href="/admin/chefs">CHEFS</a>
+                            <a href="/admin/users">USUÁRIOS</a>
                         </nav>
 
                     </div>
-        
-                    {# <div>
-                        <form action="" method="get">
-                            <input type="text" name="filter" placeholder="Buscar uma receita">
-                            <button type="submit">Buscar</button>
-                        </form>
-                    </div> #}
 
                 </div>
                 

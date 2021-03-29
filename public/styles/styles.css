@@ -382,7 +382,7 @@ footer p{
 
 .control{
     max-width: 940px;
-    margin: 50px auto 24px;
+    margin: 55px auto 67px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -644,9 +644,9 @@ button[type="submit"].btn-delete {
 
 /* =========================== EDIT RECIPES ADMIN PAGE =============================== */
 
-.item{
+/* .item{
     margin-bottom: 30px;
-}
+} */
 
 .item button{
     background-color: transparent;
@@ -669,6 +669,16 @@ form input, textarea, select{
     border: 1px solid #DDDDDD;
     border-radius: 4px;
 }
+
+input[type="checkbox"]{
+    width: auto;
+}
+
+
+
+/* ===========================  =============================== */
+
+
 
 /* =========================== PAGE 404 =============================== */
 

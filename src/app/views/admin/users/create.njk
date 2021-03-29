@@ -1,0 +1,35 @@
+{% extends "layouts/admin.njk" %} 
+
+    {% block head %}
+        <title>Foodfy - Administração</title>
+    {% endblock %}
+
+    {% block container %}
+
+        <section class="user control">
+
+            <div>
+                <h1>Criar Usuário</h1>
+            </div>
+
+            <div>
+                <button class="btn-salve" type="submit" form="form-save">Salvar</button>
+                <button class="btn-salve" type="submit" form="form-save">Cancelar</button>
+            </div>
+
+        </section>
+
+        <section class="user container">
+
+            <form id="form-save" method="POST" action="/admin/users">
+
+                {% include 'admin/users/fields.njk' %}
+
+            </form>
+
+        </section>
+
+    {% endblock container %}
+
+    {% block footer %}
+    {% endblock footer %}
