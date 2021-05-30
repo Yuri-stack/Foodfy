@@ -674,11 +674,13 @@ input[type="checkbox"]{
     width: auto;
 }
 
-
-
 /* ===========================  =============================== */
 
-
+.user.container form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 40px;
+}
 
 /* =========================== PAGE 404 =============================== */
 
