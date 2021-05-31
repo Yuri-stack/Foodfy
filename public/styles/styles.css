@@ -674,13 +674,22 @@ input[type="checkbox"]{
     width: auto;
 }
 
-/* ===========================  =============================== */
+/* =========================== Users Area =============================== */
 
 .user.container form{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px 40px;
 }
+
+.error{
+    background-color: #e74c3c;
+    padding: 4px;
+    margin-top: 5px;
+    border-radius: 4px;
+    color: white;
+}
+
 
 /* =========================== PAGE 404 =============================== */
 

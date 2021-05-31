@@ -1,20 +1,27 @@
     <div class="item">
         <div>Nome</div>
         <div>
-            <input type="text" name="name" placeholder="Digite o nome completo" value="" required>
+            <input type="text" name="name" placeholder="Digite o nome completo" value="{{ user.name }}" required>
         </div>
     </div>
 
     <div class="item">
         <div>Email</div>
         <div>
-            <input type="email" name="email" placeholder="Digite o email" value="" required>
+            <input 
+                type="email" 
+                name="email" 
+                placeholder="Digite o email" 
+                value="{{ user.email }}" 
+                onblur="Validate.apply(this, 'isEmail')"
+                required>
         </div>
     </div>
     
     <div class="item">
         <div>
-            <input type="checkbox" name="isAdmin" value="">
+            <input type="checkbox" name="isAdmin" value="{{ user.isAdmin }}">
+            {# colocar lógica para mostrar esse campo se o User for Admin #}
             <label for="isAdmin">Administrador</label>
         </div>
     </div>

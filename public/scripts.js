@@ -110,7 +110,6 @@ if(pagination){
 /* ======================================================================================= */
 
 /* Lógica para adicionar campos dinâmicos*/
-
 const AddField = {  
 
     add(parentSelector){
@@ -154,8 +153,6 @@ const AddField = {
         }
     }
 }
-
-AddField.listen()
 
 /* Lógica para fazer o upload das fotos das Receitas*/
 const PhotosUpload = {
@@ -427,3 +424,51 @@ const ImageGallery = {
     }
 
 }
+
+/* Lógica para fazer a validação */
+const Validate = {
+
+    apply(input, func){
+        Validate.clearErrors(input)
+
+        let results = Validate[func](input.value)
+        input.value = results.value
+
+        if(results.error)
+            Validate.displayError(input, results.error)
+
+    },
+
+    displayError(input, error){
+        const div = document.createElement('div')
+        div.classList.add('error')
+        div.innerHTML = error
+        input.parentNode.appendChild(div)
+
+        input.focus()
+    },
+
+    clearErrors(input){
+        const errorDiv = input.parentNode.querySelector(".error")
+
+        if(errorDiv)
+            errorDiv.remove()
+    },
+
+    isEmail(value){
+        let error = null
+        const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/  //Expressão Regular para validar o email
+
+        if(!value.match(mailFormat)){
+            error = "Email inválido"
+        }
+
+        return{
+            error,
+            value
+        }
+    }
+
+}
+
+AddField.listen()
