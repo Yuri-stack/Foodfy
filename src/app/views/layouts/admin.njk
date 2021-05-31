@@ -8,11 +8,13 @@
             <title>Foodfy Administração</title> 
         {% endblock %}
 
-        {% include "layouts/styles.njk" %}
+        {% include "layouts/parts/styles.njk" %}
         
     </head> 
 
     <body>
+
+        {% include "layouts/parts/messages.njk" %}
 
         {% block header %}
 

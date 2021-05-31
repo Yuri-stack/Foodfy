@@ -1,0 +1,20 @@
+@keyframes hideMessage{
+    to{
+        top: -50px;
+        opacity: 0;
+    }
+}
+
+.messages{
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    position: absolute;
+    width: 100%;
+    color: white;
+    top: 0;
+    opacity: 1;
+
+    animation: hideMessage 400ms 5s ease-out forwards;
+}

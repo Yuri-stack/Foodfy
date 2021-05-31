@@ -1,3 +1,5 @@
+const User = require('../models/User')
+
 module.exports = {
 
     redirectCreate(req, res){
@@ -8,7 +10,11 @@ module.exports = {
 
     edit(req, res){},
 
-    post(req, res){},
+    async post(req, res){
+
+        
+        
+    },
 
     put(req, res){},
 
