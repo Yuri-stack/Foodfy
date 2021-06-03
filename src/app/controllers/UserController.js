@@ -17,7 +17,8 @@ module.exports = {
 
     async post(req, res){
         const results = await User.create(req.body)
-        const userId = results.rows[0].id
+        req.session.userId = results.rows[0].id
+        
         return res.redirect(`/admin/users`)  
     },
 

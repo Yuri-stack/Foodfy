@@ -1,10 +1,12 @@
 const express = require('express')
 const nunjucks = require('nunjucks')
 const routes = require('./routes')
-const methodOverride = require('method-override')   //carregamos a lib. method-override para poder sobreescrever os metodos POST e GET 
+const methodOverride = require('method-override')   
+const session = require('./config/session')
 
 const server = express()
 
+server.use(session)
 server.use(express.urlencoded({ extended: true }))  //config que permite o req.body funcionar
 server.use(express.static('public'))                //configurando para o express procurar CSS e JS na pasta Public
 server.use(methodOverride('_method'))               //essa parte identifica nas ações dos form a query String: _method, para poder sobreescrever POST e GET
