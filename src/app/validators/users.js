@@ -20,8 +20,7 @@ async function post(req, res, next){
 
     // Implantar as passwordRepeat
     // if(password != passwordRepeat) return res.send("As senhas não são idênticas")
-    // yurioliveirasilva1999@gmail.com
-    return res.send("Acessou")
+    // return res.send("Acessou")
 
     next()
 

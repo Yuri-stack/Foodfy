@@ -55,9 +55,9 @@ module.exports = {
         const fileId = results[0].rows[0].id
 
         results = await Chef.create(req.body.name, fileId)
-        const chefID = results.rows[0].id
+        const userId = results.rows[0].id
 
-        return res.redirect(`/admin/chefs/${ chefID }`)
+        return res.redirect(`/admin/chefs/${ userId }`)
 
     },
 

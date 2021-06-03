@@ -18,5 +18,5 @@ nunjucks.configure('src/app/views', {
     noCache: true  
 })
 
-server.use(function(req, res){ res.status(404).render("not-found") })   //tratamento para caso o algo não seja encontrado
+server.use(function(req, res){ res.status(404).render("layouts/not-found") })   //tratamento para caso o algo não seja encontrado
 server.listen(5000, function(){ console.log('Server is running') })     //verificando se o server está rodando
