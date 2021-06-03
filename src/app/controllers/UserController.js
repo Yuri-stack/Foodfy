@@ -6,8 +6,11 @@ module.exports = {
         return res.render('admin/users/create.njk')
     },
 
-    list(req, res){
-        return res.send('Ok, cadastrado')      
+    async list(req, res){
+        const results = await User.all()
+        const users = results.rows
+
+        return res.render('admin/users/index', { users })    
     },
 
     edit(req, res){},

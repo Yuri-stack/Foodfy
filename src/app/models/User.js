@@ -2,6 +2,16 @@ const db = require('../../config/db')
 const { hash } = require('bcryptjs')
 
 module.exports = {
+
+    all(){
+        try {
+            const query = `SELECT * FROM users ORDER BY users.id ASC`
+            return db.query(query)
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
     async findOne(email){
         try {
             const query = `SELECT * FROM users WHERE users.email = $1`
@@ -33,5 +43,7 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
-    }
+    },
+
+
 }

@@ -11,7 +11,6 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
-        
     },
  
     //Função para CRIAR um novo Chef
