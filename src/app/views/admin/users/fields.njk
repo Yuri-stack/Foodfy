@@ -20,8 +20,11 @@
     
     <div class="item">
         <div>
-            <input type="checkbox" name="isAdmin" value="true">
-            {# colocar lógica para mostrar esse campo se o User for Admin #}
+            {% if user.is_admin == true %}
+                <input type="checkbox" name="isAdmin" value="true" checked>
+            {% else %}
+                <input type="checkbox" name="isAdmin" value="true">
+            {% endif %}
             <label for="isAdmin">Administrador</label>
         </div>
     </div>

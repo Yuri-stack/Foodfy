@@ -1,8 +1,3 @@
-.users{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
 /* CARD GENERICO */
 
 .card{
@@ -41,6 +36,11 @@
 
 .card_view .btn_deletar{
     color: var(--color-deleteRed);
+}
+
+/* CARD LISTAGEM */
+.list{
+    margin-bottom: 40px;
 }
 
 /* CARD COM IMAGEM DA RECEITA */

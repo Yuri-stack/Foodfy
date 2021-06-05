@@ -12,10 +12,10 @@ module.exports = {
         }
     },
 
-    async findOne(email){
+    async findOne(id){
         try {
-            const query = `SELECT * FROM users WHERE users.email = $1`
-            const results = await db.query(query, [email])
+            const query = `SELECT * FROM users WHERE users.id = $1`
+            const results = await db.query(query, [id])
             
             return results.rows[0]
         } catch (error) {
@@ -37,8 +37,9 @@ module.exports = {
             const is_admin = isAdmin || false
 
             const values = [name, email, passwordHash, is_admin]
-            return db.query(query, values)
-            // return results.rows[0].id
+            
+            const results = await db.query(query, values)
+            return results.rows[0].id
 
         } catch (error) {
             console.log(error)

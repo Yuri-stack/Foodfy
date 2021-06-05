@@ -13,13 +13,25 @@ module.exports = {
         return res.render('admin/users/index', { users })    
     },
 
-    edit(req, res){},
-
     async post(req, res){
         const results = await User.create(req.body)
-        req.session.userId = results.rows[0].id
+        // req.session.userId = results.rows[0].id
         
         return res.redirect(`/admin/users`)  
+    },
+
+    async edit(req, res){
+        const { id } = req.params
+        // const { userId: id } = req.session
+
+        const user = await User.findOne(id)
+
+        if(!user) return res.render("admin/users/edit", {
+            error: "Usuário não encontrado"
+        })
+
+        return res.render('admin/users/edit', { user })
+
     },
 
     put(req, res){},

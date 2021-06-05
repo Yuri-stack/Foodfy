@@ -323,7 +323,8 @@ footer p{
     border-radius: 4px;
 }
 
-button[type="submit"].btn-delete {
+button[type="submit"].btn-delete, 
+button[type="submit"].btn-cancelar {
     background-color: var(--color-deleteRed);
 }
 
@@ -593,6 +594,11 @@ input[type="checkbox"]{
 
 /* =========================== Users Area =============================== */
 
+.users{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 .user.container form{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -605,7 +611,6 @@ input[type="checkbox"]{
     border-radius: 4px;
     color: white;
 }
-
 
 /* =========================== PAGE 404 =============================== */
 

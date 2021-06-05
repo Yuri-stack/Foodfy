@@ -15,12 +15,12 @@
 
             {% for user in users %}
 
-                <div class="card">
-                    <span class="card_title">Yuri Oliveira</span>
-                    <span class="card_email">yurioliveira@gmail.com</span>
+                <div class="card list">
+                    <span class="card_title">{{ user.name }}</span>
+                    <span class="card_email">{{ user.email }}</span>
                     <span class="card_view">
-                        <a class="btn_editar" href="/admin/users/{{ user.id }}">Editar</a>
-                        <a class="btn_deletar" href="/admin/users/{{ user.id }}">Remover</a>
+                        <a class="btn_editar" href="/admin/users/{{ user.id }}/edit">Editar</a>
+                        <a class="btn_deletar" href="/admin/users/{{ user.id }}/edit">Remover</a>
                     </span>
                 </div>
 
