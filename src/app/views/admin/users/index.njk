@@ -7,40 +7,25 @@
     {% block container %}
 
         <section class="control">
-
-            <div>
-                <h1>Usuários</h1>
-            </div>
-
-            <div>
-                <a href="/admin/users/register">Criar Novo Usuário</a>
-            </div>
-
+            <h1>Usuários</h1>
+            <a href="/admin/users/register">Novo</a>
         </section>
 
         <section class="users container">
 
             {% for user in users %}
 
-                <div class="card-horizontal">
-
-                    <div class="card_info">
-                        <span class="info_title">{{ user.name }}</span>
-                        <span class="info_email">{{ user.email }}</span>
-                        <span class="info_view"> 
-                            <a href="/admin/users/{{ user.id }}">
-                                Editar
-                            </a>
-                            <a href="/admin/users/{{ user.id }}">
-                                Remover
-                            </a>
-                        </span>
-                    </div>
-
+                <div class="card">
+                    <span class="card_title">Yuri Oliveira</span>
+                    <span class="card_email">yurioliveira@gmail.com</span>
+                    <span class="card_view">
+                        <a class="btn_editar" href="/admin/users/{{ user.id }}">Editar</a>
+                        <a class="btn_deletar" href="/admin/users/{{ user.id }}">Remover</a>
+                    </span>
                 </div>
 
             {% endfor %}
-            
+
         </section>
 
     {% endblock %}
