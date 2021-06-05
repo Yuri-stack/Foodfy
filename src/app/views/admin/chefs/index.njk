@@ -7,36 +7,22 @@
     {% block container %}
 
         <section class="control">
-
-            <div>
-                <h1>Gerenciar Chefs</h1>
-            </div>
-
-            <div>
-                <a href="/admin/chefs/create">Criar Novo Chef</a>
-            </div>
-
+            <h1>Gerenciar Chefs</h1>
+            <a href="/admin/chefs/create">Criar Novo Chef</a>
         </section>
 
         <section class="chefs container">
 
             {% for chef in chefs %}
 
-                <div class="card-horizontal">
-
-                    <img class="img_circular" 
-                        src="{{ chef.src }}" 
-                    >
-
-                    <div class="card_info">
-                        <span class="info_title">{{ chef.name }}</span>
-                        <span class="info_view"> 
-                            <a href="/admin/chefs/{{ chef.id }}">
-                                Visualizar
-                            </a>
+                <div class="card horizontal">
+                    <img class="img_circular" src="{{ chef.src }}" alt="Imagem de {{ chef.name }}">
+                    <div class="card">
+                        <span class="card_title"> {{ chef.name }} </span>
+                        <span class="card_view">
+                            <a class="btn_view" href="/admin/chefs/{{ chef.id }}">Visualizar</a>
                         </span>
                     </div>
-
                 </div>
 
             {% endfor %}

@@ -7,37 +7,23 @@
     {% block container %}
 
         <section class="control">
-
-            <div>
-                <h1>Gerenciar Receitas</h1>
-            </div>
-
-            <div> 
-                <a href="/admin/recipes/create">Criar Nova Receita</a>
-            </div>
-
+            <h1>Gerenciar Receitas</h1>
+            <a href="/admin/recipes/create">Criar Nova Receita</a>
         </section>
 
         <section class="recipes-admin container"> 
 
             {% for recipe in recipes %}
 
-                <div class="card-horizontal">
-
-                    <img class="img_rounded"
-                        src="{{ recipe.src }}" 
-                        alt="Imagem de {{ recipe.title }}">
-
-                    <div class="card_info">
-                        <span class="info_title">{{ recipe.title }}</span>
-                        <span class="info_subtitle">por {{ recipe.chef_name }}</span>
-                        <span class="info_view">
-                            <a href="/admin/recipes/{{ recipe.id }}">
-                                Visualizar
-                            </a>
+                <div class="card horizontal">
+                    <img class="img_rounded" src="{{ recipe.src }}" alt="Imagem de {{ recipe.title }}">
+                    <div class="card">
+                        <span class="card_title">{{ recipe.title }}</span>
+                        <span class="card_subtitle">por {{ recipe.chef_name }}</span>
+                        <span class="card_view">
+                            <a class="btn_view" href="/admin/recipes/{{ recipe.id }}">Visualizar</a>
                         </span>
                     </div>
-
                 </div>
 
             {% endfor %}

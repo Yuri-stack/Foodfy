@@ -17,10 +17,12 @@
     display: block;
 }
 
+.card_subtitle,
 .card_email{
+    margin-top: 5px;
     font-family: Helvetica;
     font-size: 14px;
-    color: #777777;
+    color: var(--color-graySoft2);
 }
 
 .card_view{
@@ -30,85 +32,47 @@
 .card_view a{
     text-decoration: none;
     margin: 0 16px 0 0;
+    font-size: 14px;
 }
 
-.card_view .btn_editar{
-    font-size: 14px;
-    color: #6558C3;
+.card_view .btn_editar, .btn_view{
+    color: var(--color-rocket);
 }
 
 .card_view .btn_deletar{
-    font-size: 14px;
-    color: #F55A5A;
+    color: var(--color-deleteRed);
 }
 
-
-
-/* 
-.card img{
-    width: 300px;
-    height: 140px;
-    border-radius: 15px;
-    cursor: pointer;
-    object-fit: cover;
-}
-
-.card .info_title {
-    font-size: 18px;
-    display: block;
-    margin: 20px 0 5px;
-}
-
-.card .info_subtitle {
-    font-size: 14px;
-    color: var(--color-graySoft);
-} */
-
-/* CARDS HORIZONTAIS*/
-
-/* .card-horizontal{   Div que representa cada Card
+/* CARD COM IMAGEM DA RECEITA */
+.horizontal{
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
     grid-gap: 20px;
-    width: 100%;    Tem 100% de largura para que o nome do Chef fique em uma linha
+    width: 100%;    /*Tem 100% de largura para que o nome do Chef fique em uma linha*/
 }
 
-.card-horizontal .img_circular {
-    border-radius: 50%;
-    height: 64px;
-    width: 64px;
-    object-fit: cover;   Prop. especifica como o conteúdo de um elemento deve ser ajustado à caixa estabelecida pela altura e largura usadas
-}
-
-.card-horizontal .img_rounded{
+.horizontal .img_rounded{
     border-radius: 5%;
     width: 172px;
     height: 80px;
+    object-fit: cover;  /*Prop. especifica como o conteúdo de um elemento deve ser ajustado à caixa estabelecida pela altura e largura usadas*/
+}
+
+/* CARD COM IMAGEM DO CHEF */
+.img_circular{
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
     object-fit: cover;
 }
 
-a.card,
-a.card-horizontal {
-    text-decoration: none;
+/* CARD COM IMAGEM DA RECEITA NA VERTICAL */
+.img_vertical{
+    width: 300px;
+    height: 140px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    object-fit: cover;
 }
-
-.card_info .info_title{
-    color: #111111;
-    font-size: 18px;
-    display: block;
-}
-
-.card_info .info_subtitle{
-    margin-top: 5px;
-    color: var(--color-graySoft2);
-    font-size: 14px;
-}
-
-.card_info .info_view a{
-    margin-top: 10px;
-    display: block;
-    color: var(--color-rocket);
-    font-size: 14px;
-    text-decoration: none;
-} */

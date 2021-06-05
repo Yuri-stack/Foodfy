@@ -565,10 +565,6 @@ button[type="submit"].btn-delete {
 
 /* =========================== EDIT RECIPES ADMIN PAGE =============================== */
 
-/* .item{
-    margin-bottom: 30px;
-} */
-
 .item button{
     background-color: transparent;
     color: var(--color-rocket);
