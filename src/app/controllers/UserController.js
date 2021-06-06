@@ -7,34 +7,65 @@ module.exports = {
     },
 
     async list(req, res){
-        const results = await User.all()
-        const users = results.rows
-
-        return res.render('admin/users/index', { users })    
+        try {
+            const results = await User.all()
+            const users = results.rows
+    
+            return res.render('admin/users/index', { users })  
+        } catch (error) {
+            console.error(error)
+        }
+  
     },
 
     async post(req, res){
-        const results = await User.create(req.body)
-        // req.session.userId = results.rows[0].id
-        
-        return res.redirect(`/admin/users`)  
-    },
-
-    async edit(req, res){
-        const { id } = req.params
-        // const { userId: id } = req.session
-
-        const user = await User.findOne(id)
-
-        if(!user) return res.render("admin/users/edit", {
-            error: "Usuário não encontrado"
-        })
-
-        return res.render('admin/users/edit', { user })
+        try {
+            const results = await User.create(req.body)
+            // req.session.userId = results.rows[0].id
+            
+            return res.redirect(`/admin/users`)  
+        } catch (error) {
+            console.error(error)
+        }
 
     },
 
-    put(req, res){},
+    async edit(req, res){ 
+        try {
+            const user = req.user
+
+            return res.render('admin/users/edit', { user })
+        } catch (error) {
+            console.error(error)
+        }
+
+    },
+
+    async put(req, res){
+        try {
+            const { user } = req
+            const { name, email, isAdmin } = req.body
+
+            await User.update(user.id, {
+                name, email, is_admin:isAdmin
+            })
+
+            console.log(req.body)
+
+            return res.render(`admin/users/edit`, {
+                user: req.body,
+                success: "Dados Atualizados"
+            })  
+
+            // return res.redirect(`/admin/users` + success)  
+            
+        } catch (error) {
+            console.error(error)
+            return res.render("admin/users/edit", {
+                error: "Houve um erro na atualização, tente novamente"
+            })
+        }
+    },
 
     delete(req, res){}
 
