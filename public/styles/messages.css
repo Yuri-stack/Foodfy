@@ -23,6 +23,6 @@
     background: var(--color-deleteRed);
 }
 
-.messages .success{
+.messages.success{ 
     background: green;
 }

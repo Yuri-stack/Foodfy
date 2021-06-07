@@ -60,5 +60,9 @@ module.exports = {
             birthDay: `${day}/${month}`,
             format: `${day}/${month}/${year}`
         }
+    },
+
+    generatePassword(){
+        return Math.random().toString(36).slice(-10)
     }
 }

@@ -34,8 +34,7 @@ module.exports = {
         }
     },
 
-    async create({name, email,isAdmin}){
-    // async create({name, email, isAdmin}){
+    async create(name, email, password, isAdmin){
         try {
             const query = `
                 INSERT INTO users (name, email, password, is_admin)
@@ -43,21 +42,9 @@ module.exports = {
                 RETURNING id
             `
 
-            // const query = `
-            //     INSERT INTO users (name, email, password, is_admin)
-            //     VALUES ($1, $2, $3, $4)
-            //     RETURNING id
-            // `
+            const values = [name, email, password, isAdmin]
 
-            // const passwordHash = await hash(password, 8)
-            const passwordHash = 1111
-            const is_admin = isAdmin || false
-
-            const values = [name, email, passwordHash, is_admin]
-            
-            const results = await db.query(query, values)
-            return results.rows[0].id
-
+           return results = await db.query(query, values)
         } catch (error) {
             console.log(error)
         }

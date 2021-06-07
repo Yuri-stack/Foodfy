@@ -1,5 +1,10 @@
 const User = require('../models/User')
 
+const { hash } = require('bcryptjs')
+
+const mailer = require('../../lib/mailer')
+const { generatePassword} = require('../../lib/utils')
+
 module.exports = {
 
     redirectCreate(req, res){
@@ -10,24 +15,53 @@ module.exports = {
         try {
             const results = await User.all()
             const users = results.rows
-    
+
             return res.render('admin/users/index', { users })  
         } catch (error) {
             console.error(error)
         }
-  
     },
 
     async post(req, res){
         try {
-            const results = await User.create(req.body)
-            // req.session.userId = results.rows[0].id
-            
-            return res.redirect(`/admin/users`)  
+            const { name, email, isAdmin } = req.body
+
+            const password = generatePassword()
+
+            await mailer.sendMail({
+                to: req.body.email,
+                from: 'no-replay@foodfy.com.br',
+                subject: 'Cadastro Realizado',
+                html: `
+                    <h1>Olá ${name}!</h1>
+                    <p>Parabéns! Sua conta no Foodfy foi criada com sucesso!</p>
+                    <p>Segue seus dados de usuário:</p>
+                    <p>Login: ${email}</p>
+                    <p>Senha: ${password}</p>
+                    <p><br></p>
+                    <p>
+                        Faça seu primeiro acesso para validar sua conta clicando 
+                        <a href="href"="http://localhost:3000/admin/users/login">aqui</a>.
+                    </p>
+                `
+            })
+
+            let passwordHash = await hash(password, 8)
+
+            await User.create(name, email, passwordHash, isAdmin || false)
+
+            const results = await User.all()
+            const userList = results.rows
+
+            return res.render('admin/users/index', {
+                // userId: req.session.userId,
+                users: userList,
+                success: 'Usuário criado com sucesso!'
+            })
+
         } catch (error) {
             console.error(error)
         }
-
     },
 
     async edit(req, res){ 
@@ -49,8 +83,6 @@ module.exports = {
             await User.update(user.id, {
                 name, email, is_admin:isAdmin
             })
-
-            console.log(req.body)
 
             return res.render(`admin/users/edit`, {
                 user: req.body,
