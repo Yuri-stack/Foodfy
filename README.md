@@ -14,6 +14,7 @@
     <a  href="#">
       <img  src="https://img.shields.io/static/v1?label=Language&message=CSS&color=blue&style=for-the-badge&logo=CSS3"  alt="Language: CSS">
     </a>
+    <br>
     <a  href="#">
       <img  src="https://img.shields.io/static/v1?label=Template&message=Nunjucks&color=green&style=for-the-badge&logo=Ghost"  alt="Template: Nunjucks">
     </a>

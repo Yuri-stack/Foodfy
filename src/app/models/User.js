@@ -1,5 +1,4 @@
 const db = require('../../config/db')
-const { hash } = require('bcryptjs')
 
 module.exports = {
 
@@ -50,24 +49,23 @@ module.exports = {
         }
     },
 
-    // async update({name, email, password, is_admin}){
-    async update(id, fields){
-        let query = `UPDATE users SET`
+    async update(id, { name, email, is_admin }){
+        try {
+            const query = `
+                UPDATE users SET 
+                    name = ($1),
+                    email = ($2),
+                    is_admin = ($3)
+                WHERE id = ($4)
+            `
 
-        // const is_admin = is_admin || false
-        // tá com problema por caisa o admin que é boolean
+            const values = [name, email, is_admin, id]
+            return db.query(query, values)
 
-        Object.keys(fields).map((key, index, array) => {
-            if((index + 1) < array.length){
-                query = `${query} ${key} = '${fields[key]}',`
-            }else{
-                query = `${query} ${key} = '${fields[key]}' WHERE id = ${id}`
-            }
-        })
+        } catch (error) {
+            console(error)
+        }
+    },
 
-        await db.query(query)
-        return
-    }
-
-
+    
 }

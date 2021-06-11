@@ -72,7 +72,6 @@ module.exports = {
         } catch (error) {
             console.error(error)
         }
-
     },
 
     async put(req, res){
@@ -84,12 +83,11 @@ module.exports = {
                 name, email, is_admin:isAdmin
             })
 
+            //Depois redirecionar para a tela Index cons os dados de lá
             return res.render(`admin/users/edit`, {
                 user: req.body,
                 success: "Dados Atualizados"
             })  
-
-            // return res.redirect(`/admin/users` + success)  
             
         } catch (error) {
             console.error(error)
