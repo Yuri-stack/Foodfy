@@ -97,6 +97,12 @@ module.exports = {
         }
     },
 
-    delete(req, res){}
+    delete(req, res){
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
 
 }
