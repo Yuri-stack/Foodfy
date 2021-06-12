@@ -137,6 +137,20 @@ module.exports = {
             console.log(error)
         }
 
+    },
+
+    //Função para ENCONTRAR as receitas de um Usuário
+    findAllRecipesUser(id){
+        try {
+            const query = `
+                SELECT recipes.* FROM recipes WHERE user_id = $1
+            `
+            return db.query(query, [id])
+            
+        } catch (error) {
+            console.error(error);
+            console.log("Erro findAllRecipesUser")
+        }
     }
 
  }

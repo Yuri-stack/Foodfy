@@ -66,6 +66,13 @@ module.exports = {
             console(error)
         }
     },
-
     
+    delete(id){
+        try {
+            const query = `DELETE FROM users WHERE id = $1`
+            return db.query(query, [id])
+        } catch (error) {
+            console.log(error)
+        }
+    },
 }

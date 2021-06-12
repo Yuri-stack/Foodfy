@@ -12,6 +12,6 @@ routes.get('/register', User.redirectCreate)    // Mostrar o formulário de cria
 routes.get('/:id/edit', Validator.show, User.edit)  // Mostrar o formulário de edição de um usuário
 routes.post("/", Validator.post, User.post)     // Cadastrar um usuário
 routes.put('/', Validator.put, User.put)     // Editar um usuário
-// routes.delete('/:id', User.delete)           // Deletar um usuário 
+routes.delete('/', User.delete)           // Deletar um usuário 
 
 module.exports = routes
