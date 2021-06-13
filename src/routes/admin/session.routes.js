@@ -1,10 +1,10 @@
 const express = require('express')
 const routes = express.Router()
 
-// const Session = require('../../app/controllers/SessionController')
+const Session = require('../../app/controllers/SessionController')
 
 // Rotas para Login / Logout
-// routes.get("/login", Session.loginForm)
+routes.get("/login", Session.loginForm)
 // routes.post("/login", Session.login)
 // routes.post("/logout", Session.logout)
 
