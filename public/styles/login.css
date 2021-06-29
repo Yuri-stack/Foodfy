@@ -3,3 +3,30 @@
     align-items: center;
     justify-content: center;
 }
+
+.login{
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+.login h1{
+    text-align: center;
+}
+
+.login .item{
+    margin-top: 20px;
+}
+
+.footer-login{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-top: 20px;
+}
+
+.footer-login a{
+    font-size: 16px;
+    text-decoration: none;
+    color: #969696;
+}
