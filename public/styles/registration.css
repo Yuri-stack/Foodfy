@@ -30,3 +30,10 @@
     text-decoration: none;
     color: #969696;
 }
+
+.footer-forgot{
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 20px;
+}
