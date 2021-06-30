@@ -10,7 +10,7 @@ routes.get("/login", Session.loginForm)
 
 // Rotas para Reset da Senha
 routes.get("/forgot-password", Session.forgotForm)
-// routes.get("/password-reset", Session.resetForm)
+routes.get("/password-reset", Session.resetForm)
 // routes.post("/forgot-password", Session.forgot)
 // routes.post("/password-reset", Session.reset)
 
