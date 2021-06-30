@@ -1,0 +1,23 @@
+    <div class="item">
+        <div>Email</div>
+        <div>
+            <input 
+                type="email" 
+                name="email" 
+                placeholder="Digite o email" 
+                value="{{ user.email }}" 
+                onblur="Validate.apply(this, 'isEmail')"
+                required> 
+        </div>
+    </div>
+
+    <div class="item">
+        <div>Senha</div>
+        <div>
+            <input 
+                type="password" 
+                name="senha" 
+                placeholder="Digite o senha" 
+                required> 
+        </div>
+    </div>    
