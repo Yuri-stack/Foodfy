@@ -45,7 +45,7 @@
 ## 📌 About
 <div>
     <p align="center">
-        FoodFy is a project developed to create an application to manage mouth-watering recipes and find amazing chefs, with administration of the recipes and chefs registration areas. Made with Express, Nunjucks, CSS and PostGres.
+        FoodFy is a project developed to create an application to manage mouth-watering recipes and find amazing chefs, with administration of the recipes and chefs registration areas. Made with Express, Nunjucks, CSS and PostGres. 
     </p>
 </div>
 
