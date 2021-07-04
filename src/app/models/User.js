@@ -63,7 +63,28 @@ module.exports = {
             return db.query(query, values)
 
         } catch (error) {
-            console(error)
+            console.error(error)
+        }
+    },
+
+    async updateUser(id, { name, email, passwordHash }){
+
+        console.log(name, email, passwordHash, id)
+
+        try {
+            const query = `
+                UPDATE users SET
+                    name = ($1),
+                    email = ($2),
+                    password = ($3)
+                WHERE id = ($4)
+            `
+
+            const values = [name, email, passwordHash, id]
+            return db.query(query, values)
+            
+        } catch (error) {
+            console.error(error)
         }
     },
     
