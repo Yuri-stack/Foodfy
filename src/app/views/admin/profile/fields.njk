@@ -18,19 +18,19 @@
                 name="email" 
                 placeholder="Digite o email" 
                 value="{{ user.email }}" 
-                onblur="Validate.apply(this, 'isEmail')"
+                {# onblur="Validate.apply(this, 'isEmail')"  #}
+                {# verificar o Validate #}
                 required> 
         </div>
     </div>
-    
+
     <div class="item">
+        <div>Senha</div>
         <div>
-            {% if user.is_admin == true %}
-                <input type="checkbox" name="isAdmin" value="true" checked>
-            {% else %}
-                <input type="checkbox" name="isAdmin" value="true">
-            {% endif %}
-            <label for="isAdmin">Administrador</label>
+            <input 
+                type="password" 
+                name="password" 
+                placeholder="Digite o senha" 
+                required> 
         </div>
-    </div>
-    
+    </div>    

@@ -1,10 +1,7 @@
 const User = require('../models/User')
-const Recipe = require('../models/Recipe')
-const File = require('../models/File')
+const mailer = require('../../lib/mailer')
 
 const { hash } = require('bcryptjs')
-
-const mailer = require('../../lib/mailer')
 const { generatePassword} = require('../../lib/utils')
 
 module.exports = {
