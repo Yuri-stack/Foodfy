@@ -4,8 +4,10 @@ const routes = express.Router()
 const Session = require('../../app/controllers/SessionController')
 const Validator = require('../../app/validators/session')
 
+const { isLoggedRedirectToProfile } = require('../../app/middlewares/session')
+
 // Rotas para Login / Logout
-routes.get("/login", Session.loginForm)
+routes.get("/login", isLoggedRedirectToProfile, Session.loginForm)
 routes.post("/login", Validator.login, Session.login)
 routes.post("/logout", Session.logout)
 
