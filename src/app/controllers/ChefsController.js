@@ -7,8 +7,7 @@ module.exports = {
     //Função para LISTAR os Chefs no Index da Administração
     async index(req, res){ 
 
-        const results = await Chef.all()
-        const chefs = results.rows
+        const chefs = await Chef.findAll()
 
         async function getImage(chefId){
             let results = await Chef.findImageChef(chefId)
@@ -54,6 +53,8 @@ module.exports = {
 
         const fileId = results[0].rows[0].id
 
+        //tem que passar a data tb
+
         results = await Chef.create(req.body.name, fileId)
         const userId = results.rows[0].id
 
@@ -66,7 +67,7 @@ module.exports = {
 
         const { id } = req.params
 
-        let results = await Chef.find(id)
+        let results = await Chef.findChef(id)
         const chef = results.rows[0]
 
         if(!chef) return res.send("Chef not found / Chef não encontrado")
@@ -106,7 +107,7 @@ module.exports = {
 
         const { id } = req.params
 
-        let results = await Chef.find(id)
+        let results = await Chef.findChef(id)
         const chef = results.rows[0]
 
         if(!chef) return res.send("Chef not found")
@@ -209,7 +210,7 @@ module.exports = {
         // const newFilesPromise = req.file.map(file => File.create({...file})) 
         // results = await Promise.all(newFilesPromise)
 
-        await Chef.update(name, fileId, id)
+        await Chef.update(id, name, file_id)
         return res.redirect(`/admin/chefs/${id}`)
 
     },
@@ -219,15 +220,15 @@ module.exports = {
 
         const { id } = req.body
 
-        const chef = await Chef.find(id)
+        const chef = await Chef.findChef(id)
         const fileId = chef.rows[0].file_id     //Pega o file_id, que refere se ao indice da imagem do Chef
 
         if(chef.rows[0].total_recipes >= 1){
             return res.send('Chefs que possuem receitas não podem ser apagados')
         }
 
-        await Chef.delete(id)       //Apaga o chef
         await File.delete(fileId)   //Apaga a imagem do chef
+        await Chef.delete(id)       //Apaga o chef
 
         return res.redirect(`/admin/chefs`)
         

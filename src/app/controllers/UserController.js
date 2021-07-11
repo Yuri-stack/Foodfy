@@ -12,8 +12,7 @@ module.exports = {
 
     async list(req, res){
         try {
-            const results = await User.all()
-            const users = results.rows
+            const users = await User.findAll()
 
             return res.render('admin/users/index', { users })  
         } catch (error) {

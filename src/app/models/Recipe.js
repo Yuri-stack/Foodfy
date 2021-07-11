@@ -1,10 +1,14 @@
 const db = require('../../config/db')
-const { date } = require('../../lib/utils')
+const Base = require('./Base')
+
+Base.init({ table: 'recipes' })
 
 module.exports = { 
 
+    ...Base,
+
     //Função para SELECIONAR todas as Receitas
-    all(){
+    findAllRecipes(){
         try {
             const query = `
                 SELECT recipes.*, chefs.name AS chef_name
@@ -19,23 +23,10 @@ module.exports = {
     },
 
     //Função para CRIAR uma nova Receita
-    create({chef, title, ingredients, preparation, information}){
-        try {
-            const query = `
-                INSERT INTO recipes (title,ingredients,preparation,information,created_at,chef_id) 
-                VALUES ($1, $2, $3, $4, $5, $6)
-                RETURNING id 
-            `
-            const values = [title, ingredients, preparation, information, date(Date.now()).iso,chef]
-            return db.query(query, values)
-
-        } catch (error) {
-            console.log(error)
-        }
-    },
-
+    // lembrar de colcoar no Controller a informação da data
+    
     //Função para RETORNAR os dados das Receitas
-    find(id){
+    showDataRecipes(id){
         try {
             const query = `
                 SELECT recipes.*, chefs.name AS chef_name
@@ -48,38 +39,6 @@ module.exports = {
             console.log(error)
         }
 
-    },
-
-    //Função para ATUALIZAR uma Receita
-    update({chef, title, ingredients, preparation, information, id}){
-
-        try {
-            const query = `
-                UPDATE recipes SET
-                    title = ($1),
-                    ingredients = ($2),
-                    preparation = ($3),
-                    information = ($4),
-                    chef_id = ($5)
-                WHERE id = ($6) 
-            `
-        const values = [ title, ingredients, preparation, information, chef, id]
-        return db.query(query, values)
-            
-        } catch (error) {
-            console.log(error)
-        }
-    },
-
-    //Função para APAGAR uma Receita
-    delete(id){
-
-        try {
-            const query = `DELETE FROM recipes WHERE id = $1`
-            return db.query(query, [id])
-        } catch (error) {
-            console.log(error)
-        }
     },
 
     //Função que CARREGA os nomes dos Chefs para o Form das Receitas

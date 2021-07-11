@@ -6,7 +6,7 @@ module.exports = {
     async index(req, res){
         const { userId: id } = req.session
     
-        const user = await User.findOne(id)
+        const user = await User.findOne(id) 
     
         if(!user) return res.render("admin/profile/index", {
             error: "Usuário não encontrado"

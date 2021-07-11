@@ -2,8 +2,8 @@ const db = require('../../config/db')
 
 module.exports = { 
 
-    //Função para SELECIONAR todas as Receitas
-    allRecipes(){
+    //Função para SELECIONAR todas as Receitas para o Index
+    findAllRecipes(){ 
         try {
             const query = `
                 SELECT recipes.*, chefs.name AS chef_name
@@ -21,7 +21,7 @@ module.exports = {
     },
 
     //Função para SELECIONAR todos os Chefs
-    allChefs(){
+    finAllChefs(){
         try {
             const query = `
                 SELECT chefs.*, count(recipes) AS total_recipes
@@ -40,7 +40,7 @@ module.exports = {
     },
 
     //Função para RETORNAR os dados das Receitas
-    showRecipe(id){
+    showDataRecipes(id){
         try {
             const query = `
                 SELECT recipes.*, chefs.name AS chef_name
