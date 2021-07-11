@@ -12,25 +12,27 @@
         {% include "layouts/parts/messages.njk" %}
         {% block header %}
             <header>
-                <div class="container">
-                    <div>
-                        <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"> </a>
-                    </div>
-                    <div>
-                        <nav>
-                            <a href="/admin/recipes">RECEITAS</a>
-                            <a href="/admin/chefs">CHEFS</a>
-                            <a href="/admin/users">USUÁRIOS</a>
-                        </nav>
-                    </div>
-                    <div>
-                        <form id="form-logout" action="/admin/logout" method="post">
-                            <button type="submit">
-                                SAIR
-                            </button>
-                        </form>                    
-                    </div>
+
+            <div class="container">
+                <div>
+                    <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"> </a>
                 </div>
+                <div>
+                    <nav>
+                        <a href="/admin/recipes">RECEITAS</a>
+                        <a href="/admin/chefs">CHEFS</a>
+                        <a href="/admin/users">USUÁRIOS</a>
+                    </nav>
+                </div>
+                <div>
+                    <form id="form-logout" action="/admin/logout" method="post">
+                        <button type="submit">
+                            SAIR
+                        </button>
+                    </form>                    
+                </div>
+            </div>
+                
             </header>
         {% endblock header %}
         <main>
