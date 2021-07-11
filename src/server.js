@@ -10,13 +10,12 @@ server.use(session)
 server.use(express.urlencoded({ extended: true }))  // Config que permite o req.body funcionar
 server.use(express.static('public'))                // Configurando para o express procurar CSS e JS na pasta Public
 server.use(methodOverride('_method'))               // Essa parte identifica nas ações dos form a query String: _method, para poder sobreescrever POST e GET
-server.use(routes)                                  // Config para poder usar o arquivo de rotas
-
 server.use((req, res, next) => {                    // Colocando a Session como Variavel Global
-    req.locals.session = req.session 
-    next()
-})
+    res.locals.session = req.session;
+    next();
+});
 
+server.use(routes)                                  // Config para poder usar o arquivo de rotas
 server.set("view engine", "njk")                    // Config que diz qual engine estamos usando
 
 nunjucks.configure('src/app/views', {
