@@ -48,7 +48,7 @@ module.exports = {
 
             await User.create(name, email, passwordHash, isAdmin || false)
 
-            const results = await User.all()
+            const results = await User.findAll()
             const userList = results.rows
 
             return res.render('admin/users/index', {

@@ -22,9 +22,7 @@ module.exports = {
 
             let passwordHash = await hash(password, 8)
 
-            await User.updateUser(userId, {
-                name, email, passwordHash
-            })
+            await User.update(userId, { name, email, passwordHash })
 
             //Depois redirecionar para a tela Index cons os dados de lá
             return res.render(`admin/profile/index`, {

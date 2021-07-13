@@ -7,7 +7,7 @@ module.exports = {
     //Função para LISTAR as receitas no Index
     async index(req, res){
 
-        const results = await Public.allRecipes()
+        const results = await Public.findAllRecipes()
         const recipes = results.rows
 
         /* Função para buscar o endereço de cada img das receitas */
@@ -115,7 +115,7 @@ module.exports = {
 
         const { id } = req.params
 
-        let results = await Public.showRecipe(id)
+        let results = await Public.showDataRecipes(id)
         const recipe = results.rows[0]
 
         if(!recipe) return res.send("Recipe not found / Receita não encontrada")
@@ -132,7 +132,7 @@ module.exports = {
     //Função para LISTAR os Chefs
     async listChef(req, res){
 
-        const results = await Public.allChefs()
+        const results = await Public.findAllChefs()
         const chefs = results.rows
 
         /* Função para buscar o endereço de cada img dos chefs */

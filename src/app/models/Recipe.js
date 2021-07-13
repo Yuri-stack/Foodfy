@@ -23,7 +23,7 @@ module.exports = {
     },
 
     //Função para CRIAR uma nova Receita
-    // lembrar de colcoar no Controller a informação da data
+    // lembrar de colocar no Controller a informação da data
     
     //Função para RETORNAR os dados das Receitas
     showDataRecipes(id){

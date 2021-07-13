@@ -6,7 +6,8 @@ module.exports = {
     //Função para LISTAR as receitas no Index da Administração
     async index(req, res){
 
-        const results = await Recipe.all()
+        // const results = await Recipe.all()
+        const results = await Recipe.findAllRecipes()
         const recipes = results.rows
 
         async function getImage(recipeID){
@@ -68,7 +69,7 @@ module.exports = {
 
         const { id } = req.params
 
-        let results = await Recipe.find(id)
+        let results = await Recipe.showDataRecipes(id)
         const recipe = results.rows[0]
 
         if(!recipe) return res.send("Recipe not found / Receita não encontrada")
@@ -86,7 +87,8 @@ module.exports = {
 
         const { id } = req.params
 
-        let results = await Recipe.find(id)
+        // let results = await Recipe.find(id)
+        let results = await Recipe.showDataRecipes(id)
         const recipe = results.rows[0]
         
         if(!recipe) return res.send("Recipe not found")

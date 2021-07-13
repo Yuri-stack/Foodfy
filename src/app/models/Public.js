@@ -21,7 +21,7 @@ module.exports = {
     },
 
     //Função para SELECIONAR todos os Chefs
-    finAllChefs(){
+    findAllChefs(){
         try {
             const query = `
                 SELECT chefs.*, count(recipes) AS total_recipes

@@ -105,7 +105,6 @@ const Base = {
             console.log(error)
         }
     }
-
 }
 
 module.exports = Base

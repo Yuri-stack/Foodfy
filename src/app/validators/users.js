@@ -40,7 +40,7 @@ async function post(req, res, next){
 async function show(req, res, next){
     const { id } = req.params
     
-    const user = await User.findOne(id)
+    const user = await User.findOne({ where: { id } })
 
     if(!user) return res.render("admin/users/edit", {
         error: "Usuário não encontrado"
