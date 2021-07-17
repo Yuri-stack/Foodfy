@@ -23,8 +23,10 @@ module.exports = {
     async post(req, res){
         try {
             const { name, email, isAdmin } = req.body
+            let password = generatePassword()
+            password = await hash(password, 8)
 
-            const password = generatePassword()
+            await User.create({ name, email, password, is_admin:isAdmin || false })
 
             await mailer.sendMail({
                 to: req.body.email,
@@ -44,16 +46,10 @@ module.exports = {
                 `
             })
 
-            let passwordHash = await hash(password, 8)
-
-            await User.create(name, email, passwordHash, isAdmin || false)
-
-            const results = await User.findAll()
-            const userList = results.rows
+            const users = await User.findAll()
 
             return res.render('admin/users/index', {
-                // userId: req.session.userId,
-                users: userList,
+                users,
                 success: 'Usuário criado com sucesso!'
             })
 
@@ -78,13 +74,14 @@ module.exports = {
             const { name, email, isAdmin } = req.body
 
             await User.update(user.id, {
-                name, email, is_admin:isAdmin
+                name, email, is_admin:isAdmin || false
             })
 
-            //Depois redirecionar para a tela Index cons os dados de lá
-            return res.render(`admin/users/edit`, {
-                user: req.body,
-                success: "Dados Atualizados"
+            const users = await User.findAll()
+
+            return res.render('admin/users/index', {
+                users,
+                success: 'Usuário atualizado com sucesso!'
             })  
             
         } catch (error) {
@@ -99,13 +96,19 @@ module.exports = {
         try {
             const { id } = req.body
 
-            // Apagar o Usuário do Banco
             await User.delete(id)
+            const users = await User.findAll()
 
-            return res.render('admin/users/index')
+            return res.render('admin/users/index', {
+                users,
+                success: 'Usuário excluído com sucesso!'
+            }) 
             
         } catch (error) {
             console.error(error)
+            return res.render("admin/users/index", {
+                error: "Houve um erro na exclusão, tente novamente"
+            })
         }
     }
 

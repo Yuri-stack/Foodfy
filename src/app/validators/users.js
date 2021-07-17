@@ -22,7 +22,8 @@ async function post(req, res, next){
     }
     
     const { email } = req.body
-    const user = await User.findOneEmail(email)
+    const user = await User.findOne({ where: { email } })
+    // const user = await User.findOneEmail(email) 
 
     if(user) return res.render('admin/users/create', {
         user: req.body,
@@ -58,16 +59,16 @@ async function put(req, res, next){
         return res.render("admin/users/", fillAllFields)
     }
 
-    const { id, password } = req.body
+    const { id } = req.body
 
-    const user = await User.findOne(id)
+    const user = await User.findOne({ where: { id }})
 
-    const passed = await compare(password, user.password)
-    // const passed = true;
+    // const passed = await compare(password, user.password)
+    // // const passed = true;
 
-    if(!passed) return res.render("admin/users/edit",{
+    if(!user) return res.render("admin/users/edit",{
         user: req.body,
-        error: "Senha Incorreta"
+        error: "Erro ao atualizar, o usuário não foi encontrado"
     })
 
     req.user = user

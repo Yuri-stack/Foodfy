@@ -51,19 +51,16 @@ const Base = {
             console.log(error)
         }
     },
-
     async create(fields) {
         try {
-            let keys = [],
-                values = []
+            let keys = [], values = []
 
             Object.keys(fields).map(key => {
-                keys.push(key)              // name: 
-                values.push(fields[key])    // 'Yuri'
+                keys.push(key)                      // name: 
+                values.push(`'${fields[key]}'`)    // 'Yuri'
             })
 
-            const query = `
-                INSERT INTO ${this.table} (${keys.join(',')})
+            const query = `INSERT INTO ${this.table} (${keys.join(',')})
                 VALUES (${values.join(',')})
                 RETURNING id
             `
@@ -72,7 +69,7 @@ const Base = {
             return results.rows[0].id
 
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     },
 
