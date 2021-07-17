@@ -6,7 +6,7 @@ module.exports = {
     async index(req, res){
         const { userId: id } = req.session
     
-        const user = await User.findOne(id) 
+        const user = await User.findOne({ where: { id }}) 
     
         if(!user) return res.render("admin/profile/index", {
             error: "Usuário não encontrado"
@@ -18,13 +18,12 @@ module.exports = {
     async put(req, res){
         try {
             const { userId } = req.session
-            const { name, email, password } = req.body
+            let { name, email, password } = req.body
 
-            let passwordHash = await hash(password, 8)
+            password = await hash(password, 8)
 
-            await User.update(userId, { name, email, passwordHash })
+            await User.update(userId, { name, email, password })
 
-            //Depois redirecionar para a tela Index cons os dados de lá
             return res.render(`admin/profile/index`, {
                 user: req.body,
                 success: "Dados Atualizados"
@@ -33,6 +32,7 @@ module.exports = {
         } catch (error) {
             console.error(error)
             return res.render("admin/profile/index", {
+                user: req.body,
                 error: "Houve um erro na atualização, tente novamente"
             })
         }
