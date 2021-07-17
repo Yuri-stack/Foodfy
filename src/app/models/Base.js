@@ -51,6 +51,7 @@ const Base = {
             console.log(error)
         }
     },
+
     async create(fields) {
         try {
             let keys = [], values = []
@@ -93,7 +94,7 @@ const Base = {
             console.log(error)
         }
     },
-
+    
     delete(id) {
         try {
             const query = `DELETE FROM ${this.table} WHERE id = $1`

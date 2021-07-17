@@ -17,6 +17,9 @@ module.exports = {
             return res.render('admin/users/index', { users })  
         } catch (error) {
             console.error(error)
+            return res.render("admin/users/index", {
+                error: "Houve um erro ao carregar os usuários, tente novamente"
+            })
         }
     },
 
@@ -55,16 +58,21 @@ module.exports = {
 
         } catch (error) {
             console.error(error)
+            return res.render("admin/users/index", {
+                error: "Houve um erro na criação do usuário, tente novamente"
+            })
         }
     },
 
     async edit(req, res){ 
         try {
             const user = req.user
-
             return res.render('admin/users/edit', { user })
         } catch (error) {
             console.error(error)
+            return res.render("admin/users/edit", {
+                error: "Houve um erro na edição, tente novamente"
+            })
         }
     },
 

@@ -1,5 +1,4 @@
 const db = require('../../config/db')
-
 const Base = require('./Base')
 
 Base.init({ table: 'chefs' })
@@ -14,7 +13,7 @@ module.exports = {
     // create(name, file_id){
 
     //Função para RETORNAR os dados dos Chefs
-    findChef(id){
+    findChef(id) {
         try {
             const query = `
                 SELECT chefs.*, count(recipes) AS total_recipes
@@ -25,11 +24,11 @@ module.exports = {
                 ORDER BY chefs.id ASC
             `
             return db.query(query, [id])
-        } catch (error){
+        } catch (error) {
             console.log(error)
         }
 
-    }, 
+    },
 
     //Função para ATUALIZAR um Chef
     // update(name, file_id, id){
@@ -41,14 +40,14 @@ module.exports = {
     //     } catch (error) {
     //         console.log(error)
     //     }
-  
+
     // },
 
     //Função para RETORNAR os Chefs suas respectivas Receitas
-    findRecipesChef(id){
+    findRecipesChef(id) {
 
         try {
-        
+
             const query = `
                 SELECT recipes.*
                 FROM chefs
@@ -66,10 +65,10 @@ module.exports = {
     },
 
     //Função para RETORNAR aos Chefs sua respectiva imagem
-    findImageChef(id){
+    findImageChef(id) {
 
         try {
-        
+
             const query = `
                 SELECT files.*, chefs.file_id 
                 FROM files
@@ -78,8 +77,8 @@ module.exports = {
                 ORDER BY files.id ASC
             `
 
-            return db.query (query, [id])
-            
+            return db.query(query, [id])
+
         } catch (error) {
             console.log(error)
         }
