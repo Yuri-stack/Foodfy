@@ -10,22 +10,22 @@ module.exports = {
         const results = await Public.findAllRecipes()
         const recipes = results.rows
 
-        /* Função para buscar o endereço de cada img das receitas */
-        async function getImage(recipeId){
-            let results = await Recipe.findImageRecipe(recipeId)
-            const files = results.rows.map(file =>
-                `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
-            )
-            return files[0]
-        }
+        // /* Função para buscar o endereço de cada img das receitas */
+        // async function getImage(recipeId){
+        //     let results = await Recipe.findImageRecipe(recipeId)
+        //     const files = results.rows.map(file =>
+        //         `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+        //     )
+        //     return files[0]
+        // }
 
-        /* Função que atualiza o source da receita com o resultado da Função anterior */
-        const recipesPromises = recipes.map(async recipe => {
-            recipe.src = await getImage(recipe.id)
-            return recipe
-        })
+        // /* Função que atualiza o source da receita com o resultado da Função anterior */
+        // const recipesPromises = recipes.map(async recipe => {
+        //     recipe.src = await getImage(recipe.id)
+        //     return recipe
+        // })
 
-        await Promise.all(recipesPromises)
+        // await Promise.all(recipesPromises)
 
         return res.render('public/index', { recipes })
 
