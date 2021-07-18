@@ -1,30 +1,16 @@
 const Chef = require('../models/Chef')
 const File = require('../models/File')
 const Recipe = require('../models/Recipe')
+const LoadChefService = require('../services/LoadChefService')
 
 module.exports = {
 
     //Função para LISTAR os Chefs no Index da Administração
-    async index(req, res) { //arrumar com os services
+    async index(req, res) {
         try {
-            const chefs = await Chef.findAll()
+            const chefs = await LoadChefService.load('chefs')
 
-            async function getImage(chefId) {
-                let results = await Chef.findImageChef(chefId)
-                const files = results.rows.map(file =>
-                    `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-                )
-                return files[0]
-            }
-
-            const chefsPromises = chefs.map(async chef => {
-                chef.src = await getImage(chef.id)
-                return chef
-            })
-
-            const chefsAll = await Promise.all(chefsPromises)
-
-            return res.render('admin/chefs/index', { chefs: chefsAll })
+            return res.render('admin/chefs/index', { chefs })
 
         } catch (error) {
             console.error(error)
@@ -39,8 +25,10 @@ module.exports = {
     //Função para CADASTRAR um novo Chef 
     async post(req, res) {
         try {
-            const { filename, path } = req.files
+            const { filename, path } = req.files[0]
             const fileId = await File.create({ name: filename, path })
+
+            console.log(fileId)
 
             const { name } = req.body
             const chefId = await Chef.create({ name, file_id: fileId })
@@ -56,42 +44,21 @@ module.exports = {
     },
 
     //Função para MOSTRAR os detalhes de um Chef 
-    async show(req, res) {      //arrumar com os services
-        const { id } = req.params
+    async show(req, res) {      
+        try {
+            const { id } = req.params
+            const chef = await LoadChefService.load('chef', id)
 
-        let results = await Chef.findChef(id)
-        const chef = results.rows[0]
+            if (!chef) return res.send("Chef não encontrado")
 
-        if (!chef) return res.send("Chef not found / Chef não encontrado")
+            return res.render('admin/chefs/details', { chef })
 
-        //Lógica para buscar as imagens dos chefs
-        results = await Chef.findImageChef(id)
-        const files = results.rows.map(file => ({
-            ...file,
-            src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-        }))
-
-        //Lógica para buscar as receitas do Chef 
-        results = await Chef.findRecipesChef(id)
-        const recipes = results.rows
-
-        //Lógica para buscar as imagens das receitas
-        async function getImage(recipeId) {
-            let results = await Recipe.findImageRecipe(recipeId)
-            const filesRecipes = results.rows.map(file =>
-                `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-            )
-            return filesRecipes[0]
+        } catch (error) {
+            console.error(error)
+            return res.render('admin/chefs/details', {
+                error: "Houve um erro na apresentação do Chef, tente novamente mais tarde"
+            })
         }
-
-        const recipesPromises = recipes.map(async recipe => {
-            recipe.src = await getImage(recipe.id)
-            return recipe
-        })
-
-        const recipeAll = await Promise.all(recipesPromises)
-
-        return res.render('admin/chefs/details', { chef, files, recipes: recipeAll })
     },
 
     //Função para CARREGAR informações para editar - Precisa arrumar o bug de não reconhecer a img (Fix-5.13)

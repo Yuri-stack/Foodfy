@@ -68,7 +68,7 @@ module.exports = {
     },
 
     //Função para RETORNAR as Receitas suas respectivas Imagens
-    findImageRecipe(id){
+    async findImageRecipe(id){
 
         try {
             const query =`
@@ -77,7 +77,8 @@ module.exports = {
             LEFT JOIN recipes ON (recipes.id = recipe_files.recipe_id) 
             WHERE recipes.id = $1`;
 
-            return db.query(query, [id]);
+            const results = await db.query(query, [id]);
+            return results.rows
 
         } catch (error) {
             console.error(error);

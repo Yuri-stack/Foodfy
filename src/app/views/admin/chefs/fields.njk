@@ -1,39 +1,25 @@
+<div class="item">
+    <div>Nome do Chef</div>
+    <div>
+        <input type="text" name="name" placeholder="Insira o nome do chef" value="{{ chef.name }}" required></div>
+    </div>
     <div class="item">
-        <div>Nome do Chef</div>
-        <div>
-            <input type="text" name="name" placeholder="Insira o nome do chef" value="{{ chef.name }}" required>
-        </div>
-    </div>
-    
-    <div class="item"> 
-
         <div>Avatar</div>
-       
         <div id="avatar-upload">
-            <input 
-                id="photo-avatar" type="file" name="photos" value="{{ files.src }}"
-                accept="image/*" onchange="ChefPhotoUpload.handleFileInput(event)">
-            <p class="button">Enviar Avatar</p>
-        </div>
-
-        <div id="photo-preview">
-
-            {% if files %}
-                {% for image in files %}
-
-                    <div class="photo" id={{image.id}}>
-
-                        <img src="{{image.src}}" alt="{{image.name}}">
-                        <i class="material-icons" onclick="ChefPhotoUpload.removeOldPhoto(event)">
-                            close
-                        </i>
-
+            <input id="photo-avatar" type="file" name="photos" value="{{ files.src }}" accept="image/*" onchange="ChefPhotoUpload.handleFileInput(event)">
+                <p class="button">Enviar Avatar</p>
+            </div>
+            <div id="photo-preview">
+                {% if files %}
+                    {% for image in files %}
+                        <div class="photo" id="{{ image.id }}">
+                            <img src="{{ image.src }}" alt="{{ image.name }}">
+                                <i class="material-icons" onclick="ChefPhotoUpload.removeOldPhoto(event)">
+                                    close
+                                </i>
+                            </div>
+                        {% endfor %}
+                        <input type="hidden" name="removed_file">
+                        {% endif %}
                     </div>
-
-                {% endfor %}
-                <input type="hidden" name="removed_file">
-            {% endif %}
-
-        </div>
-
-    </div>
+                </div>

@@ -9,9 +9,6 @@ module.exports = {
 
     //precisa ordenar os chefs por id
 
-    //Função para CRIAR um novo Chef
-    // create(name, file_id){
-
     //Função para RETORNAR os dados dos Chefs
     findChef(id) {
         try {
@@ -44,10 +41,9 @@ module.exports = {
     // },
 
     //Função para RETORNAR os Chefs suas respectivas Receitas
-    findRecipesChef(id) {
+    async findRecipesChef(id) {
 
         try {
-
             const query = `
                 SELECT recipes.*
                 FROM chefs
@@ -56,9 +52,10 @@ module.exports = {
                 GROUP BY chefs.id, recipes.id
                 ORDER BY recipes.created_at DESC
             `
-            return db.query(query, [id])
+            const results = await db.query(query, [id])
+            return results.rows
 
-        } catch (error) {
+        } catch (error) { 
             console.log(error)
         }
 
