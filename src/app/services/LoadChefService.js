@@ -28,7 +28,7 @@ const LoadService = {
 
             const recipes = await Chef.findRecipesChef(chef.id)
 
-            if(!recipes){
+            if(recipes){
                 const recipesPromise = recipes.map(async recipe => {
                     const files = await getImage(recipe.id)
                     recipe.image = files[0].src

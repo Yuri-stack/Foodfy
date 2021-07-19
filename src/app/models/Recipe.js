@@ -8,7 +8,7 @@ module.exports = {
     ...Base,
 
     //Função para SELECIONAR todas as Receitas
-    findAllRecipes(){
+    async findAllRecipes(){
         try {
             const query = `
                 SELECT recipes.*, chefs.name AS chef_name
@@ -16,7 +16,8 @@ module.exports = {
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)   
                 ORDER BY recipes.created_at DESC
             ` 
-            return db.query(query)
+            const results = await db.query(query)
+            return results.rows
         } catch (error) {
             console.log(error)
         }

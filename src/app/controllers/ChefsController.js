@@ -2,6 +2,7 @@ const { unlinkSync } = require('fs');
 
 const Chef = require('../models/Chef')
 const File = require('../models/File')
+
 const LoadChefService = require('../services/LoadChefService')
 
 module.exports = {
@@ -15,6 +16,9 @@ module.exports = {
 
         } catch (error) {
             console.error(error)
+            return res.render('admin/chefs/index', {
+                error: "Houve um erro ao carregar os Chef, tente novamente"
+            })
         }
     },
 
@@ -50,7 +54,7 @@ module.exports = {
 
             if(!chef){
                 return res.render('admin/chefs/details', {
-                    error: "Usuário não encontrado, tente novamente mais tarde"
+                    error: "Chef não encontrado, tente novamente mais tarde"
                 })
             }
 
@@ -72,7 +76,7 @@ module.exports = {
             
             if(!chef){
                 return res.render('admin/chefs/details', {
-                    error: "Usuário não encontrado, tente novamente mais tarde"
+                    error: "Chef não encontrado, tente novamente mais tarde"
                 })
             }
 

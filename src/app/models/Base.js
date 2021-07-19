@@ -57,8 +57,13 @@ const Base = {
             let keys = [], values = []
 
             Object.keys(fields).map(key => {
-                keys.push(key)                      // name: 
-                values.push(`'${fields[key]}'`)    // 'Yuri'
+                keys.push(key)
+
+                if(Array.isArray(fields[key])){
+                    values.push(`'{"${fields[key].join('","')}"}'`)
+                }else{
+                    values.push(`'${fields[key]}'`)
+                }
             })
 
             const query = `INSERT INTO ${this.table} (${keys.join(',')})
@@ -79,13 +84,21 @@ const Base = {
             let update = []
 
             Object.keys(fields).map(key => {
-                const line = `${key} = '${fields[key]}'`
+                let line
+
+                if(Array.isArray(fields[key])){
+                    line = `${key} = '{"${fields[key].join('","')}"}'`
+                }else{
+                    line = `${key} = '${fields[key]}'`
+                }
+
                 update.push(line)
             })
 
             let query = `
                 UPDATE ${this.table} SET
-                ${update.join(',')} WHERE id = ${id}
+                ${update.join(',')} 
+                WHERE id = ${id}
             `
 
             return db.query(query)

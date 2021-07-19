@@ -27,19 +27,6 @@ module.exports = {
 
     },
 
-    //Função para ATUALIZAR um Chef
-    // update(name, file_id, id){
-
-    //     try {
-    //         const query = `UPDATE chefs SET name = $1, file_id = $2 WHERE id = $3`
-    //         const values = [name, file_id, id]
-    //         return db.query(query, values)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-    // },
-
     //Função para RETORNAR os Chefs suas respectivas Receitas
     async findRecipesChef(id) {
 
