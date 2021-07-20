@@ -120,18 +120,26 @@ module.exports = {
         } catch (error) {
             console.error(error)
             return res.render('admin/chefs/details', {
+                chef,
                 error: "Houve um erro na atualização do Chef, tente novamente mais tarde"
             })
         }
     },
 
-    //Função para APAGAR     -- Chefs que possuem receitas não podem ser apagados
+    //Função para APAGAR
     async delete(req, res) {
         try {
             const { id } = req.body
 
             const chef = await LoadChefService.load('chef', id)
             let fileId = chef.file_id
+
+            if(chef.total_recipes != 0){
+                return res.render('admin/chefs/details', {
+                    chef,
+                    error: "Chefs com Receitas não podem ser apagados"
+                })
+            }
 
             await Chef.delete(id)
 

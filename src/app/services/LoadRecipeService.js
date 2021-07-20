@@ -21,6 +21,7 @@ const LoadService = {
         try {
             const recipe = await Recipe.find(this.filter)
             recipe.files = await getImage(recipe.id)
+            recipe.chef_name = await Recipe.nameChef(recipe.id)
 
             return recipe
             
@@ -31,7 +32,6 @@ const LoadService = {
 
     async recipes(){
         try {
-
             let recipes
 
             if(this.filter){

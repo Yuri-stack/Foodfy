@@ -28,7 +28,7 @@ const LoadService = {
 
             const recipes = await Chef.findRecipesChef(chef.id)
 
-            if(recipes){
+            if(recipes[0].id != null){
                 const recipesPromise = recipes.map(async recipe => {
                     const files = await getImage(recipe.id)
                     recipe.image = files[0].src
@@ -37,6 +37,7 @@ const LoadService = {
                 chef.recipes = await Promise.all(recipesPromise)
             }
 
+            chef.total_recipes = await Chef.countRecipe(chef.id)
             return chef
 
         } catch (error) {
@@ -50,6 +51,7 @@ const LoadService = {
             const chefsPromise = chefs.map(async chef => {
                 const file = await File.findOne({ where: { id: chef.file_id } })
                 chef.image = `${file.path.replace('public', '')}`
+                chef.total_recipes = await Chef.countRecipe(chef.id)
                 return chef
             })
 

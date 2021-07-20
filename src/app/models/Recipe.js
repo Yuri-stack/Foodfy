@@ -23,21 +23,37 @@ module.exports = {
         }
     },
 
-    //Função para RETORNAR os dados das Receitas
-    showDataRecipes(id){
+    async nameChef(id){
         try {
             const query = `
-                SELECT recipes.*, chefs.name AS chef_name
+                SELECT chefs.name AS chef_name
                 FROM recipes
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
                 WHERE recipes.id = $1
             `
-            return db.query(query, [id])
+            const results = await db.query(query, [id])
+            return results.rows[0].chef_name
+            
         } catch (error) {
-            console.log(error)
+            
         }
-
     },
+
+    //Função para RETORNAR os dados das Receitas
+    // showDataRecipes(id){
+    //     try {
+    //         const query = `
+    //             SELECT recipes.*, chefs.name AS chef_name
+    //             FROM recipes
+    //             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+    //             WHERE recipes.id = $1
+    //         `
+    //         return db.query(query, [id])
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+
+    // },
 
     //Função que CARREGA os nomes dos Chefs para o Form das Receitas
     chefSelectOptions(){

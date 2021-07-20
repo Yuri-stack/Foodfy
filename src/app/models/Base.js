@@ -14,6 +14,10 @@ function find(filters, table) {
         })
     }
 
+    if(table == 'chefs'){
+        query += ` ORDER BY chefs.id DESC`
+    }
+    
     return db.query(query)
 }
 
