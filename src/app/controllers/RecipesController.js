@@ -20,28 +20,6 @@ module.exports = {
                 error: "Houve um erro ao carregar as receitas, tente novamente"
             })
         }
-
-
-        // // const results = await Recipe.all()
-        // const results = await Recipe.findAllRecipes()
-        // const recipes = results.rows
-
-        // async function getImage(recipeID){
-        //     let results = await Recipe.findImageRecipe(recipeID)
-        //     const files = results.rows.map(file =>  
-        //         `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`    
-        //     )
-        //     return files[0]
-        // }
-
-        // const recipesPromises = recipes.map(async recipe => {
-        //     recipe.src = await getImage(recipe.id)
-        //     return recipe
-        // })
-
-        // const recipeAll = await Promise.all(recipesPromises)
-        
-        // return res.render('admin/recipes/index', { recipes : recipeAll })
     },
 
     //Função para REDIRECIONAR para a pag de Create

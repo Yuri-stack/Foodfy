@@ -8,24 +8,25 @@ module.exports = {
     ...Base,
 
     //precisa ordenar os chefs por id
+    //precisa contar as receitas dos chefs
 
     //Função para RETORNAR os dados dos Chefs
-    findChef(id) {
-        try {
-            const query = `
-                SELECT chefs.*, count(recipes) AS total_recipes
-                FROM chefs
-                LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
-                WHERE chefs.id = $1
-                GROUP BY chefs.id
-                ORDER BY chefs.id ASC
-            `
-            return db.query(query, [id])
-        } catch (error) {
-            console.log(error)
-        }
+    // findChef(id) {
+    //     try {
+    //         const query = `
+    //             SELECT chefs.*, count(recipes) AS total_recipes
+    //             FROM chefs
+    //             LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+    //             WHERE chefs.id = $1
+    //             GROUP BY chefs.id
+    //             ORDER BY chefs.id ASC
+    //         `
+    //         return db.query(query, [id])
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
 
-    },
+    // },
 
     //Função para RETORNAR os Chefs suas respectivas Receitas
     async findRecipesChef(id) {
@@ -43,27 +44,6 @@ module.exports = {
             return results.rows
 
         } catch (error) { 
-            console.log(error)
-        }
-
-    },
-
-    //Função para RETORNAR aos Chefs sua respectiva imagem
-    findImageChef(id) {
-
-        try {
-
-            const query = `
-                SELECT files.*, chefs.file_id 
-                FROM files
-                LEFT JOIN chefs ON (files.id = chefs.file_id)
-                WHERE chefs.id = $1
-                ORDER BY files.id ASC
-            `
-
-            return db.query(query, [id])
-
-        } catch (error) {
             console.log(error)
         }
 

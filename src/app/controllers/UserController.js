@@ -119,38 +119,4 @@ module.exports = {
             })
         }
     }
-
-    // async delete(req, res){
-    //     try {
-    //         const { id } = req.body
-
-    //         // Pegar as receitas do Usuário
-    //         let recipes = await Recipe.findAllRecipesUser(id)
-
-    //         // Apagar as receitas
-    //         let results = await Recipe.findImageRecipe(recipes.rows[0].id);
-
-    //         const filesPromise = results.rows.map(async file => {
-
-    //             const files = { recipe_id: id, file_id: file.id}
-
-    //                 await Recipe.deleteImageRecipe(files)
-
-    //                 await File.delete(file.id)
-
-    //                 await Recipe.delete(id)
-    //         });
-
-    //         Promise.all(filesPromise);
-
-    //         // Apagar o Usuário do Banco
-    //         await User.delete(id)
-
-    //         return res.render('admin/users/index')
-            
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // }
-
 }

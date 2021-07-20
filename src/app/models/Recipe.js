@@ -23,9 +23,6 @@ module.exports = {
         }
     },
 
-    //Função para CRIAR uma nova Receita
-    // lembrar de colocar no Controller a informação da data
-    
     //Função para RETORNAR os dados das Receitas
     showDataRecipes(id){
         try {
@@ -112,6 +109,42 @@ module.exports = {
             console.error(error);
             console.log("Erro findAllRecipesUser")
         }
-    }
+    },
 
+    //Função relacionado a PAGINAÇÃO das Receitas
+    paginate(params){
+        try {
+            const { filter, limit, offset } = params
+
+            let query = "",
+                filterQuery = "",
+                totalQuery = `(
+                    SELECT count(*) FROM recipes
+                ) AS total
+                `
+    
+            if( filter ){
+                filterQuery = `WHERE recipes.title ILIKE '%${filter}%'`
+    
+                totalQuery = `(
+                    SELECT count(*) FROM recipes
+                    ${filterQuery}
+                ) AS total`
+            }
+    
+            query = `
+                SELECT recipes.*, ${totalQuery}, chefs.name AS chef_name
+                FROM recipes
+                LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+                ${filterQuery}
+                ORDER BY recipes.id ASC LIMIT $1 OFFSET $2
+            `
+    
+            return db.query(query, [limit, offset])         
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
  }

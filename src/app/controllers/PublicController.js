@@ -1,31 +1,22 @@
-const Public = require('../models/Public')
-const Chef = require('../models/Chef')
-const Recipe = require('../models/Recipe')
+const LoadRecipeService = require('../services/LoadRecipeService')
+const LoadChefService = require('../services/LoadChefService')
 
 module.exports = { 
 
     //Função para LISTAR as receitas no Index
     async index(req, res){
+        try {
+            const recipes = await LoadRecipeService.load('recipes')
 
-        const results = await Public.findAllRecipes()
-        const recipes = results.rows
+            return res.render('public/index', { recipes })
 
-        // /* Função para buscar o endereço de cada img das receitas */
-        // async function getImage(recipeId){
-        //     let results = await Recipe.findImageRecipe(recipeId)
-        //     const files = results.rows.map(file =>
-        //         `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
-        //     )
-        //     return files[0]
-        // }
+        } catch (error) {
+            console.error(error)
+            return res.render('public/index', {
+                error: "Houve um erro ao carregar as receitas, tente novamente"
+            })
+        }
 
-        // /* Função que atualiza o source da receita com o resultado da Função anterior */
-        // const recipesPromises = recipes.map(async recipe => {
-        //     recipe.src = await getImage(recipe.id)
-        //     return recipe
-        // })
-
-        // await Promise.all(recipesPromises)
 
         return res.render('public/index', { recipes })
 
@@ -41,119 +32,86 @@ module.exports = {
         return res.render('public/about') 
     },
 
+    //Função para LISTAR os Chefs
+    async listChef(req, res){
+        try {
+            const chefs = await LoadChefService.load('chefs')
+
+            return res.render('public/chefs', { chefs })
+
+        } catch (error) {
+            console.error(error)
+            return res.render('public/chefs', {
+                error: "Houve um erro ao carregar os Chef, tente novamente"
+            })
+        }
+    },
+
     //Função para LISTAR as receitas na Pag. Receitas
     async listRecipes(req, res){
+        try {
+            let { page, limit, filter } = req.query
 
-        let { page, limit, filter } = req.query
+            page = page || 1
+            limit = limit || 6
+            let offset = limit * (page - 1)
 
-        page = page || 1
-        limit = limit || 6
-        let offset = limit * (page - 1)
+            const params = { page, limit, filter, offset }
 
-        if(filter){
+            if(filter) {
+                const recipes = await LoadRecipeService.load('recipes', params)
 
-            const params = { filter, limit, offset }
+                const pagination = { total: Math.ceil(recipes[0].total / limit), page }
+                return res.render('public/search', { recipes, pagination, filter })
+            }else{
+                const recipes = await LoadRecipeService.load('recipes')
 
-            const results = await Public.findBy(params)
-            const recipes = results.rows
-
-            /* Função para buscar o endereço de cada img das receitas */
-            async function getImage(recipeId){
-                let results = await Recipe.findImageRecipe(recipeId)
-                const files = results.rows.map(file =>
-                    `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
-                )
-                return files[0]
+                const pagination = { total: Math.ceil(recipes[0].total / limit), page }
+                return res.render('public/recipes', { recipes, pagination })
             }
-    
-            /* Função que atualiza o source da receita com o resultado da Função anterior */
-            const recipesPromises = recipes.map(async recipe => {
-                recipe.src = await getImage(recipe.id)
-                return recipe
+            
+        } catch (error) {
+            console.error(error)
+            return res.render('public/recipes', {
+                error: "Houve um erro ao carregar as Receitas, tente novamente"
             })
-    
-            await Promise.all(recipesPromises)
-
-            const pagination = { total: Math.ceil(recipes[0].total / limit), page }
-
-            return res.render('public/search', { recipes, pagination, filter })
-
-        }else{
-
-            const params = { filter, limit, offset }
-
-            const results = await Public.paginate(params)
-            const recipes = results.rows
-
-            /* Função para buscar o endereço de cada img das receitas */
-            async function getImage(recipeId){
-                let results = await Recipe.findImageRecipe(recipeId)
-                const files = results.rows.map(file =>
-                    `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
-                )
-                return files[0]
-            }
-    
-            /* Função que atualiza o source da receita com o resultado da Função anterior */
-            const recipesPromises = recipes.map(async recipe => {
-                recipe.src = await getImage(recipe.id)
-                return recipe
-            })
-    
-            await Promise.all(recipesPromises)
-
-            const pagination = { total: Math.ceil(recipes[0].total / limit), page }
-
-            return res.render('public/recipes', { recipes, pagination })
-
-        }
-        
+        }      
     },
 
     //Função para MOSTRAR os detalhes das receitas
     async showRecipe(req, res){
+        try {
+            const { id } = req.params
+            const recipe = await LoadRecipeService.load('recipe', id)
 
-        const { id } = req.params
+            if(!recipe){
+                return res.render('public/details', {
+                    error: "Receita não encontrada, tente novamente mais tarde"
+                })
+            }
 
-        let results = await Public.showDataRecipes(id)
-        const recipe = results.rows[0]
+            return res.render('public/details', { recipe })
 
-        if(!recipe) return res.send("Recipe not found / Receita não encontrada")
-
-        results = await Recipe.findImageRecipe(id)
-        const files = results.rows.map( file => ({
-            src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`  
-        }))
-
-        return res.render("public/details", { recipe, files })
-
-    },
-
-    //Função para LISTAR os Chefs
-    async listChef(req, res){
-
-        const results = await Public.findAllChefs()
-        const chefs = results.rows
-
-        /* Função para buscar o endereço de cada img dos chefs */
-        async function getImage(chefId){
-            let results = await Chef.findImageChef(chefId)
-            const files = results.rows.map(file =>
-                `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
-            )
-            return files[0]
+        } catch (error) {
+            console.error(error)
+            return res.render('public/details', {
+                error: "Houve um erro na apresentação da Receita, tente novamente mais tarde"
+            })
         }
 
-        /* Função que atualiza o source do chef com o resultado da Função anterior */
-        const chefsPromise = chefs.map(async chef => {
-            chef.src = await getImage(chef.id)
-            return chef
-        })
+        // const { id } = req.params
 
-        await Promise.all(chefsPromise)
+        // let results = await Public.showDataRecipes(id)
+        // const recipe = results.rows[0]
 
-        return res.render('public/chefs', { chefs })
+        // if(!recipe) return res.send("Recipe not found / Receita não encontrada")
+
+        // results = await Recipe.findImageRecipe(id)
+        // const files = results.rows.map( file => ({
+        //     src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`  
+        // }))
+
+        // return res.render("public/details", { recipe, files })
 
     }
-
 }

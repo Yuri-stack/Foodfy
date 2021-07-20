@@ -1,4 +1,3 @@
-const File = require('../models/File')
 const Recipe = require('../models/Recipe')
 
 //Lógica para buscar as imagens das receitas
@@ -32,7 +31,15 @@ const LoadService = {
 
     async recipes(){
         try {
-            const recipes = await Recipe.findAllRecipes()
+
+            let recipes
+
+            if(this.filter){
+                recipes = await Recipe.paginate(this.filter)
+            }else{
+                recipes = await Recipe.findAllRecipes()
+            }
+
             const recipesPromise = recipes.map(async recipe => {
                 const files = await getImage(recipe.id)
                 recipe.image = files[0].src

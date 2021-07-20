@@ -8,19 +8,19 @@
 
             <section class="recipe container">
 
-                <div class="gallery">
+                <div class="gallery"> 
                     <div class="highlight">
-                        {% if not files[0] %}
-                            <img src="http://placehold.it/500x500?text=Chef sem foto">
+                        {% if not recipe.files %}
+                            <img src="http://placehold.it/500x500?text=Receita sem foto">
                         {% else %}
-                            <img src="{{ files[0].src }}" alt="Imagem de {{ recipe.title }}">
+                            <img src="{{ recipe.files[0].src }}" alt="Imagem de {{ recipe.title }}">
                         {% endif %}
                     </div>
 
                     <div class="gallery-preview">
-                        {% for image in files %}
+                        {% for item in recipe.files %}
                             <img 
-                                src="{{ image.src }}" alt="{{ image.name }}"
+                                src="{{ item.src }}" alt="{{ item.name }}"
                                 {% if loop.index0 == 0 %}
                                     class="active"
                                 {%endif%}
