@@ -2,7 +2,7 @@ const User = require('../models/User')
 const mailer = require('../../lib/mailer')
 
 const { hash } = require('bcryptjs')
-const { generatePassword} = require('../../lib/utils')
+const { generatePassword } = require('../../lib/utils')
 
 module.exports = {
 
@@ -27,7 +27,7 @@ module.exports = {
         try {
             const { name, email, isAdmin } = req.body
             let password = generatePassword()
-            password = await hash(password, 8)
+            password = await hash(password, 4)
 
             await User.create({ name, email, password, is_admin:isAdmin || false })
 

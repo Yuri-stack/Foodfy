@@ -1,3 +1,7 @@
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
+DROP DATABASE IF EXISTS foodfy;
 CREATE DATABASE foodfy;
 
 CREATE TABLE files (
@@ -64,6 +68,9 @@ ALTER TABLE "session"
 ADD CONSTRAINT "session_pkey" 
 PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
+-- ADMIN
+INSERT INTO users (name, email, password, is_admin) VALUES ('Admin', 'foodfy@admin.com', '$2a$08$Gfu1JOtjZzxLMpdkppZB6OAj4jWXooqomeRawzOV0U9YqxpVZnTvy', true) RETURNING id
+
 -- FUNCTIONS
 CREATE FUNCTION trigger_setTimestampUpdated()
 RETURNS TRIGGER AS $$
@@ -85,6 +92,6 @@ FOR EACH ROW
 EXECUTE PROCEDURE trigger_setTimestampUpdated();
 
 CREATE TRIGGER setTimestampUpdated
-BEFORE UPDATE ON 
+BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_setTimestampUpdated();

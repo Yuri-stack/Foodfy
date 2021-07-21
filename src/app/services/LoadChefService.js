@@ -50,7 +50,13 @@ const LoadService = {
             const chefs = await Chef.findAll(this.filter)
             const chefsPromise = chefs.map(async chef => {
                 const file = await File.findOne({ where: { id: chef.file_id } })
-                chef.image = `${file.path.replace('public', '')}`
+
+                if(file.path != 'public/images/chef_nameFaker.png'){
+                    chef.image = `${file.path.replace('public', '')}`
+                }else{
+                    chef.image = 'http://placehold.it/940x280?text=Chef sem foto';
+                }
+
                 chef.total_recipes = await Chef.countRecipe(chef.id)
                 return chef
             })

@@ -35,12 +35,11 @@ module.exports = {
     async post(req, res){
         try {
             const { filename, path } = req.files[0]
+            const { userId } = req.session
             const { title, ingredients, preparation, information, chef } = req.body
             
-            console.log(filename, path)
-
             const fileId = await File.create({ name: filename, path })
-            const recipeId = await Recipe.create({ title, ingredients, preparation, information, chef_id: chef })
+            const recipeId = await Recipe.create({ title, ingredients, preparation, information, chef_id: chef, user_id: userId })
 
             await Recipe.createImageRecipe(recipeId,fileId)
 
