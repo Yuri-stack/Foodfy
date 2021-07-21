@@ -114,12 +114,14 @@ module.exports = {
     },
 
     //Função para ENCONTRAR as receitas de um Usuário
-    findAllRecipesUser(id){
+    async findAllRecipesUser(id){
         try {
             const query = `
                 SELECT recipes.* FROM recipes WHERE user_id = $1
             `
-            return db.query(query, [id])
+
+            const results = await db.query(query, [id])
+            return results.rows
             
         } catch (error) {
             console.error(error);

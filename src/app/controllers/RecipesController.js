@@ -3,7 +3,7 @@ const { unlinkSync } = require('fs');
 const Recipe = require('../models/Recipe')
 const File = require('../models/File')
 
-const LoadRecipeService = require('../services/LoadRecipeService')
+const LoadRecipeService = require('../services/LoadRecipeService');
 
 module.exports = { 
 
@@ -177,5 +177,35 @@ module.exports = {
                 error: "Houve um erro ao excluir a Receita, tente novamente mais tarde"
             })
         }
+    },
+
+    //Função para CARREGAR as receitas dos Usuários
+    async myRecipes(req, res){
+        const recipes = await Recipe.findAllRecipesUser(req.session.userId)
+
+        //Lógica para buscar as imagens das receitas
+        async function getImage(recipeId) {
+            let files = await Recipe.findImageRecipe(recipeId)
+            files = files.map(file => ({
+                ...file,
+                src: `${file.path.replace("public", "")}`
+            }))
+
+            return files
+        }
+        
+        const recipesPromise = recipes.map(async recipe => {
+            const files = await getImage(recipe.id)
+
+            if(files.length != 0){
+                recipe.image = files[0].src
+            }else{
+                recipe.image = 'http://placehold.it/940x280?text=Receita sem foto';
+            }
+            return recipe
+        })
+
+        const allRecipes = await Promise.all(recipesPromise)
+        return res.render("admin/recipes/myRecipes", { recipes: allRecipes })
     }
 }

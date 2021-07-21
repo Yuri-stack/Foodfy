@@ -23,7 +23,7 @@ function createFiles(num, placeholder){
 
 async function createUsers(){
     const users = []
-    const password = await hash('acnologia', 8)
+    const password = await hash('acnologia', 4)
 
     while(users.length < 5){
         users.push({
