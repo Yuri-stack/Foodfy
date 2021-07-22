@@ -34,14 +34,21 @@ module.exports = {
     //Função para CADASTRAR uma nova receita
     async post(req, res){
         try {
-            const { filename, path } = req.files[0]
             const { userId } = req.session
             const { title, ingredients, preparation, information, chef } = req.body
-            
-            const fileId = await File.create({ name: filename, path })
-            const recipeId = await Recipe.create({ title, ingredients, preparation, information, chef_id: chef, user_id: userId })
 
-            await Recipe.createImageRecipe(recipeId,fileId)
+            const recipeId = await Recipe.create({ title, ingredients, preparation, information, chef_id: chef, user_id: userId })
+            
+            const filesPromise = req.files.map(async file => {
+                const fileId = await File.create({ 
+                    name: file.filename, 
+                    path: file.path 
+                })
+
+                await Recipe.createImageRecipe(recipeId,fileId)
+            })
+
+            await Promise.all(filesPromise);
 
             return res.redirect(`/admin/recipes/${ recipeId }`)
             
@@ -161,7 +168,7 @@ module.exports = {
             const { id } = req.body;
             const files = await Recipe.findImageRecipe(id);
 
-            const removedFilePromise =  files.map(file => {
+            const removedFilePromise = await files.map(file => {
                 File.delete({ id: file.file_id })
                 unlinkSync(file.path)
             })
@@ -169,7 +176,9 @@ module.exports = {
             await Promise.all(removedFilePromise)
             await Recipe.delete(id)
 
-            return res.render('admin/recipes/index')
+            const recipes = await LoadRecipeService.load('recipes')
+
+            return res.render('admin/recipes/index', { recipes })
 
         } catch (error) {
             console.error(error)
