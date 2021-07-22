@@ -1,39 +1,24 @@
-    <div class="item">
-        <div>Nome do Chef</div>
-        <div>
-            <input type="text" name="name" placeholder="Insira o nome do chef" value="{{ chef.name }}" required>
-        </div>
+<div class="item">
+    <div>Nome do Chef</div>
+    <div>
+        <input type="text" name="name" placeholder="Insira o nome do chef" value="{{ chef.name }}" required></div>
     </div>
-    
-    <div class="item"> 
 
+    <div class="item">
         <div>Avatar</div>
-       
         <div id="avatar-upload">
-            <input 
-                id="photo-avatar" type="file" name="photos" value="{{ files.src }}"
-                accept="image/*" onchange="ChefPhotoUpload.handleFileInput(event)">
+            <input id="photo-avatar" type="file" name="photos" value="{{ chef.file.src }}" accept="image/*" onchange="ChefPhotoUpload.handleFileInput(event)">
             <p class="button">Enviar Avatar</p>
         </div>
 
-        <div id="photo-preview">
-
-            {% if files %}
-                {% for image in files %}
-
-                    <div class="photo" id={{image.id}}>
-
-                        <img src="{{image.src}}" alt="{{image.name}}">
-                        <i class="material-icons" onclick="ChefPhotoUpload.removeOldPhoto(event)">
-                            close
-                        </i>
-
-                    </div>
-
-                {% endfor %}
+        <div class="photo-preview">
+            {% if chef.file %}
+                <div class="photo" id="{{ chef.file.id }}">
+                    <img src="{{ chef.file.src }}" alt="{{ chef.file.name }}">
+                    <i class="material-icons" onclick="ChefPhotoUpload.removeOldPhoto(event)">close</i>
+                </div>
+                
                 <input type="hidden" name="removed_file">
+
             {% endif %}
-
         </div>
-
-    </div>

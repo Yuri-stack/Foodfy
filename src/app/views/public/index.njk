@@ -13,7 +13,8 @@
                         <a href="/about">Sobre</a>
                         <a href="/recipes">Receitas</a>
                         <a href="/chefs">Chefs</a>
-                        <a href="/admin/chefs">Admin</a> 
+                        <a>|</a>
+                        <a href="/admin/login">Login</a> 
                     </nav>
                 </div>
 
@@ -59,22 +60,14 @@
 
             {% for recipe in recipes %}
 
-                <div class="card" id="{{ recipe.id }}"> 
-
-                    <div>
-                        <a href="/recipes/{{ recipe.id }}">
-                            <img src="{{ recipe.src }}" alt="Imagem de {{ recipe.title }}">
-                        </a>
+                <div class="card vertical">
+                    <a href="/recipes/{{ recipe.id }}">
+                        <img class="img_vertical" src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
+                    </a>
+                    <div class="card">
+                        <span class="card_title">{{ recipe.title }}</span>
+                        <span class="card_subtitle">por {{ recipe.chef_name }}</span>
                     </div>
-    
-                    <div class="info_title">
-                        <p>{{ recipe.title }}</p>
-                    </div>
-    
-                    <div class="info_subtitle">
-                        <p>{{ recipe.chef_name }}</p>
-                    </div>
-    
                 </div>
 
             {% endfor %}

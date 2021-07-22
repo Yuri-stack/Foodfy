@@ -1,34 +1,20 @@
-{% extends "layouts/admin.njk" %} 
-
-    {% block head %}
-        <title>Foodfy - Administração</title>
-    {% endblock %}
-
-    {% block container %}
-
-        <section class="control"> 
-
-            <div>
-                <h1>Criando Chefs</h1>
-            </div>
-
-            <div>
-                <button class="btn-salve" type="submit" form="form-save">Salvar Chef</button>
-            </div>
-
-        </section>
-
-        <section class="chef container">
-
-            <form id="form-save" method="POST" action="/admin/chefs" enctype="multipart/form-data">
-
-                {% include 'admin/chefs/fields.njk' %}
-
-            </form>
-
-        </section>
-
-    {% endblock container %}
-
-    {% block footer %}
-    {% endblock footer %}
+{% extends "layouts/admin.njk" %}
+{% block head %}
+    <title>Foodfy - Administração</title>
+{% endblock %}
+{% block container %}
+    <section class="control">
+        <div>
+            <h1>Criando Chefs</h1>
+        </div>
+        <div>
+            <button class="btn-salve" type="submit" form="form-save">Salvar Chef</button>
+        </div>
+    </section>
+    <section class="chef container">
+        <form id="form-save" method="POST" action="/admin/chefs" enctype="multipart/form-data">
+            {% include 'admin/chefs/fields.njk' %}
+        </form>
+    </section>
+{% endblock container %}
+{% block footer %}{% endblock footer %}

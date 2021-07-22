@@ -18,3 +18,11 @@
 
     animation: hideMessage 400ms 5s ease-out forwards;
 }
+
+.messages .error{
+    background: var(--color-deleteRed);
+}
+
+.messages.success{ 
+    background: green;
+}

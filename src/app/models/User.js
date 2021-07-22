@@ -1,14 +1,9 @@
-const db = require('../../config/db')
+const Base = require('./Base')
+
+Base.init({ table: 'users' })
 
 module.exports = {
-    async findOne(email){
-        try {
-            const query = `SELECT * FROM users WHERE users.email = $1`
-            const results = await db.query(query, [email])
-            
-            return results.rows[0]
-        } catch (error) {
-            console.log(error)
-        }
-    }
+
+    ...Base,
+    // precisa ordenar os users por id no all() ou FindAll()
 }

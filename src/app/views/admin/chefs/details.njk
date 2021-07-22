@@ -22,10 +22,10 @@
 
             <section class="chef-principal">
 
-                {% if not files[0] %}
+                {% if not chef.file %}
                     <img class="img_circular" src="http://placehold.it/500x500?text=Chef sem foto">
                 {% else %}
-                    <img class="img_circular" src="{{ files[0].src }}" alt="Imagem de {{ chef.name }}">
+                    <img class="img_circular" src="{{ chef.file.src }}" alt="Imagem de {{ chef.name }}">
                 {% endif %}
 
                 <div class="chef-intro">
@@ -39,25 +39,25 @@
 
             <section class="recipes-admin container">
 
-                {% if recipes[0].id == null %}
+                {% if chef.recipes[0].id == null %}
 
                     Este Chef ainda não possui receitas.
 
                 {% else %}
 
-                    {% for recipeItem in recipes %}
+                    {% for item in chef.recipes %}
 
                         <div class="card-horizontal">
 
                             <img class="img_rounded"
-                                src="{{ recipeItem.src }}" 
-                                alt="{{ recipeItem.title }}">
+                                src="{{ item.image }}" 
+                                alt="{{ item.title }}">
 
                             <div class="card_info">
-                                <span class="info_title">{{ recipeItem.title }}</span>
+                                <span class="info_title">{{ item.title }}</span>
                                 <span class="info_subtitle">por {{ chef.name }}</span>
                                 <span class="info_view">
-                                    <a href="/admin/recipes/{{ recipeItem.id }}">
+                                    <a href="/admin/recipes/{{ item.id }}">
                                         Visualizar
                                     </a>
                                 </span>

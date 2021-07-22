@@ -1,10 +1,14 @@
 const db = require('../../config/db')
-const { date } = require('../../lib/utils')
+const Base = require('./Base')
+
+Base.init({ table: 'recipes' })
 
 module.exports = { 
 
+    ...Base,
+
     //Função para SELECIONAR todas as Receitas
-    all(){
+    async findAllRecipes(){
         try {
             const query = `
                 SELECT recipes.*, chefs.name AS chef_name
@@ -12,75 +16,44 @@ module.exports = {
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)   
                 ORDER BY recipes.created_at DESC
             ` 
-            return db.query(query)
+            const results = await db.query(query)
+            return results.rows
         } catch (error) {
             console.log(error)
         }
     },
 
-    //Função para CRIAR uma nova Receita
-    create({chef, title, ingredients, preparation, information}){
+    async nameChef(id){
         try {
             const query = `
-                INSERT INTO recipes (title,ingredients,preparation,information,created_at,chef_id) 
-                VALUES ($1, $2, $3, $4, $5, $6)
-                RETURNING id 
-            `
-            const values = [title, ingredients, preparation, information, date(Date.now()).iso,chef]
-            return db.query(query, values)
-
-        } catch (error) {
-            console.log(error)
-        }
-    },
-
-    //Função para RETORNAR os dados das Receitas
-    find(id){
-        try {
-            const query = `
-                SELECT recipes.*, chefs.name AS chef_name
+                SELECT chefs.name AS chef_name
                 FROM recipes
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
                 WHERE recipes.id = $1
             `
-            return db.query(query, [id])
-        } catch (error) {
-            console.log(error)
-        }
-
-    },
-
-    //Função para ATUALIZAR uma Receita
-    update({chef, title, ingredients, preparation, information, id}){
-
-        try {
-            const query = `
-                UPDATE recipes SET
-                    title = ($1),
-                    ingredients = ($2),
-                    preparation = ($3),
-                    information = ($4),
-                    chef_id = ($5)
-                WHERE id = ($6) 
-            `
-        const values = [ title, ingredients, preparation, information, chef, id]
-        return db.query(query, values)
+            const results = await db.query(query, [id])
+            return results.rows[0].chef_name
             
         } catch (error) {
-            console.log(error)
+            
         }
     },
 
-    //Função para APAGAR uma Receita
-    delete(id){
+    //Função para RETORNAR os dados das Receitas
+    // showDataRecipes(id){
+    //     try {
+    //         const query = `
+    //             SELECT recipes.*, chefs.name AS chef_name
+    //             FROM recipes
+    //             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+    //             WHERE recipes.id = $1
+    //         `
+    //         return db.query(query, [id])
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
 
-        try {
-            const query = `DELETE FROM recipes WHERE id = $1`
-            return db.query(query, [id])
-        } catch (error) {
-            console.log(error)
-        }
-    },
+    // },
 
     //Função que CARREGA os nomes dos Chefs para o Form das Receitas
     chefSelectOptions(){
@@ -109,16 +82,17 @@ module.exports = {
     },
 
     //Função para RETORNAR as Receitas suas respectivas Imagens
-    findImageRecipe(id){
-
+    async findImageRecipe(id){
         try {
             const query =`
-            SELECT files.* FROM files 
-            LEFT JOIN recipe_files ON (files.id = recipe_files.file_id)
-            LEFT JOIN recipes ON (recipes.id = recipe_files.recipe_id) 
-            WHERE recipes.id = $1`;
+            SELECT recipe_files.*,
+            files.name AS name, files.path AS path, files.id AS file_id
+            FROM recipe_files
+            LEFT JOIN files ON (recipe_files.file_id = files.id)
+            WHERE recipe_files.recipe_id = $1`;
 
-            return db.query(query, [id]);
+            const results = await db.query(query, [id]);
+            return results.rows
 
         } catch (error) {
             console.error(error);
@@ -128,7 +102,6 @@ module.exports = {
 
     //Função para APAGAR as imagens do Banco de Dados
     async deleteImageRecipe({ recipeId, fileId }){
-
         try{
             return db.query(`
                 DELETE FROM recipe_files 
@@ -137,6 +110,58 @@ module.exports = {
             console.log(error)
         }
 
-    }
+    },
 
+    //Função para ENCONTRAR as receitas de um Usuário
+    async findAllRecipesUser(id){
+        try {
+            const query = `
+                SELECT recipes.* FROM recipes WHERE user_id = $1
+            `
+
+            const results = await db.query(query, [id])
+            return results.rows
+            
+        } catch (error) {
+            console.error(error);
+            console.log("Erro findAllRecipesUser")
+        }
+    },
+
+    //Função relacionado a PAGINAÇÃO das Receitas
+    paginate(params){
+        try {
+            const { filter, limit, offset } = params
+
+            let query = "",
+                filterQuery = "",
+                totalQuery = `(
+                    SELECT count(*) FROM recipes
+                ) AS total
+                `
+    
+            if( filter ){
+                filterQuery = `WHERE recipes.title ILIKE '%${filter}%'`
+    
+                totalQuery = `(
+                    SELECT count(*) FROM recipes
+                    ${filterQuery}
+                ) AS total`
+            }
+    
+            query = `
+                SELECT recipes.*, ${totalQuery}, chefs.name AS chef_name
+                FROM recipes
+                LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+                ${filterQuery}
+                ORDER BY recipes.id ASC LIMIT $1 OFFSET $2
+            `
+    
+            return db.query(query, [limit, offset])         
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
  }

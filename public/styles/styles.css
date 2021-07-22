@@ -169,83 +169,6 @@ main{
     height: 500px;
 }
 
-/* CARDS */
-
-.card{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    margin-top: 10px;
-}
-
-.card img{
-    width: 300px;
-    height: 140px;
-    border-radius: 15px;
-    cursor: pointer;
-    object-fit: cover;
-}
-
-.card .info_title {
-    font-size: 18px;
-    display: block;
-    margin: 20px 0 5px;
-}
-
-.card .info_subtitle {
-    font-size: 14px;
-    color: var(--color-graySoft);
-}
-
-/* CARDS HORIZONTAIS*/
-
-.card-horizontal{   /* Div que representa cada Card*/
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    grid-gap: 20px;
-    width: 100%;    /*Tem 100% de largura para que o nome do Chef fique em uma linha*/
-}
-
-.card-horizontal .img_circular {
-    border-radius: 50%;
-    height: 64px;
-    width: 64px;
-    object-fit: cover;   /*Prop. especifica como o conteúdo de um elemento deve ser ajustado à caixa estabelecida pela altura e largura usadas*/
-}
-
-.card-horizontal .img_rounded{
-    border-radius: 5%;
-    width: 172px;
-    height: 80px;
-    object-fit: cover;
-}
-
-a.card,
-a.card-horizontal {
-    text-decoration: none;
-}
-
-.card_info .info_title{
-    color: #111111;
-    font-size: 18px;
-    display: block;
-}
-
-.card_info .info_subtitle{
-    margin-top: 5px;
-    color: var(--color-graySoft2);
-    font-size: 14px;
-}
-
-.card_info .info_view a{
-    margin-top: 10px;
-    display: block;
-    color: var(--color-rocket);
-    font-size: 14px;
-    text-decoration: none;
-}
-
 /* RODAPÉ / FOOTER */
 
 footer {
@@ -400,7 +323,8 @@ footer p{
     border-radius: 4px;
 }
 
-button[type="submit"].btn-delete {
+button[type="submit"].btn-delete, 
+button[type="submit"].btn-cancelar {
     background-color: var(--color-deleteRed);
 }
 
@@ -642,10 +566,6 @@ button[type="submit"].btn-delete {
 
 /* =========================== EDIT RECIPES ADMIN PAGE =============================== */
 
-/* .item{
-    margin-bottom: 30px;
-} */
-
 .item button{
     background-color: transparent;
     color: var(--color-rocket);
@@ -674,6 +594,11 @@ input[type="checkbox"]{
 
 /* =========================== Users Area =============================== */
 
+.users{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 .user.container form{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -686,7 +611,6 @@ input[type="checkbox"]{
     border-radius: 4px;
     color: white;
 }
-
 
 /* =========================== PAGE 404 =============================== */
 

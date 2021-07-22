@@ -8,20 +8,17 @@
 
         <section class="user control">
 
-            <div>
-                <h1>Criar Usuário</h1>
-            </div>
-
+            <h1>Criar Usuário</h1>
             <div>
                 <button class="btn-salve" type="submit" form="form-save">Salvar</button>
-                <button class="btn-salve" type="submit" form="form-save">Cancelar</button>
+                <button class="btn-cancelar" type="submit" form="form-save">Cancelar</button>
             </div>
 
         </section>
 
         <section class="user container">
 
-            <form id="form-save" method="POST" action="/admin/users">
+            <form id="form-save" method="POST" action="/admin/users/">
 
                 {% include 'admin/users/fields.njk' %}
 

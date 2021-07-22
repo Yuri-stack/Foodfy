@@ -1,0 +1,31 @@
+{% extends "layouts/admin.njk" %}
+
+    {% block head %}
+        <title>Foodfy - Usuários</title> 
+    {% endblock %}
+
+    {% block container %}
+
+        <section class="control">
+            <h1>Usuários</h1>
+            <a href="/admin/users/register">Novo</a>
+        </section>
+
+        <section class="users container">
+
+            {% for user in users %}
+
+                <div class="card list">
+                    <span class="card_title">{{ user.name }}</span>
+                    <span class="card_email">{{ user.email }}</span>
+                    <span class="card_view">
+                        <a class="btn_editar" href="/admin/users/{{ user.id }}/edit">Editar</a>
+                        <a class="btn_deletar" href="/admin/users/{{ user.id }}/edit">Remover</a>
+                    </span>
+                </div>
+
+            {% endfor %}
+
+        </section>
+
+    {% endblock %}

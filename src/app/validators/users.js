@@ -1,17 +1,28 @@
+const { compare } = require('bcryptjs')
 const User = require('../models/User')
+
+function checkAllFields(body){
+    const keys = Object.keys(body)          
+
+    for(key of keys){                           
+        if(body[key] == ""){                
+            return {
+                user: body,
+                error: "Por favor, preencha todos os campos"
+            }
+        }
+    }
+}
 
 async function post(req, res, next){
 
-    const keys = Object.keys(req.body)          
-
-    for(key of keys){                           
-        if(req.body[key] == ""){                
-            return res.send("Por favor, preencha todos os campos") 
-        }
+    const fillAllFields = checkAllFields(req.body)
+    if(fillAllFields){
+        return res.render("admin/users/create", fillAllFields)
     }
-
-    const { email, password, passwordRepeat } = req.body
-    const user = await User.findOne(email)
+    
+    const { email } = req.body
+    const user = await User.findOne({ where: { email } })
 
     if(user) return res.render('admin/users/create', {
         user: req.body,
@@ -20,11 +31,48 @@ async function post(req, res, next){
 
     // Implantar as passwordRepeat
     // if(password != passwordRepeat) return res.send("As senhas não são idênticas")
-    // yurioliveirasilva1999@gmail.com
-    return res.send("Acessou")
+    // return res.send("Acessou")
 
     next()
 
 }
 
-module.exports = { post }
+async function show(req, res, next){
+    const { id } = req.params
+    
+    const user = await User.findOne({ where: { id } })
+
+    if(!user) return res.render("admin/users/edit", {
+        error: "Usuário não encontrado"
+    })
+
+    req.user = user
+
+    next()
+}
+
+async function put(req, res, next){
+    const fillAllFields = checkAllFields(req.body)
+    
+    if(fillAllFields){
+        return res.render("admin/users/", fillAllFields)
+    }
+
+    const { id } = req.body
+
+    const user = await User.findOne({ where: { id }})
+
+    // const passed = await compare(password, user.password)
+    // // const passed = true;
+
+    if(!user) return res.render("admin/users/edit",{
+        user: req.body,
+        error: "Erro ao atualizar, o usuário não foi encontrado"
+    })
+
+    req.user = user
+
+    next()
+}
+
+module.exports = { post, show, put }
