@@ -189,7 +189,7 @@ module.exports = {
     },
 
     //Função para CARREGAR as receitas dos Usuários
-    async myRecipes(req, res){
+    async userRecipes(req, res){
         const recipes = await Recipe.findAllRecipesUser(req.session.userId)
 
         //Lógica para buscar as imagens das receitas

@@ -1,5 +1,6 @@
 const faker = require('faker')
 const { hash } = require('bcryptjs')
+const { generatePassword } = require('../../lib/utils')
 
 const Chef = require('./src/app/models/Chef')
 const Recipe = require('./src/app/models/Recipe')
@@ -23,7 +24,8 @@ function createFiles(num, placeholder){
 
 async function createUsers(){
     const users = []
-    const password = await hash('acnologia', 4)
+    let userPassword = generatePassword()
+    const password = await hash(userPassword, 4)
 
     while(users.length < 5){
         users.push({

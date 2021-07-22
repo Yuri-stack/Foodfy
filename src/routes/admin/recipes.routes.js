@@ -7,7 +7,7 @@ const { onlyUsers, isAdmin } = require('../../app/middlewares/session')
 const Recipes = require('../../app/controllers/RecipesController')
 
 // Rotas para a Administração das Receitas
-routes.get('/myRecipes', onlyUsers, Recipes.myRecipes)
+routes.get('/myRecipes', onlyUsers, Recipes.userRecipes)
 routes.get("/", onlyUsers, isAdmin, Recipes.index)                      // Mostrar a lista de receitas
 routes.get("/create", onlyUsers, Recipes.redirectCreate)                // Mostrar formulário de nova receita
 routes.get("/:id", onlyUsers, Recipes.show)                             // Exibir detalhes de uma receita
