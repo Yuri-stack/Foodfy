@@ -25,7 +25,7 @@ function createFiles(num, placeholder){
 async function createUsers(){
     const users = []
     let userPassword = generatePassword()
-    const password = await hash(userPassword, 4)
+    const password = await hash(userPassword, 8)
 
     while(users.length < 5){
         users.push({

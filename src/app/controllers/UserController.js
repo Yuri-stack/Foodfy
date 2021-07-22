@@ -27,7 +27,7 @@ module.exports = {
         try {
             const { name, email, isAdmin } = req.body
             let userPassword = generatePassword()
-            const password = await hash(userPassword, 4)
+            const password = await hash(userPassword, 8)
 
             await User.create({ name, email, password, is_admin:isAdmin || false })
 
