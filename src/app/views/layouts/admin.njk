@@ -9,7 +9,7 @@
         {% include "layouts/parts/styles.njk" %}
     </head>
     <body>
-        {# {% include "layouts/parts/messages.njk" %} #}
+        {% include "layouts/parts/messages.njk" %}
         {% block header %}
 
             {% if session.isAdmin %}

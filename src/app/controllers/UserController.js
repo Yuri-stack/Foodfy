@@ -104,8 +104,16 @@ module.exports = {
         try {
             const { id } = req.body
 
-            await User.delete(id)
             const users = await User.findAll()
+
+            if(id == req.session.userId){
+                return res.render('admin/users/index', {
+                    users,
+                    error: 'Você não pode excluir sua própria conta'
+                }) 
+            }
+
+            await User.delete(id)
 
             return res.render('admin/users/index', {
                 users,
@@ -115,6 +123,7 @@ module.exports = {
         } catch (error) {
             console.error(error)
             return res.render("admin/users/index", {
+                users,
                 error: "Houve um erro na exclusão, tente novamente"
             })
         }

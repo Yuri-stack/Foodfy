@@ -51,12 +51,12 @@ module.exports = {
                     <h1>Olá! Parece que você perdeu sua senha</h1>
                     <p>Não se preocupe, clique no link abaixo para recuperá-la</p>
                     <p>
-                        <a href="http:localhost:3000/admin/session/password-reset?token=${token}" target="_blank">Recuperar</a>.
+                        <a href="http://localhost:3000/admin/password-reset?token=${token}" target="_blank">Recuperar</a>.
                     </p>
                     `
             })
 
-            return res.render('admin/session/password-reset', {
+            return res.render('admin/session/forgot-password', {
                 success: "Verifique seu email para resetar sua senha"
             })
             
