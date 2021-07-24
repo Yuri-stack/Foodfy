@@ -26,8 +26,8 @@ module.exports = {
     async post(req, res){
         try {
             const { name, email, isAdmin } = req.body
-            let password = generatePassword()
-            password = await hash(password, 4)
+            let userPassword = generatePassword()
+            const password = await hash(userPassword, 8)
 
             await User.create({ name, email, password, is_admin:isAdmin || false })
 
@@ -40,7 +40,7 @@ module.exports = {
                     <p>Parabéns! Sua conta no Foodfy foi criada com sucesso!</p>
                     <p>Segue seus dados de usuário:</p>
                     <p>Login: ${email}</p>
-                    <p>Senha: ${password}</p>
+                    <p>Senha: ${userPassword}</p>
                     <p><br></p>
                     <p>
                         Faça seu primeiro acesso para validar sua conta clicando 
@@ -104,8 +104,16 @@ module.exports = {
         try {
             const { id } = req.body
 
-            await User.delete(id)
             const users = await User.findAll()
+
+            if(id == req.session.userId){
+                return res.render('admin/users/index', {
+                    users,
+                    error: 'Você não pode excluir sua própria conta'
+                }) 
+            }
+
+            await User.delete(id)
 
             return res.render('admin/users/index', {
                 users,
@@ -115,6 +123,7 @@ module.exports = {
         } catch (error) {
             console.error(error)
             return res.render("admin/users/index", {
+                users,
                 error: "Houve um erro na exclusão, tente novamente"
             })
         }

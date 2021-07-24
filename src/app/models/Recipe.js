@@ -83,13 +83,13 @@ module.exports = {
 
     //Função para RETORNAR as Receitas suas respectivas Imagens
     async findImageRecipe(id){
-
         try {
             const query =`
-            SELECT files.* FROM files 
-            LEFT JOIN recipe_files ON (files.id = recipe_files.file_id)
-            LEFT JOIN recipes ON (recipes.id = recipe_files.recipe_id) 
-            WHERE recipes.id = $1`;
+            SELECT recipe_files.*,
+            files.name AS name, files.path AS path, files.id AS file_id
+            FROM recipe_files
+            LEFT JOIN files ON (recipe_files.file_id = files.id)
+            WHERE recipe_files.recipe_id = $1`;
 
             const results = await db.query(query, [id]);
             return results.rows
@@ -102,7 +102,6 @@ module.exports = {
 
     //Função para APAGAR as imagens do Banco de Dados
     async deleteImageRecipe({ recipeId, fileId }){
-
         try{
             return db.query(`
                 DELETE FROM recipe_files 
@@ -114,12 +113,14 @@ module.exports = {
     },
 
     //Função para ENCONTRAR as receitas de um Usuário
-    findAllRecipesUser(id){
+    async findAllRecipesUser(id){
         try {
             const query = `
                 SELECT recipes.* FROM recipes WHERE user_id = $1
             `
-            return db.query(query, [id])
+
+            const results = await db.query(query, [id])
+            return results.rows
             
         } catch (error) {
             console.error(error);

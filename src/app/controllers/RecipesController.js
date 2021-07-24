@@ -1,9 +1,9 @@
-const { unlinkSync } = require('fs');
-
 const Recipe = require('../models/Recipe')
 const File = require('../models/File')
 
-const LoadRecipeService = require('../services/LoadRecipeService')
+const { unlinkSync } = require('fs');
+
+const LoadRecipeService = require('../services/LoadRecipeService');
 
 module.exports = { 
 
@@ -34,14 +34,21 @@ module.exports = {
     //Função para CADASTRAR uma nova receita
     async post(req, res){
         try {
-            const { filename, path } = req.files[0]
             const { userId } = req.session
             const { title, ingredients, preparation, information, chef } = req.body
-            
-            const fileId = await File.create({ name: filename, path })
-            const recipeId = await Recipe.create({ title, ingredients, preparation, information, chef_id: chef, user_id: userId })
 
-            await Recipe.createImageRecipe(recipeId,fileId)
+            const recipeId = await Recipe.create({ title, ingredients, preparation, information, chef_id: chef, user_id: userId })
+            
+            const filesPromise = req.files.map(async file => {
+                const fileId = await File.create({ 
+                    name: file.filename, 
+                    path: file.path 
+                })
+
+                await Recipe.createImageRecipe(recipeId,fileId)
+            })
+
+            await Promise.all(filesPromise);
 
             return res.redirect(`/admin/recipes/${ recipeId }`)
             
@@ -161,7 +168,7 @@ module.exports = {
             const { id } = req.body;
             const files = await Recipe.findImageRecipe(id);
 
-            const removedFilePromise =  files.map(file => {
+            const removedFilePromise = await files.map(file => {
                 File.delete({ id: file.file_id })
                 unlinkSync(file.path)
             })
@@ -169,7 +176,9 @@ module.exports = {
             await Promise.all(removedFilePromise)
             await Recipe.delete(id)
 
-            return res.render('admin/recipes/index')
+            const recipes = await LoadRecipeService.load('recipes')
+
+            return res.render('admin/recipes/index', { recipes })
 
         } catch (error) {
             console.error(error)
@@ -177,5 +186,35 @@ module.exports = {
                 error: "Houve um erro ao excluir a Receita, tente novamente mais tarde"
             })
         }
+    },
+
+    //Função para CARREGAR as receitas dos Usuários
+    async userRecipes(req, res){
+        const recipes = await Recipe.findAllRecipesUser(req.session.userId)
+
+        //Lógica para buscar as imagens das receitas
+        async function getImage(recipeId) {
+            let files = await Recipe.findImageRecipe(recipeId)
+            files = files.map(file => ({
+                ...file,
+                src: `${file.path.replace("public", "")}`
+            }))
+
+            return files
+        }
+        
+        const recipesPromise = recipes.map(async recipe => {
+            const files = await getImage(recipe.id)
+
+            if(files.length != 0){
+                recipe.image = files[0].src
+            }else{
+                recipe.image = 'http://placehold.it/940x280?text=Receita sem foto';
+            }
+            return recipe
+        })
+
+        const allRecipes = await Promise.all(recipesPromise)
+        return res.render("admin/recipes/myRecipes", { recipes: allRecipes })
     }
 }

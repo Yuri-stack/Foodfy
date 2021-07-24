@@ -1,7 +1,7 @@
-const { unlinkSync } = require('fs');
-
 const Chef = require('../models/Chef')
 const File = require('../models/File')
+
+const { unlinkSync } = require('fs');
 
 const LoadChefService = require('../services/LoadChefService')
 
