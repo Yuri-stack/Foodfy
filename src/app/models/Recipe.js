@@ -128,20 +128,31 @@ module.exports = {
     },
 
     //Função relacionado a PAGINAÇÃO das Receitas
-    paginate(params){
+    async paginate(params){
         try {
-            const { filter, limit, offset } = params
+            const { filter, limit, offset, id } = params
 
             let query = "",
                 filterQuery = "",
                 totalQuery = `(
                     SELECT count(*) FROM recipes
-                ) AS total
-                `
+                ) AS total`,
+                orderBy = 'ORDER BY recipes.created_at DESC'
     
-            if( filter ){
+            if(filter){
                 filterQuery = `WHERE recipes.title ILIKE '%${filter}%'`
     
+                totalQuery = `(
+                    SELECT count(*) FROM recipes
+                    ${filterQuery}
+                ) AS total`
+
+                orderBy = 'ORDER BY recipes.updated_at DESC'
+            }
+
+            if(id){
+                filterQuery = `WHERE user_id = ${id}`
+
                 totalQuery = `(
                     SELECT count(*) FROM recipes
                     ${filterQuery}
@@ -153,14 +164,15 @@ module.exports = {
                 FROM recipes
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
                 ${filterQuery}
-                ORDER BY recipes.id ASC LIMIT $1 OFFSET $2
+                ${orderBy}
+                LIMIT $1 OFFSET $2
             `
-    
-            return db.query(query, [limit, offset])         
+            const results = await db.query(query, [limit, offset])
+            return results.rows     
 
         } catch (error) {
             console.log(error)
+            console.log("Erro no paginate")
         }
-
     }
  }

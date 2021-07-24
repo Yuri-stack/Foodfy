@@ -7,7 +7,7 @@ const LoadRecipeService = require('../services/LoadRecipeService')
 
 module.exports = { 
 
-    //Função para LISTAR as receitas no Index da Administração
+    //Função para LISTAR as receitas no Index
     async index(req, res){
         try {
             const recipes = await LoadRecipeService.load('recipes')
