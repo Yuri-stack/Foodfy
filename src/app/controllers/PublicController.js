@@ -6,9 +6,18 @@ module.exports = {
     //Função para LISTAR as receitas no Index
     async index(req, res){
         try {
-            const recipes = await LoadRecipeService.load('recipes')
+            let { page, limit, filter } = req.query
 
-            return res.render('public/index', { recipes })
+            page = page || 1
+            limit = limit || 6
+            let offset = limit * (page - 1)
+
+            const params = { page, limit, filter, offset }
+
+            const recipes = await LoadRecipeService.load('recipes', params)
+
+            const pagination = { total: Math.ceil(recipes[0].total / limit), page }
+            return res.render('public/index', { recipes, pagination })
 
         } catch (error) {
             console.error(error)
@@ -16,10 +25,6 @@ module.exports = {
                 error: "Houve um erro ao carregar as receitas, tente novamente"
             })
         }
-
-
-        return res.render('public/index', { recipes })
-
     },
 
     //Função para REDIRECIONAR para a Pag. Index
@@ -64,7 +69,7 @@ module.exports = {
                 const pagination = { total: Math.ceil(recipes[0].total / limit), page }
                 return res.render('public/search', { recipes, pagination, filter })
             }else{
-                const recipes = await LoadRecipeService.load('recipes')
+                const recipes = await LoadRecipeService.load('recipes', params)
 
                 const pagination = { total: Math.ceil(recipes[0].total / limit), page }
                 return res.render('public/recipes', { recipes, pagination })

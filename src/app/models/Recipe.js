@@ -8,7 +8,7 @@ module.exports = {
     ...Base,
 
     //Função para SELECIONAR todas as Receitas
-    async findAllRecipes(){
+    async findAllRecipes(){ 
         try {
             const query = `
                 SELECT recipes.*, chefs.name AS chef_name
@@ -22,6 +22,43 @@ module.exports = {
             console.log(error)
         }
     },
+
+    // async findAllRecipes(params){
+    //     try {
+    //         const { limit, offset, id } = params
+
+    //         let query = "",
+    //             filterQuery = "",
+    //             totalQuery = `(
+    //                 SELECT count(*) FROM recipes
+    //             ) AS total`,
+    //             orderBy = 'ORDER BY recipes.created_at DESC'
+    
+    //         if(id){
+    //             filterQuery = `WHERE user_id = ${id}`
+
+    //             totalQuery = `(
+    //                 SELECT count(*) FROM recipes
+    //                 ${filterQuery}
+    //             ) AS total`
+    //         }
+    
+    //         query = `
+    //             SELECT recipes.*, ${totalQuery}, chefs.name AS chef_name
+    //             FROM recipes
+    //             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+    //             ${filterQuery}
+    //             ${orderBy}
+    //             LIMIT $1 OFFSET $2
+    //         `
+    //         const results = await db.query(query, [limit, offset])
+    //         return results.rows     
+
+    //     } catch (error) {
+    //         console.log(error)
+    //         console.log("Erro no paginate")
+    //     }
+    // },
 
     async nameChef(id){
         try {
@@ -68,7 +105,6 @@ module.exports = {
 
     //Função para CRIAR as imagens das Receitas no Banco de Dados
     createImageRecipe(recipeId, fileId){
-
         try {
             const query = `INSERT INTO recipe_files (recipe_id, file_id) VALUES ($1,$2) RETURNING id`
             const values = [recipeId, fileId]

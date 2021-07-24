@@ -7,7 +7,7 @@ const LoadRecipeService = require('../services/LoadRecipeService');
 
 module.exports = { 
 
-    //Função para LISTAR as receitas no Index
+    //Função para LISTAR as receitas no Index da Administração
     async index(req, res){
         try {
             const recipes = await LoadRecipeService.load('recipes')
@@ -190,31 +190,42 @@ module.exports = {
 
     //Função para CARREGAR as receitas dos Usuários
     async userRecipes(req, res){
-        const recipes = await Recipe.findAllRecipesUser(req.session.userId)
+        try {
+            const recipes = await Recipe.findAllRecipesUser(req.session.userId)
 
-        //Lógica para buscar as imagens das receitas
-        async function getImage(recipeId) {
-            let files = await Recipe.findImageRecipe(recipeId)
-            files = files.map(file => ({
-                ...file,
-                src: `${file.path.replace("public", "")}`
-            }))
+            //Lógica para buscar as imagens das receitas
+            async function getImage(recipeId) { 
+                let files = await Recipe.findImageRecipe(recipeId)
+                files = files.map(file => ({
+                    ...file,
+                    src: `${file.path.replace("public", "")}`
+                }))
 
-            return files
+                return files
+            }
+        
+            const recipesPromise = recipes.map(async recipe => {
+                const files = await getImage(recipe.id)
+
+                if(files.length != 0){
+                    recipe.image = files[0].src
+                }else{
+                    recipe.image = 'http://placehold.it/940x280?text=Receita sem foto';
+                }
+                return recipe
+            })
+
+            // Caso queira add a paginação aqui, veka os códigos do arquivo public/recipes e do PublicController das Receitas
+
+            const allRecipes = await Promise.all(recipesPromise)
+            return res.render("admin/recipes/myRecipes", { recipes: allRecipes })
+
+        } catch (error) {
+            console.error(error)
+            return res.render('admin/recipes/index', {
+                error: "Houve um erro ao exibir suas receitas, tente novamente"
+            })
         }
         
-        const recipesPromise = recipes.map(async recipe => {
-            const files = await getImage(recipe.id)
-
-            if(files.length != 0){
-                recipe.image = files[0].src
-            }else{
-                recipe.image = 'http://placehold.it/940x280?text=Receita sem foto';
-            }
-            return recipe
-        })
-
-        const allRecipes = await Promise.all(recipesPromise)
-        return res.render("admin/recipes/myRecipes", { recipes: allRecipes })
     }
 }
