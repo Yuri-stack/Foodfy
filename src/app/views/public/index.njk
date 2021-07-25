@@ -1,79 +1,41 @@
-{% extends "layouts/public.njk" %} 
+{% extends "layouts/layout.njk" %} 
 
-    {% block header %}
-
-        <header>
-
-            <div class="container">
-
-                <div class="header">
-                    <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
-
-                    <nav>
-                        <a href="/about">Sobre</a>
-                        <a href="/recipes">Receitas</a>
-                        <a href="/chefs">Chefs</a>
-                        <a>|</a>
-                        <a href="/admin/login">Login</a> 
-                    </nav>
-                </div>
-
-                <div class="filter">
-                    <form action="/recipes" method="GET">
-                        <input type="text" name="filter" placeholder="Buscar uma receita">
-                        <button type="submit">Buscar</button>
-                    </form>
-                </div>
-
-            </div>
-
-        </header>
-
-    {% endblock header %}
-
-    {% block banner %}
-
+    {% block content %}
         <section class="banner">
-            
-            <div class="container">
-                <div class="banner-info">
+            <div class="box">
+                <div class="box_info">
                     <h1>As melhores receitas</h1>
                     <p>Aprenda a construir os melhores pratos com receitas criadas por 
                         profissionais do mundo inteiro.</p>
                 </div>
-                <div class="banner-img">
+                <div class="box_img">
                     <img src="assets/chef.png" alt="Chef da Foodfy">
                 </div>
             </div>
-
         </section>
-
-    {% endblock banner %}
-
-    {% block container %}
 
         <section class="title">
             <h2>Mais acessadas</h2>
         </section>
 
-        <section class="recipes container">
+        <section class="show-wrapper container">
 
             {% for recipe in recipes %}
 
-                <div class="card vertical">
+                <div class="card vertical" id="{{ recipe.id }}">
                     <a href="/recipes/{{ recipe.id }}">
                         <img class="img_vertical" src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
                     </a>
+    
                     <div class="card">
                         <span class="card_title">{{ recipe.title }}</span>
                         <span class="card_subtitle">por {{ recipe.chef_name }}</span>
                     </div>
+    
                 </div>
 
             {% endfor %}
-            
+
         </section>
             
     {% endblock %}
-
-</html>

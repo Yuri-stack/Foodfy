@@ -9,93 +9,27 @@
 }
 
 *{
-    box-sizing: border-box; 
     margin: 0;
-    border: 0;
     padding: 0;
-    font-family: "Roboto", sans-serif;
-}
-
-/* MENU */
-
-header{
-    height: 80px;
-}
-
-header .container {
-    display: flex;
-    align-items: center;
-    max-width: 940px;
-    margin: auto;
-    justify-content: space-between;
-}
-
-header .header{
-    display: flex;
-    align-items: center;
-}
-
-header .container nav{
-    line-height: 80px;
-    margin-left: 50px;
-}
-
-header .container nav a{
+    box-sizing: border-box; 
     text-decoration: none;
-    font-size: 16px;
-    line-height: 26px;
-    color: var(--color-grayHard);
-    margin-left: 30px;
+    list-style-type: none;
+    font-family: "Roboto", sans-serif;
+    border: none;
 }
 
-header .container nav a.active{
-    font-weight: bold;
+html,body {
+    min-height: 100vh;
 }
 
-header.black-menu{
-    background-color: var(--color-grayHard);
-}
-
-header.black-menu .container {
-    justify-content: left;
-}
-
-header.black-menu img{
-    filter: invert(100%);
-}
-
-header.black-menu .container a{
-    color: white;
-}
-
-/* FILTRO / FILTER */
-
-.filter form{
-    display: grid;
-    grid-template-columns: 1fr 100px;
-    align-items: center;
-    margin-right: 5%;
-}
-
-.filter form input,
-.filter form button{
-    height: 37px;
-    margin: 0;
-}
-
-.filter form button{
-    margin-left: 5%;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-.filter form input{
-    color: var(--color-graySoft3);
-    font-size: 14px;
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    display: flex;                      
+    flex-direction: column;             
 }
 
 /* CONTAINER */
-
 .container {
     max-width: 940px;
     margin: 0 auto 50px;
@@ -104,76 +38,28 @@ header.black-menu .container a{
     position: relative;
 }
 
-/* BANNER */
-
-section.banner {
-    margin: auto auto 50px;
-    max-width: 940px;
-    background: #FBDFDB;
-    border-radius: 30px;
-}
-
-section.banner .container{
-    max-width: 940px;
-    height: 360px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-}
-
-section.banner .container div{
-    align-items: center;
-    width: 330px;
-    margin: auto 60px;
-}
-
-section.banner .container div h1{
-    font-size: 32px;
-    line-height: 42px;
-}
-
-section.banner .container div p{
-    margin-top: 10px;
-    font-size: 18px;
-    line-height: 28px;
-    width: 350px;
-    opacity: 0.7;
-}
-
-section.banner .container .banner-img{
-    margin: auto 0 0;
-}
-
-/* MAIN */
-
-main{
-    min-height: 87vh;
-    position: relative;
-    padding-bottom: 60px;
-    overflow: hidden;
-}
-
 .title{
     max-width: 940px;
-    margin: 0 auto 20px;
+    margin: 32px auto 24px;
     width: 100%;
 }
 
-/* CONTAINER DAS RECEITAS 3X */
+/* WRAPPER DAS RECEITAS, CHEFS E USUÁRIOS */
 
-.recipes{
-    margin: 10px auto;
+.show-wrapper{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    margin: 16px auto 24px;
+    grid-template-columns: repeat(3,1fr);
     gap: 20px;
-    height: 500px;
+}
+
+.chefs{
+    grid-template-columns: repeat(4,1fr);
 }
 
 /* RODAPÉ / FOOTER */
-
 footer {
     background: #EEEEEE;
-    position: absolute;
     bottom: 0;
     width: 100%;
     padding: 24px;
@@ -276,12 +162,12 @@ footer p{
 
 /* =========================== PAGE CHEFS / PÁGINA CHEFS =============================== */
 
-.chefs{
+/* .chefs{
     margin-top: 15px;
     display: grid;
     grid-template-columns: repeat(4,1fr);
     grid-gap: 20px;
-}
+} */
 
 /* Pag. Detalhe Chef */
 

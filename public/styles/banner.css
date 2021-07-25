@@ -1,0 +1,33 @@
+.banner {
+    margin: 0 auto;
+    width: 940px;
+    background: #FBDFDB;
+    border-radius: 30px;
+}
+
+.box{
+    width: 820px;
+    height: 360px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.box_info{
+    text-align: center;
+    width: 330px;
+    margin: auto 60px;
+}
+
+.box_info h1{
+    font-size: 32px;
+    line-height: 42px;
+}
+
+.box_info p{
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 28px;
+    width: 350px;
+    opacity: 0.7;
+}

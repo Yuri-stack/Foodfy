@@ -1,0 +1,23 @@
+<header>
+    {# Parte do Logo #}
+    <div class="menu">
+        <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
+
+        {# Parte do Menu / antigo header #}
+        <nav class="principal">
+            <a href="/about">Sobre</a>
+            <a href="/recipes">Receitas</a>
+            <a href="/chefs">Chefs</a>
+            <a>|</a>
+            <a href="/admin/login">Login</a> 
+        </nav>
+
+        {# Parte da Pesquisa / antigo filter #}
+        <form class="search" action="/recipes" method="GET">
+            <input type="text" name="filter" placeholder="Buscar uma receita">
+            <button type="submit">Buscar</button>
+        </form>
+
+    </div>
+
+</header>
