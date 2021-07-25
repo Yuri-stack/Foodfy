@@ -1,0 +1,401 @@
+/* MENU */
+.admin-menu{
+    color: white;
+    width: 100%;
+    padding: 16px 0 8px;
+    text-align: center;
+}
+
+.black-menu{
+    background-color: var(--color-grayHard);
+    justify-content: left;
+}
+
+.black-menu img{
+    filter: invert(100%);
+}
+
+.black-menu .principal a{
+    color: white;
+}
+
+.my-account{
+    margin-left: 220px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.my-account a {
+    color: white;
+}
+
+/*  */
+
+.control{
+    max-width: 940px;
+    margin: 55px auto 67px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.control h1{
+    font-size: 24px;
+}
+
+.control a, button[type="submit"], .button {
+    background-color: var(--color-rocket);
+    padding: 8px 16px;
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+button[type="submit"].btn-delete, 
+button[type="submit"].btn-cancelar {
+    background-color: var(--color-deleteRed);
+}
+
+.info-title {
+    color: var(--color-grayHard);
+    font-size: 36px;
+    font-weight: bold;
+    display: block;
+}
+
+.info-subtitle{
+    font-size: 20px;
+    color: var(--color-graySoft2);
+    text-align: center;
+    display: block;
+}
+
+/* =========================== RECIPES ADMIN PAGE =============================== */
+
+.recipes-admin{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* =========================== CREATE CHEFS ADMIN PAGE ============================= */
+
+/* Campo de Upload de Imagens / Upload Photos Fields */
+
+.item #avatar-upload {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 125px;
+    margin-top: 8px;
+}
+
+.item #avatar-upload p {
+    box-shadow: 0 2px 2px -6px var(--color-gray);
+    width: 100%;
+    text-align: center;
+    cursor: pointer; 
+}
+
+.item #photo-avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+/* precisa arrumar esses estilos*/
+.item #photo-preview {
+    display: grid;
+    width: 150px;
+    height: 150px;
+    margin: 5px 0 0 0;
+}
+
+.item #photo-preview img {
+    width: 150px;
+    height: 150px; 
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #DDDDDD;
+}
+
+#photo-preview .photo {
+    position: relative;
+}
+
+#photo-preview .photo i {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: rgba(255, 255, 255, 0.8);
+    color: red;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 200%;
+    cursor: pointer;
+
+    transition: opacity 200ms;
+    opacity: 0;
+}
+
+#photo-preview .photo:hover i{
+    opacity: 1;
+}
+
+.chefs{
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 20px;
+}
+
+/* Pag. Detalhe Chef */
+
+.chef-principal .img_circular{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+/* =========================== CREATE RECIPES ADMIN PAGE ============================= */
+
+/* Container das Campos de Imagem / Image Fields Container */
+
+#photo-container{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+}
+
+/* Campo de Upload de Imagens / Upload Photos Fields */
+
+.item #photos-upload {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    
+    margin: 5px;
+
+    width: 150px;
+    height: 150px;
+
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+}
+
+.item #photos-upload i{
+    color: #999;
+    background: #FFFFFF;
+
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+    cursor: pointer;
+    font-size: 200%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item #photos-input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+/* Campo de Vizualição das Imagens das Receitas / View Photos Fields */
+
+.item #photos-preview {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    width: 150px;
+    height: 150px;
+    margin: 5px 0 0 0;
+}
+
+.item #photos-preview img {
+    width: 150px;
+    height: 150px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #DDDDDD;
+}
+
+#photos-preview .photo {
+    position: relative;
+}
+
+#photos-preview .photo i {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: rgba(255, 255, 255, 0.8);
+    color: red;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 200%;
+    cursor: pointer;
+
+    transition: opacity 200ms;
+    opacity: 0;
+}
+
+#photos-preview .photo:hover i{
+    opacity: 1;
+}
+
+/* =========================== SHOW RECIPES ADMIN PAGE =============================== */
+
+.gallery .highlight > img{
+    border-radius: 15px;
+    width: 940px;
+    height: 280px;
+    object-fit: cover;
+}
+
+.gallery .gallery-preview{
+    display: flex;
+    justify-content: flex-end;
+    height: 50px;
+}
+
+.gallery .gallery-preview img{
+    height: 50px;
+    width: 50px;
+
+    margin-left: 10px;
+    border-radius: 3.5px;
+    border: 1px solid #DDDDDD;
+
+    object-fit: cover;
+    opacity: 0.5;
+
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.gallery .gallery-preview img:hover,
+.gallery .gallery-preview img.active{
+    opacity: 1;
+}
+
+
+/* =========================== EDIT RECIPES ADMIN PAGE =============================== */
+
+.item button{
+    background-color: transparent;
+    color: var(--color-rocket);
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+form div:first-child{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+form input, textarea, select{
+    width: 100%;
+    color: #555;
+    padding: 15px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+}
+
+input[type="checkbox"]{
+    width: auto;
+}
+
+/* =========================== Users Area =============================== */
+
+.users{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.user.container form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 40px;
+}
+
+.error{
+    background-color: #e74c3c;
+    padding: 4px;
+    border-radius: 4px;
+    color: white;
+}
+
+/* =========================== PAGE 404 =============================== */
+
+.notFound{
+    text-align: center;
+}
+
+.notFound h1{
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: bold;
+}
+
+.notFound p{
+    /* max-width: 600px; */
+    margin: 5px auto;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.notFound img{
+    margin: 38px auto;
+}
+
+/* Responsividade */
+
+@media(max-width: 800px) {
+
+    .recipes-title {
+        margin: 30px 100px 10px;
+    }
+
+    .recipes-container {
+        grid-template-columns: 1fr;
+        margin: 50px;
+    }
+}

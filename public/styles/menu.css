@@ -1,7 +1,7 @@
 header, footer {
     color: white;
     width: 100%;
-    padding: 32px 0;
+    padding: 16px 0 16px;
     text-align: center;
 }
 
@@ -51,22 +51,4 @@ header, footer {
 .search button{
     margin-left: 5%;
     font-size: 16px;
-}
-
-/* MENU Admin */
-
-header.black-menu{
-    background-color: var(--color-grayHard);
-}
-
-header.black-menu .container {
-    justify-content: left;
-}
-
-header.black-menu img{
-    filter: invert(100%);
-}
-
-header.black-menu .container a{
-    color: white;
 }

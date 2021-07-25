@@ -1,58 +1,32 @@
-{% extends "layouts/public.njk" %}
+{% extends "layouts/layout.njk" %}
 
-    {% block header %}
+    {% block head %}
+        <title>Receitas</title>
+    {% endblock %}
 
-        <header>
-
-            <div class="container">
-
-                <div class="header">
-                    <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
-
-                    <nav>
-                        <a href="/about">Sobre</a>
-                        <a href="/recipes">Receitas</a>
-                        <a href="/chefs">Chefs</a>
-                    </nav>
-                </div>
-
-                <div class="filter">
-                    <form action="/recipes" method="GET">
-                        <input type="text" name="filter" value={{filter}} placeholder="Buscar uma receita">
-                        <button type="submit">Buscar</button>
-                    </form>
-                </div>
-
-            </div>
-
-        </header>
-
-    {% endblock header %}
-
-    {% block container %}
+    {% block content %}
 
         <section class="title">
             <h2>Buscando por "{{ filter }}"</h2>
         </section>
 
-        <section class="recipes container">
+        <section class="show-wrapper container">
 
             {% for recipe in recipes %}
 
-                <div class="card vertical" id="{{ recipe.id }}">
+                <div class="card vertical">
                     <a href="/recipes/{{ recipe.id }}">
                         <img class="img_vertical" src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
-                    </a> 
-
+                    </a>
                     <div class="card">
                         <span class="card_title">{{ recipe.title }}</span>
                         <span class="card_subtitle">por {{ recipe.chef_name }}</span>
-                    </div> 
+                    </div>
                 </div>
-                
+
             {% endfor %}
 
-        </section>  
+        </section>
 
         <section class="pagination"
             data-page={{pagination.page}}
@@ -61,4 +35,4 @@
             >
         </section>
 
-    {% endblock %}
+    {% endblock content %}
