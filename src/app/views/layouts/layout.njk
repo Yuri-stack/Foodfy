@@ -17,14 +17,18 @@
 
         {% include "layouts/parts/messages.njk" %}
         
-        {% include "./parts/header.njk" %}
+        {% block header %}
+            {% include "./parts/header.njk" %}
+        {% endblock %}
 
         {% block content %}
 
         {% endblock %}
 
-        {% include "./parts/footer.njk" %}
-
+        {% block footer %}
+            {% include "./parts/footer.njk" %}
+        {% endblock %}
+        
     </body>
 
 </html>

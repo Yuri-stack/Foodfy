@@ -13,20 +13,17 @@
     padding: 0;
     box-sizing: border-box; 
     text-decoration: none;
-    list-style-type: none;
     font-family: "Roboto", sans-serif;
     border: none;
-}
-
-html,body {
-    min-height: 100vh;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f9f9f9;
     display: flex;                      
-    flex-direction: column;             
+    flex-direction: column;   
+    overflow-y: overlay;      
+    min-height: 100vh;
 }
 
 /* CONTAINER */
@@ -45,7 +42,6 @@ body {
 }
 
 /* WRAPPER DAS RECEITAS, CHEFS E USUÁRIOS */
-
 .show-wrapper{
     display: grid;
     margin: 16px auto 24px;
@@ -60,40 +56,15 @@ body {
 /* RODAPÉ / FOOTER */
 footer {
     background: #EEEEEE;
-    bottom: 0;
     width: 100%;
     padding: 24px;
+    flex-flow: column;
 }
 
 footer p{
     font-size: 14px;
     color: var(--color-graySoft3);
     text-align: center;
-}
-
-/* PAGINAÇÃO / PAGINATION */
-
-.pagination{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 10px;
-}
-
-
-/* .pagination{
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    width: 100%;
-    bottom: 0%;
-    background-color: #DC4747;
-} */
-
-.pagination a, 
-.pagination span{
-    text-decoration: none;
-    margin-right: 16px;
 }
 
 /* ABOUT / SOBRE */
@@ -113,17 +84,29 @@ footer p{
     text-align: justify;
 }
 
+/* PAGINAÇÃO / PAGINATION */
+.pagination{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.pagination a, 
+.pagination span{
+    text-decoration: none;
+    margin-right: 16px;
+}
+
 /* RECIPES DETAILS / DETALHE DAS RECEITA */
 
-/* .recipe-principal img{
-    border-radius: 15px;
-    width: 940px;
-    height: 280px;
-    object-fit: cover;
-} */
-
 .recipe-intro{
-    margin: auto 30px;
+    margin: auto 32px;
+    text-align: center;
+}
+
+.chef-intro{
+    margin: 30px auto;
     text-align: center;
 }
 
@@ -135,14 +118,14 @@ footer p{
     margin-bottom: 39px;
 }
 
-.recipe-info ul{
-    margin-left: 18px;
-}
-
 .recipe-info h1{
     font-size: 24px;
     color: var(--color-grayHard);
     margin-bottom: 20px;
+}
+
+.recipe-info ul{
+    margin-left: 18px;
 }
 
 .recipe .visibility{
@@ -173,11 +156,6 @@ footer p{
     border-radius: 50%;
     display: block;
     margin: 0 auto;
-}
-
-.chef-intro{
-    margin: 30px auto;
-    text-align: center;
 }
 
 /* =========================== ADMIN PAGE =============================== */
