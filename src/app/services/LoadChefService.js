@@ -7,7 +7,7 @@ async function getImage(recipeId) {
     let files = await Recipe.findImageRecipe(recipeId)
     files = files.map(file => ({
         ...file,
-        src: `${file.path.replace("public", "")}`
+        src: `${file.path.replace('public', '')}`
     }))
 
     return files
@@ -36,7 +36,6 @@ const LoadService = {
                 })
                 chef.recipes = await Promise.all(recipesPromise)
             }
-
             chef.total_recipes = await Chef.countRecipe(chef.id)
             return chef
 

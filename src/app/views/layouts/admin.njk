@@ -19,12 +19,16 @@
 
         {% block header %}
             {% include "./parts/adminHeader.njk" %}
-        {% endblock header %}
+        {% endblock %}
 
         <main>
-            {% block container %}{% endblock %}
-            {% block footer %}{% endblock footer %}
+            {% block content %}
+            {% endblock %}
+
+            {% block footer %}
+            {% endblock %}
         </main>
+
         <script src="/scripts.js"></script>
     </body>
 </html>

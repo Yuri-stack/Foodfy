@@ -4,45 +4,31 @@
         <title>Chef {{ chef.name }}</title>
     {% endblock %}
 
-    {% block container %}
-
+    {% block content %}
         <section class="control">
-
-            <div>
-                <h1>Chef: {{ chef.name }}</h1>
-            </div>
-
-            <div>
-                <a href="{{ chef.id }}/edit">Editar Chef</a>
-            </div>
-
+            <h1>Chef: {{ chef.name }}</h1>
+            <a class="button" href="{{ chef.id }}/edit">Editar Chef</a>
         </section>
 
-        <section class="chef container">
+        <section class="container">
+            
+            {% if not chef.file %}
+                <img class="img_circular_grande" src="http://placehold.it/500x500?text=Chef sem foto">
+            {% else %}
+                <img class="img_circular_grande" src="{{ chef.image }}" alt="Imagem de {{ chef.name }}">
+            {% endif %}
 
-            <section class="chef-principal">
+            <div class="chef-intro">
+                <span class="info-title">{{ chef.name }}</span>
+                <span class="info-subtitle">{{ chef.total_recipes }} receita(s)</span>
+            </div>
 
-                {% if not chef.file %}
-                    <img class="img_circular" src="http://placehold.it/500x500?text=Chef sem foto">
-                {% else %}
-                    <img class="img_circular" src="{{ chef.file.src }}" alt="Imagem de {{ chef.name }}">
-                {% endif %}
+        <h1>Receitas</h1>
 
-                <div class="chef-intro">
-                    <span class="info-title">{{ chef.name }}</span>
-                    <span class="info-subtitle">{{ chef.total_recipes }} receita(s)</span>
-                </div>
-
-            </section>
-
-            <h1>Receitas</h1>
-
-            <section class="recipes-admin container">
-
+            <section class="chefs-recipes">
+                
                 {% if chef.recipes[0].id == null %}
-
                     Este Chef ainda não possui receitas.
-
                 {% else %}
 
                     {% for item in chef.recipes %}
@@ -66,11 +52,8 @@
                         </div>
 
                     {% endfor %}
-
+                    
                 {% endif %}
-
             </section>
-
         </section>
-
     {% endblock %}

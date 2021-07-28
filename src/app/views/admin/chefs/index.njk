@@ -1,18 +1,17 @@
 {% extends "layouts/admin.njk" %}
 
     {% block head %}
-        <title>Foodfy - Chefs</title> 
+        <title>Chefs</title> 
     {% endblock %}
 
-    {% block container %}
-
+    {% block content %}
         <section class="control">
             <h1>Gerenciar Chefs</h1>
-            <a href="/admin/chefs/create">Criar Novo Chef</a>
+            <a class="button" href="/admin/chefs/create">Criar Novo Chef</a>
         </section>
 
-        <section class="chefs container">
-
+        <section class="show-wrapper container">
+            
             {% for chef in chefs %}
 
                 <div class="card horizontal">
@@ -26,7 +25,10 @@
                 </div>
 
             {% endfor %}
-            
+
         </section>
+    {% endblock %} 
+        
+    {% block container %}
 
     {% endblock %}

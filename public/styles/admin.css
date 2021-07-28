@@ -32,8 +32,7 @@
     color: white;
 }
 
-/*  */
-
+/* SEÇÃO DE FUNÇÕES DE CONTROLE */
 .control{
     max-width: 940px;
     margin: 55px auto 67px;
@@ -43,10 +42,11 @@
 }
 
 .control h1{
-    font-size: 24px;
+    font-size: 32px;
 }
 
-.control a, button[type="submit"], .button {
+.button,
+button[type="submit"]{
     background-color: var(--color-rocket);
     padding: 8px 16px;
     text-decoration: none;
@@ -75,16 +75,39 @@ button[type="submit"].btn-cancelar {
     display: block;
 }
 
-/* =========================== RECIPES ADMIN PAGE =============================== */
+.item{
+    margin-bottom: 16px;
+}
 
-.recipes-admin{
+/* ===== RECIPES ADMIN PAGE ===== */
+
+
+
+/* ===== CREATE CHEFS ADMIN PAGE =====*/
+
+/* INTRODUÇÃO DOS CHEFS */
+.chef-intro{
+    margin: 30px auto;
+    text-align: center;
+}
+
+/* RECEITAS DOS CHEFES */
+.chefs-recipes{
     margin-top: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
-/* =========================== CREATE CHEFS ADMIN PAGE ============================= */
+/* IMAGEM DO CHEF NA PAGINA DETAILS */
+.img_circular_grande{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
 
 /* Campo de Upload de Imagens / Upload Photos Fields */
 
@@ -157,24 +180,6 @@ button[type="submit"].btn-cancelar {
 
 #photo-preview .photo:hover i{
     opacity: 1;
-}
-
-.chefs{
-    margin-top: 15px;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    grid-gap: 20px;
-}
-
-/* Pag. Detalhe Chef */
-
-.chef-principal .img_circular{
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto;
 }
 
 /* =========================== CREATE RECIPES ADMIN PAGE ============================= */
