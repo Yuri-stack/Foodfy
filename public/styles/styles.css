@@ -49,10 +49,6 @@ body {
     gap: 20px;
 }
 
-.chefs{
-    grid-template-columns: repeat(4,1fr);
-}
-
 /* RODAPÉ / FOOTER */
 footer {
     background: #EEEEEE;
@@ -106,11 +102,11 @@ footer p{
 }
 
 .recipe-info{
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 22px;
+    line-height: 32px;
     color: var(--color-gray);
-    margin-top: 20px;
-    margin-bottom: 39px;
+    margin-top: 22px;
+    margin-bottom: 42px;
 }
 
 .recipe-info h1{

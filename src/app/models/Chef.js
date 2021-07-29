@@ -28,8 +28,8 @@ module.exports = {
         try {
             const query = `
                 SELECT recipes.*
-                FROM chefs
-                LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+                FROM recipes
+                LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
                 WHERE chefs.id = $1
                 GROUP BY chefs.id, recipes.id
                 ORDER BY recipes.created_at DESC

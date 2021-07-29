@@ -81,14 +81,28 @@ button[type="submit"].btn-cancelar {
 
 /* ===== RECIPES ADMIN PAGE ===== */
 
-
+/* CONTAINER DE APRESENTAÇÃO DAS RECEITAS */
+.show-wrapper-recipes{
+    display: grid;
+    margin: 16px auto 24px;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+}
 
 /* ===== CREATE CHEFS ADMIN PAGE =====*/
 
 /* INTRODUÇÃO DOS CHEFS */
 .chef-intro{
-    margin: 30px auto;
+    margin: 32px auto;
     text-align: center;
+}
+
+/* CONTAINER DE APRESENTAÇÃO DOS CHEFS */
+.show-wrapper-chefs{
+    display: grid;
+    margin: 16px auto 24px;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
 }
 
 /* RECEITAS DOS CHEFES */
@@ -185,7 +199,6 @@ button[type="submit"].btn-cancelar {
 /* =========================== CREATE RECIPES ADMIN PAGE ============================= */
 
 /* Container das Campos de Imagem / Image Fields Container */
-
 #photo-container{
     display: grid;
     grid-template-columns: repeat(6,1fr);
@@ -329,11 +342,6 @@ button[type="submit"].btn-cancelar {
     margin-top: 10px;
 }
 
-form div:first-child{
-    font-size: 16px;
-    font-weight: bold;
-}
-
 form input, textarea, select{
     width: 100%;
     color: #555;
@@ -344,21 +352,17 @@ form input, textarea, select{
     border-radius: 4px;
 }
 
-input[type="checkbox"]{
-    width: auto;
-}
+/* =========================== USERS ADMIN PAGE =============================== */
 
-/* =========================== Users Area =============================== */
-
-.users{
+.show-wrapper-user{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-.user.container form{
+.users.container form{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px 40px;
+    gap: 32px 40px;
 }
 
 .error{
@@ -366,6 +370,10 @@ input[type="checkbox"]{
     padding: 4px;
     border-radius: 4px;
     color: white;
+}
+
+input[type="checkbox"]{
+    width: auto;
 }
 
 /* =========================== PAGE 404 =============================== */
@@ -389,18 +397,4 @@ input[type="checkbox"]{
 
 .notFound img{
     margin: 38px auto;
-}
-
-/* Responsividade */
-
-@media(max-width: 800px) {
-
-    .recipes-title {
-        margin: 30px 100px 10px;
-    }
-
-    .recipes-container {
-        grid-template-columns: 1fr;
-        margin: 50px;
-    }
 }

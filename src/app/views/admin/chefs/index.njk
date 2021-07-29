@@ -7,10 +7,12 @@
     {% block content %}
         <section class="control">
             <h1>Gerenciar Chefs</h1>
-            <a class="button" href="/admin/chefs/create">Criar Novo Chef</a>
+            {% if session.isAdmin %}
+                <a class="button" href="/admin/chefs/create">Criar Novo Chef</a>
+            {% endif %}
         </section>
 
-        <section class="show-wrapper container">
+        <section class="show-wrapper-chefs container">
             
             {% for chef in chefs %}
 
@@ -28,7 +30,3 @@
 
         </section>
     {% endblock %} 
-        
-    {% block container %}
-
-    {% endblock %}

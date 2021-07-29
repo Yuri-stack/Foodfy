@@ -11,7 +11,7 @@
         <p class="button">Enviar Avatar</p>
     </div>
 
-    <div class="photo-preview">
+    <div id="photo-preview">
         {% if chef.file %}
             <div class="photo" id="{{ chef.file.id }}">
                 <img src="{{ chef.file.src }}" alt="{{ chef.file.name }}">

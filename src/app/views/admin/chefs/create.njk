@@ -3,15 +3,13 @@
     {% block content %}
         <section class="control">
             <h1>Criando Chefs</h1>
-            <button type="submit" form="form-save">Salvar Chef</button>
+            <button type="submit" form="form-save">Salvar</button>
         </section>
 
         <section class="container">
-
             <form id="form-save" method="POST" action="/admin/chefs" enctype="multipart/form-data">
                 {% include 'admin/chefs/fields.njk' %}
             </form>
-
         </section>
 
     {% endblock %}

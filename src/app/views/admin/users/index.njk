@@ -1,17 +1,16 @@
 {% extends "layouts/admin.njk" %}
 
     {% block head %}
-        <title>Foodfy - Usuários</title> 
+        <title>Usuários</title> 
     {% endblock %}
 
-    {% block container %}
-
+    {% block content %} 
         <section class="control">
-            <h1>Usuários</h1>
-            <a href="/admin/users/register">Novo</a>
+            <h1>Gerenciar Usuários</h1>
+            <a class="button" href="/admin/users/register">Criar Novo Usuário</a>
         </section>
 
-        <section class="users container">
+        <section class="show-wrapper-user container">
 
             {% for user in users %}
 
@@ -27,5 +26,4 @@
             {% endfor %}
 
         </section>
-
     {% endblock %}

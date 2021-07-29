@@ -7,7 +7,9 @@
     {% block content %}
         <section class="control">
             <h1>Chef: {{ chef.name }}</h1>
-            <a class="button" href="{{ chef.id }}/edit">Editar Chef</a>
+            {% if session.isAdmin %}
+                <a class="button" href="{{ chef.id }}/edit">Editar Chef</a>
+            {% endif %}
         </section>
 
         <section class="container">
@@ -15,7 +17,7 @@
             {% if not chef.file %}
                 <img class="img_circular_grande" src="http://placehold.it/500x500?text=Chef sem foto">
             {% else %}
-                <img class="img_circular_grande" src="{{ chef.image }}" alt="Imagem de {{ chef.name }}">
+                <img class="img_circular_grande" src="{{ chef.file.src }}" alt="Imagem de {{ chef.name }}">
             {% endif %}
 
             <div class="chef-intro">
@@ -23,7 +25,7 @@
                 <span class="info-subtitle">{{ chef.total_recipes }} receita(s)</span>
             </div>
 
-        <h1>Receitas</h1>
+            <h1>Receitas</h1>
 
             <section class="chefs-recipes">
                 

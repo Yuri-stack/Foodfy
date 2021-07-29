@@ -28,15 +28,16 @@ const LoadService = {
 
             const recipes = await Chef.findRecipesChef(chef.id)
 
-            if(recipes[0].id != null){
-                const recipesPromise = recipes.map(async recipe => {
-                    const files = await getImage(recipe.id)
-                    recipe.image = files[0].src
-                    return recipe
-                })
-                chef.recipes = await Promise.all(recipesPromise)
-            }
+            const recipesPromise = recipes.map(async recipe => {
+                const files = await getImage(recipe.id)
+                console.log(files)
+                recipe.image = files[0].src
+                return recipe
+            })
+
+            chef.recipes = await Promise.all(recipesPromise)
             chef.total_recipes = await Chef.countRecipe(chef.id)
+
             return chef
 
         } catch (error) {
