@@ -6,6 +6,9 @@ const { onlyUsers, isAdmin } = require('../../app/middlewares/session')
 
 const Chefs = require('../../app/controllers/ChefsController')
 
+routes.get("/success", (req, res) => res.render('layouts/success'))
+routes.get("/error", (req, res) => res.render('layouts/error'))
+
 // Rotas para a Administração dos Chefs
 routes.get('/seeChefs', onlyUsers, Chefs.index)                                 // Mostrar a lista de Chefs aos usuarios padroes
 routes.get("/", onlyUsers, isAdmin, Chefs.index)                                // Mostrar a lista de Chefs

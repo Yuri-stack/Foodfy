@@ -50,13 +50,11 @@ module.exports = {
 
             await Promise.all(filesPromise);
 
-            return res.redirect(`/admin/recipes/${ recipeId }`)
+            return res.redirect(`/admin/recipes/success`)
             
         } catch (error) {
             console.error(error)
-            return res.render('admin/recipes/index', {
-                error: "Houve um erro na criação da Receita, tente novamente"
-            })
+            return res.redirect('/admin/recipes/error')
         }
     },
 
@@ -102,9 +100,7 @@ module.exports = {
 
         } catch (error) {
             console.error(error)
-            return res.render('admin/recipes/details', {
-                error: "Houve um erro na edição da Receita, tente novamente mais tarde"
-            })
+            return res.redirect('/admin/recipes/error')
         }
     },
 
@@ -152,13 +148,11 @@ module.exports = {
 
             await Recipe.update(id, { title, ingredients, preparation, information, chef_id: chef })
 
-            return res.redirect(`/admin/recipes/${id}`)
+            return res.redirect(`/admin/recipes/success`)
 
         } catch (error) {
             console.error(error)
-            return res.render('admin/recipes/details', {
-                error: "Houve um erro na atualização da Receita, tente novamente mais tarde"
-            })
+            return res.redirect('/admin/recipes/error')
         }
     },
 
@@ -178,13 +172,11 @@ module.exports = {
 
             const recipes = await LoadRecipeService.load('recipes')
 
-            return res.render('admin/recipes/index', { recipes })
+            return res.redirect(`/admin/recipes/success`)
 
         } catch (error) {
             console.error(error)
-            return res.render('admin/recipes/details', {
-                error: "Houve um erro ao excluir a Receita, tente novamente mais tarde"
-            })
+            return res.redirect('/admin/recipes/error')
         }
     },
 
@@ -215,7 +207,7 @@ module.exports = {
                 return recipe
             })
 
-            // Caso queira add a paginação aqui, veka os códigos do arquivo public/recipes e do PublicController das Receitas
+            // Caso queira add a paginação aqui, veja os códigos do arquivo public/recipes e do PublicController das Receitas
 
             const allRecipes = await Promise.all(recipesPromise)
             return res.render("admin/recipes/myRecipes", { recipes: allRecipes })

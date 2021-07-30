@@ -23,43 +23,6 @@ module.exports = {
         }
     },
 
-    // async findAllRecipes(params){
-    //     try {
-    //         const { limit, offset, id } = params
-
-    //         let query = "",
-    //             filterQuery = "",
-    //             totalQuery = `(
-    //                 SELECT count(*) FROM recipes
-    //             ) AS total`,
-    //             orderBy = 'ORDER BY recipes.created_at DESC'
-    
-    //         if(id){
-    //             filterQuery = `WHERE user_id = ${id}`
-
-    //             totalQuery = `(
-    //                 SELECT count(*) FROM recipes
-    //                 ${filterQuery}
-    //             ) AS total`
-    //         }
-    
-    //         query = `
-    //             SELECT recipes.*, ${totalQuery}, chefs.name AS chef_name
-    //             FROM recipes
-    //             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-    //             ${filterQuery}
-    //             ${orderBy}
-    //             LIMIT $1 OFFSET $2
-    //         `
-    //         const results = await db.query(query, [limit, offset])
-    //         return results.rows     
-
-    //     } catch (error) {
-    //         console.log(error)
-    //         console.log("Erro no paginate")
-    //     }
-    // },
-
     async nameChef(id){
         try {
             const query = `
@@ -75,22 +38,6 @@ module.exports = {
             
         }
     },
-
-    //Função para RETORNAR os dados das Receitas
-    // showDataRecipes(id){
-    //     try {
-    //         const query = `
-    //             SELECT recipes.*, chefs.name AS chef_name
-    //             FROM recipes
-    //             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-    //             WHERE recipes.id = $1
-    //         `
-    //         return db.query(query, [id])
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-    // },
 
     //Função que CARREGA os nomes dos Chefs para o Form das Receitas
     chefSelectOptions(){
@@ -152,9 +99,12 @@ module.exports = {
     async findAllRecipesUser(id){
         try {
             const query = `
-                SELECT recipes.* FROM recipes WHERE user_id = $1
+                SELECT recipes.*, chefs.name AS chef_name
+                FROM recipes 
+                LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+                WHERE user_id = $1
+                ORDER BY recipes.created_at DESC
             `
-
             const results = await db.query(query, [id])
             return results.rows
             

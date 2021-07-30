@@ -34,15 +34,13 @@ module.exports = {
             const fileId = await File.create({ name: filename, path })
 
             const { name } = req.body
-            const chefId = await Chef.create({ name, file_id: fileId })
+            await Chef.create({ name, file_id: fileId })
 
-            return res.redirect(`/admin/chefs/${chefId}`)
+            return res.redirect(`/admin/chefs/success`)
 
         } catch (error) {
             console.error(error)
-            return res.render('admin/chefs/create.njk', {
-                error: "Houve um erro na criação do Chef, tente novamente"
-            })
+            return res.redirect('/admin/chefs/error')
         }
     },
 
@@ -84,9 +82,7 @@ module.exports = {
 
         } catch (error) {
             console.error(error)
-            return res.render('admin/chefs/details', {
-                error: "Houve um erro na edição do Chef, tente novamente mais tarde"
-            })
+            return res.redirect('/admin/chefs/error')
         }
     },
 
@@ -115,14 +111,11 @@ module.exports = {
                 unlinkSync(file.path);
             }
 
-            return res.redirect(`/admin/chefs/${id}`);
+            return res.redirect(`/admin/chefs/success`);
 
         } catch (error) {
             console.error(error)
-            return res.render('admin/chefs/details', {
-                chef,
-                error: "Houve um erro na atualização do Chef, tente novamente mais tarde"
-            })
+            return res.redirect('/admin/chefs/error')
         }
     },
 
@@ -149,13 +142,11 @@ module.exports = {
             
             await File.delete(fileId)   //Apaga a imagem do chef
 
-            return res.redirect('/admin/chefs');
+            return res.redirect(`/admin/chefs/success`)
             
         } catch (error) {
             console.error(error)
-            return res.render('admin/chefs/details', {
-                error: "Houve um erro ao excluir o Chef, tente novamente mais tarde"
-            })
+            return res.redirect('/admin/chefs/error')
         }
     }
 }

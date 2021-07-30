@@ -1,0 +1,23 @@
+{% extends "layouts/admin.njk" %}
+
+    {% block content %}
+        <section class="action-error container">
+            <div class="error-lottie">
+                <h1>Ops... Aconteceu algo inesperado</h1>
+                <p>Tente realizar a ação novamente!</p>
+            </div>
+        </section>
+
+        <script src="/lottie.min.js"></script>
+        <script>
+            const element = document.querySelector('.error-lottie')
+
+            lottie.loadAnimation({
+            container: element, // the dom element that will contain the animation
+            renderer: 'svg',
+            loop: false,
+            autoplay: true,
+            path: '/animations/10960-error.json' // the path to the animation json
+            });
+        </script>
+    {% endblock %}
