@@ -177,8 +177,6 @@ module.exports = {
             await Promise.all(removedFilePromise)
             await Recipe.delete(id)
 
-            const recipes = await LoadRecipeService.load('recipes')
-
             return res.redirect(`/admin/recipes/success`)
 
         } catch (error) {

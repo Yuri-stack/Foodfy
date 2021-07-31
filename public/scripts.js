@@ -35,12 +35,6 @@ if(currentPage.includes("/admin")){
     header.classList.add("black-menu")
 }
 
-/* O INCLUDE verifica se algum termo de uma String existe e retorna True or False
-    Ex: "instructors/2".include("instructors") = True
-        "instructors/2".include("2") = True
-        "instructors/2".include("k") = False
-*/
-
 /* ======================================================================================= */
 
 /* Lógica para a PAGINAÇÃO */
@@ -465,6 +459,26 @@ const Validate = {
         return{
             error,
             value
+        }
+    },
+
+    allFields(e){
+        const items = document.querySelectorAll('.item input, .item select')
+
+        for(item of items){
+            if(item.value == ""){
+                const message = document.createElement('div')
+
+                message.classList.add('messages')
+                message.classList.add('error')
+
+                message.style.position = 'fixed'
+                message.innerHTML = "Os campos são obrigatórios"
+                
+                document.querySelector('body').append(message)
+
+                e.preventDefault()
+            }
         }
     }
 
