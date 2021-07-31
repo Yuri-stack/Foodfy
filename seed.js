@@ -1,6 +1,6 @@
 const faker = require('faker')
 const { hash } = require('bcryptjs')
-const { generatePassword } = require('../../lib/utils')
+const { generatePassword } = require('./src/lib/utils')
 
 const Chef = require('./src/app/models/Chef')
 const Recipe = require('./src/app/models/Recipe')
@@ -15,7 +15,7 @@ function createFiles(num, placeholder){
     while(files.length < num){
         files.push({
             name: faker.image.image(),
-            path: `public/images/${placeholder}.png`
+            path: `public/images/${placeholder}.jpg`
         })
     }
 

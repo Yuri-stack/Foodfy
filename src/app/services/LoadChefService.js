@@ -30,9 +30,14 @@ const LoadService = {
 
             const recipesPromise = recipes.map(async recipe => {
                 const files = await getImage(recipe.id)
-                console.log(files)
-                recipe.image = files[0].src
-                return recipe
+
+                if(files.length != 0){
+                    recipe.image = files[0].src
+                }else{
+                    recipe.image = 'http://placehold.it/940x280?text=Receita sem foto';
+                }
+                
+                return recipe               
             })
 
             chef.recipes = await Promise.all(recipesPromise)

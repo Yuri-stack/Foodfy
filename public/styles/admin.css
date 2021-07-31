@@ -105,14 +105,6 @@ button[type="submit"].btn-cancelar {
     gap: 20px;
 }
 
-/* RECEITAS DOS CHEFES */
-.chefs-recipes{
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
 /* IMAGEM DO CHEF NA PAGINA DETAILS */
 .img_circular_grande{
     width: 200px;

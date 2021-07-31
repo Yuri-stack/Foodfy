@@ -68,9 +68,6 @@ ALTER TABLE "session"
 ADD CONSTRAINT "session_pkey" 
 PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
--- ADMIN
-INSERT INTO users (name, email, password, is_admin) VALUES ('Admin', 'foodfy@admin.com', '$2a$08$Gfu1JOtjZzxLMpdkppZB6OAj4jWXooqomeRawzOV0U9YqxpVZnTvy', true) RETURNING id
-
 -- FUNCTIONS
 CREATE FUNCTION trigger_setTimestampUpdated()
 RETURNS TRIGGER AS $$
@@ -95,3 +92,17 @@ CREATE TRIGGER setTimestampUpdated
 BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_setTimestampUpdated();
+
+-- to run seeds
+DELETE FROM recipe_files;
+DELETE FROM recipes;
+DELETE FROM chefs;
+DELETE FROM users;
+DELETE FROM files;
+
+-- restart sequence auto-increment from tables ids
+ALTER SEQUENCE recipe_files_id_seq RESTART WITH 1;
+ALTER SEQUENCE recipes_id_seq RESTART WITH 1;
+ALTER SEQUENCE chefs_id_seq RESTART WITH 1;
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
+ALTER SEQUENCE files_id_seq RESTART WITH 1;
