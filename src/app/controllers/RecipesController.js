@@ -1,5 +1,6 @@
 const Recipe = require('../models/Recipe')
 const File = require('../models/File')
+const RecipeFile = require('../models/RecipeFile')
 
 const { unlinkSync } = require('fs');
 
@@ -108,6 +109,7 @@ module.exports = {
     async put(req, res){
         try {
             const { id, title, ingredients, preparation, information, chef, removed_file } = req.body
+            let fileId
 
             // Lógica para SALVAR as novas imagens carregadas durante a Atualização
             if(req.files.length != 0){
@@ -118,7 +120,7 @@ module.exports = {
 
                 if(totalFiles <= 5){
                     const newFilesPromise = req.files.map(async file => {
-                        const fileId = await File.create({
+                        fileId = await File.create({
                             name: file.filename,
                             path: file.path
                         })
@@ -138,9 +140,14 @@ module.exports = {
                 removedFile.splice(lastIndex, 1)                        //aqui fica desse jeito [1,2,3]
 
                 const removedFilePromise = removedFile.map(async id => {
-                    const file = await File.findOne({ where: { id } })
-                    File.delete(id)
-                    unlinkSync(file.path);
+                    const recipeFile = await RecipeFile.findOne({ where: { id } })
+                    await RecipeFile.delete(id)
+                    
+                    id = recipeFile.file_id
+                    const file = await File.findOne({ where: { id }})
+                    
+                    unlinkSync(file.path)
+                    await File.delete(id)
                 })
 
                 await Promise.all(removedFilePromise);
@@ -163,7 +170,7 @@ module.exports = {
             const files = await Recipe.findImageRecipe(id);
 
             const removedFilePromise = await files.map(file => {
-                File.delete({ id: file.file_id })
+                File.delete(file.file_id)
                 unlinkSync(file.path)
             })
 
