@@ -20,7 +20,7 @@ const visibility = document.querySelectorAll(".visibility")
 
 /* Lógica para personalizar o menu quando a página referente a ele estiver ativada*/
 
-const currentPage = window.location.pathname                    /* Pega a posição atual da página */
+const currentPage = window.location.pathname                               /* Pega a posição atual da página */
 const menuItems = document.querySelectorAll("header .container nav a")     /* Pega cada item do menu */
 const header = document.querySelector("header")
 const menuLogo = document.querySelector("header .container div a img")
@@ -33,14 +33,7 @@ for(item of menuItems){
 
 if(currentPage.includes("/admin")){
     header.classList.add("black-menu")
-    menuLogo.classList.add("invert")
 }
-
-/* O INCLUDE verifica se algum termo de uma String existe e retorna True or False
-    Ex: "instructors/2".include("instructors") = True
-        "instructors/2".include("2") = True
-        "instructors/2".include("k") = False
-*/
 
 /* ======================================================================================= */
 
@@ -466,6 +459,26 @@ const Validate = {
         return{
             error,
             value
+        }
+    },
+
+    allFields(e){
+        const items = document.querySelectorAll('.item input, .item select')
+
+        for(item of items){
+            if(item.value == ""){
+                const message = document.createElement('div')
+
+                message.classList.add('messages')
+                message.classList.add('error')
+
+                message.style.position = 'fixed'
+                message.innerHTML = "Os campos são obrigatórios"
+                
+                document.querySelector('body').append(message)
+
+                e.preventDefault()
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 const Recipe = require('../models/Recipe')
 const File = require('../models/File')
+const RecipeFile = require('../models/RecipeFile')
 
 const { unlinkSync } = require('fs');
 
@@ -50,13 +51,11 @@ module.exports = {
 
             await Promise.all(filesPromise);
 
-            return res.redirect(`/admin/recipes/${ recipeId }`)
+            return res.redirect(`/admin/recipes/success`)
             
         } catch (error) {
             console.error(error)
-            return res.render('admin/recipes/index', {
-                error: "Houve um erro na criação da Receita, tente novamente"
-            })
+            return res.redirect('/admin/recipes/error')
         }
     },
 
@@ -102,9 +101,7 @@ module.exports = {
 
         } catch (error) {
             console.error(error)
-            return res.render('admin/recipes/details', {
-                error: "Houve um erro na edição da Receita, tente novamente mais tarde"
-            })
+            return res.redirect('/admin/recipes/error')
         }
     },
 
@@ -112,6 +109,7 @@ module.exports = {
     async put(req, res){
         try {
             const { id, title, ingredients, preparation, information, chef, removed_file } = req.body
+            let fileId
 
             // Lógica para SALVAR as novas imagens carregadas durante a Atualização
             if(req.files.length != 0){
@@ -122,7 +120,7 @@ module.exports = {
 
                 if(totalFiles <= 5){
                     const newFilesPromise = req.files.map(async file => {
-                        const fileId = await File.create({
+                        fileId = await File.create({
                             name: file.filename,
                             path: file.path
                         })
@@ -142,9 +140,14 @@ module.exports = {
                 removedFile.splice(lastIndex, 1)                        //aqui fica desse jeito [1,2,3]
 
                 const removedFilePromise = removedFile.map(async id => {
-                    const file = await File.findOne({ where: { id } })
-                    File.delete(id)
-                    unlinkSync(file.path);
+                    const recipeFile = await RecipeFile.findOne({ where: { id } })
+                    await RecipeFile.delete(id)
+                    
+                    id = recipeFile.file_id
+                    const file = await File.findOne({ where: { id }})
+                    
+                    unlinkSync(file.path)
+                    await File.delete(id)
                 })
 
                 await Promise.all(removedFilePromise);
@@ -152,13 +155,11 @@ module.exports = {
 
             await Recipe.update(id, { title, ingredients, preparation, information, chef_id: chef })
 
-            return res.redirect(`/admin/recipes/${id}`)
+            return res.redirect(`/admin/recipes/success`)
 
         } catch (error) {
             console.error(error)
-            return res.render('admin/recipes/details', {
-                error: "Houve um erro na atualização da Receita, tente novamente mais tarde"
-            })
+            return res.redirect('/admin/recipes/error')
         }
     },
 
@@ -169,52 +170,59 @@ module.exports = {
             const files = await Recipe.findImageRecipe(id);
 
             const removedFilePromise = await files.map(file => {
-                File.delete({ id: file.file_id })
+                File.delete(file.file_id)
                 unlinkSync(file.path)
             })
 
             await Promise.all(removedFilePromise)
             await Recipe.delete(id)
 
-            const recipes = await LoadRecipeService.load('recipes')
-
-            return res.render('admin/recipes/index', { recipes })
+            return res.redirect(`/admin/recipes/success`)
 
         } catch (error) {
             console.error(error)
-            return res.render('admin/recipes/details', {
-                error: "Houve um erro ao excluir a Receita, tente novamente mais tarde"
-            })
+            return res.redirect('/admin/recipes/error')
         }
     },
 
     //Função para CARREGAR as receitas dos Usuários
     async userRecipes(req, res){
-        const recipes = await Recipe.findAllRecipesUser(req.session.userId)
+        try {
+            const recipes = await Recipe.findAllRecipesUser(req.session.userId)
 
-        //Lógica para buscar as imagens das receitas
-        async function getImage(recipeId) {
-            let files = await Recipe.findImageRecipe(recipeId)
-            files = files.map(file => ({
-                ...file,
-                src: `${file.path.replace("public", "")}`
-            }))
+            //Lógica para buscar as imagens das receitas
+            async function getImage(recipeId) { 
+                let files = await Recipe.findImageRecipe(recipeId)
+                files = files.map(file => ({
+                    ...file,
+                    src: `${file.path.replace("public", "")}`
+                }))
 
-            return files
+                return files
+            }
+        
+            const recipesPromise = recipes.map(async recipe => {
+                const files = await getImage(recipe.id)
+
+                if(files.length != 0){
+                    recipe.image = files[0].src
+                }else{
+                    recipe.image = 'http://placehold.it/940x280?text=Receita sem foto';
+                }
+                return recipe
+            })
+
+            // Caso queira add a paginação aqui, veja os códigos do arquivo public/recipes e do PublicController das Receitas
+
+            const allRecipes = await Promise.all(recipesPromise)
+            return res.render("admin/recipes/myRecipes", { recipes: allRecipes })
+
+        } catch (error) {
+            console.error(error)
+            return res.render('admin/recipes/index', {
+                error: "Houve um erro ao exibir suas receitas, tente novamente"
+            })
         }
         
-        const recipesPromise = recipes.map(async recipe => {
-            const files = await getImage(recipe.id)
-
-            if(files.length != 0){
-                recipe.image = files[0].src
-            }else{
-                recipe.image = 'http://placehold.it/940x280?text=Receita sem foto';
-            }
-            return recipe
-        })
-
-        const allRecipes = await Promise.all(recipesPromise)
-        return res.render("admin/recipes/myRecipes", { recipes: allRecipes })
     }
 }

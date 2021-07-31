@@ -1,0 +1,40 @@
+{% if session.isAdmin %}
+    <header class="admin-menu">
+        {# Parte do Logo #}
+        <div class="menu">
+            <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
+
+            {# Parte do Menu / antigo header #}
+            <nav class="principal">
+                <a href="/admin/recipes">RECEITAS</a>
+                <a href="/admin/chefs">CHEFS</a>
+                <a href="/admin/users">USUÁRIOS</a>
+            </nav>
+
+            <nav class="my-account">
+                <a href="/admin/login">PERFIL</a>
+                <a href=""> | </a>
+                <form id="form-logout" action="/admin/logout" method="post">
+                    <button type="submit">Sair</button>
+                </form>
+            </nav>
+        </div>
+    </header>
+{% else %}
+    <header>
+        <div class="menu">
+            <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
+
+            {# Parte do Menu / antigo header #}
+            <nav class="principal">
+                <a href="/admin/recipes/myRecipes">Minhas Receitas</a>
+                <a href="/admin/chefs/seeChefs">Chefs</a>
+            </nav>
+
+            {# Parte do Login/Logout #}
+            <form id="form-logout" action="/admin/logout" method="post">
+                <button type="submit">SAIR</button>
+            </form>
+        </div>
+    </header>
+{% endif %}

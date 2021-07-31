@@ -7,7 +7,7 @@ async function getImage(recipeId) {
     let files = await Recipe.findImageRecipe(recipeId)
     files = files.map(file => ({
         ...file,
-        src: `${file.path.replace("public", "")}`
+        src: `${file.path.replace('public', '')}`
     }))
 
     return files
@@ -28,16 +28,21 @@ const LoadService = {
 
             const recipes = await Chef.findRecipesChef(chef.id)
 
-            if(recipes[0].id != null){
-                const recipesPromise = recipes.map(async recipe => {
-                    const files = await getImage(recipe.id)
-                    recipe.image = files[0].src
-                    return recipe
-                })
-                chef.recipes = await Promise.all(recipesPromise)
-            }
+            const recipesPromise = recipes.map(async recipe => {
+                const files = await getImage(recipe.id)
 
+                if(files.length != 0){
+                    recipe.image = files[0].src
+                }else{
+                    recipe.image = 'http://placehold.it/940x280?text=Receita sem foto';
+                }
+                
+                return recipe               
+            })
+
+            chef.recipes = await Promise.all(recipesPromise)
             chef.total_recipes = await Chef.countRecipe(chef.id)
+
             return chef
 
         } catch (error) {

@@ -8,7 +8,7 @@ module.exports = {
     ...Base,
 
     //Função para SELECIONAR todas as Receitas
-    async findAllRecipes(){
+    async findAllRecipes(){ 
         try {
             const query = `
                 SELECT recipes.*, chefs.name AS chef_name
@@ -39,22 +39,6 @@ module.exports = {
         }
     },
 
-    //Função para RETORNAR os dados das Receitas
-    // showDataRecipes(id){
-    //     try {
-    //         const query = `
-    //             SELECT recipes.*, chefs.name AS chef_name
-    //             FROM recipes
-    //             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-    //             WHERE recipes.id = $1
-    //         `
-    //         return db.query(query, [id])
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-    // },
-
     //Função que CARREGA os nomes dos Chefs para o Form das Receitas
     chefSelectOptions(){
 
@@ -68,7 +52,6 @@ module.exports = {
 
     //Função para CRIAR as imagens das Receitas no Banco de Dados
     createImageRecipe(recipeId, fileId){
-
         try {
             const query = `INSERT INTO recipe_files (recipe_id, file_id) VALUES ($1,$2) RETURNING id`
             const values = [recipeId, fileId]
@@ -116,9 +99,12 @@ module.exports = {
     async findAllRecipesUser(id){
         try {
             const query = `
-                SELECT recipes.* FROM recipes WHERE user_id = $1
+                SELECT recipes.*, chefs.name AS chef_name
+                FROM recipes 
+                LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+                WHERE user_id = $1
+                ORDER BY recipes.created_at DESC
             `
-
             const results = await db.query(query, [id])
             return results.rows
             
@@ -129,20 +115,31 @@ module.exports = {
     },
 
     //Função relacionado a PAGINAÇÃO das Receitas
-    paginate(params){
+    async paginate(params){
         try {
-            const { filter, limit, offset } = params
+            const { filter, limit, offset, id } = params
 
             let query = "",
                 filterQuery = "",
                 totalQuery = `(
                     SELECT count(*) FROM recipes
-                ) AS total
-                `
+                ) AS total`,
+                orderBy = 'ORDER BY recipes.created_at DESC'
     
-            if( filter ){
+            if(filter){
                 filterQuery = `WHERE recipes.title ILIKE '%${filter}%'`
     
+                totalQuery = `(
+                    SELECT count(*) FROM recipes
+                    ${filterQuery}
+                ) AS total`
+
+                orderBy = 'ORDER BY recipes.updated_at DESC'
+            }
+
+            if(id){
+                filterQuery = `WHERE user_id = ${id}`
+
                 totalQuery = `(
                     SELECT count(*) FROM recipes
                     ${filterQuery}
@@ -154,14 +151,15 @@ module.exports = {
                 FROM recipes
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
                 ${filterQuery}
-                ORDER BY recipes.id ASC LIMIT $1 OFFSET $2
+                ${orderBy}
+                LIMIT $1 OFFSET $2
             `
-    
-            return db.query(query, [limit, offset])         
+            const results = await db.query(query, [limit, offset])
+            return results.rows     
 
         } catch (error) {
             console.log(error)
+            console.log("Erro no paginate")
         }
-
     }
  }

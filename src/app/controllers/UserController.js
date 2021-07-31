@@ -51,16 +51,11 @@ module.exports = {
 
             const users = await User.findAll()
 
-            return res.render('admin/users/index', {
-                users,
-                success: 'Usuário criado com sucesso!'
-            })
+            return res.redirect(`/admin/users/success`)
 
         } catch (error) {
             console.error(error)
-            return res.render("admin/users/index", {
-                error: "Houve um erro na criação do usuário, tente novamente"
-            })
+            return res.redirect('/admin/users/error')
         }
     },
 
@@ -70,9 +65,7 @@ module.exports = {
             return res.render('admin/users/edit', { user })
         } catch (error) {
             console.error(error)
-            return res.render("admin/users/edit", {
-                error: "Houve um erro na edição, tente novamente"
-            })
+            return res.redirect('/admin/users/error')
         }
     },
 
@@ -85,18 +78,11 @@ module.exports = {
                 name, email, is_admin:isAdmin || false
             })
 
-            const users = await User.findAll()
-
-            return res.render('admin/users/index', {
-                users,
-                success: 'Usuário atualizado com sucesso!'
-            })  
+            return res.redirect(`/admin/users/success`)  
             
         } catch (error) {
             console.error(error)
-            return res.render("admin/users/edit", {
-                error: "Houve um erro na atualização, tente novamente"
-            })
+            return res.redirect('/admin/users/error')
         }
     },
 
@@ -115,17 +101,11 @@ module.exports = {
 
             await User.delete(id)
 
-            return res.render('admin/users/index', {
-                users,
-                success: 'Usuário excluído com sucesso!'
-            }) 
+            return res.redirect(`/admin/users/success`)
             
         } catch (error) {
             console.error(error)
-            return res.render("admin/users/index", {
-                users,
-                error: "Houve um erro na exclusão, tente novamente"
-            })
+            return res.redirect('/admin/users/error')
         }
     }
 }

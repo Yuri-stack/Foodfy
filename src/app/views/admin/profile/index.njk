@@ -1,21 +1,16 @@
 {% extends "layouts/admin.njk" %}
 
     {% block head %}
-        <title>Foodfy - Administração</title> 
+        <title>Meu Perfil</title> 
     {% endblock %} 
 
-    {% block container %}
-
+    {% block content %} 
         <section class="control">
-
             <h1>Saudações, {{ user.name }}!</h1>
-            <div>   
-                <button class="btn-salve" type="submit" form="form-save">Salvar Usuário</button>
-            </div>
-
+            <button type="submit" form="form-save" onclick="Validate.allFields(event)">Salvar Usuário</button>
         </section>
 
-        <section class="user container">
+        <section class="users container">
 
             <form id="form-save" method="POST" action="/admin/profile?_method=PUT"> 
 
@@ -28,4 +23,4 @@
 
         </section>
 
-    {% endblock container %}
+    {% endblock %}

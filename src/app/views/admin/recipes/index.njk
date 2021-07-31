@@ -1,33 +1,39 @@
 {% extends "layouts/admin.njk" %} 
 
     {% block head %}
-        <title>Foodfy - Receitas</title> 
+        <title>Receitas</title> 
     {% endblock %}
- 
-    {% block container %}
 
+    {% block content %}
         <section class="control">
             <h1>Gerenciar Receitas</h1>
-            <a href="/admin/recipes/create">Criar Nova Receita</a>
+            <a class="button" href="/admin/recipes/create">Criar Nova Receita</a>
         </section>
 
-        <section class="recipes-admin container"> 
+        <section class="show-wrapper-recipes container">
 
             {% for recipe in recipes %}
 
                 <div class="card horizontal">
-                    <img class="img_rounded" src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
+
+                    <img 
+                        class="img_rounded" 
+                        src="{{ recipe.image }}" 
+                        alt="Imagem de {{ recipe.title }}">
+
                     <div class="card">
                         <span class="card_title">{{ recipe.title }}</span>
                         <span class="card_subtitle">por {{ recipe.chef_name }}</span>
                         <span class="card_view">
-                            <a class="btn_view" href="/admin/recipes/{{ recipe.id }}">Visualizar</a>
+                            <a class="btn_view" 
+                                href="/admin/recipes/{{ recipe.id }}">
+                                Visualizar
+                            </a>
                         </span>
                     </div>
                 </div>
 
             {% endfor %}
-                
-        </section>
 
-    {% endblock container %}
+        </section>
+    {% endblock %}

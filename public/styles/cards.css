@@ -52,7 +52,8 @@
     width: 100%;    /*Tem 100% de largura para que o nome do Chef fique em uma linha*/
 }
 
-.horizontal .img_rounded{
+/* IMAGEM ARREDONDADA */
+.img_rounded{
     border-radius: 5%;
     width: 172px;
     height: 80px;

@@ -9,93 +9,24 @@
 }
 
 *{
-    box-sizing: border-box; 
     margin: 0;
-    border: 0;
     padding: 0;
-    font-family: "Roboto", sans-serif;
-}
-
-/* MENU */
-
-header{
-    height: 80px;
-}
-
-header .container {
-    display: flex;
-    align-items: center;
-    max-width: 940px;
-    margin: auto;
-    justify-content: space-between;
-}
-
-header .header{
-    display: flex;
-    align-items: center;
-}
-
-header .container nav{
-    line-height: 80px;
-    margin-left: 50px;
-}
-
-header .container nav a{
+    box-sizing: border-box; 
     text-decoration: none;
-    font-size: 16px;
-    line-height: 26px;
-    color: var(--color-grayHard);
-    margin-left: 30px;
+    font-family: "Roboto", sans-serif;
+    border: none;
 }
 
-header .container nav a.active{
-    font-weight: bold;
-}
-
-header.black-menu{
-    background-color: var(--color-grayHard);
-}
-
-header.black-menu .container {
-    justify-content: left;
-}
-
-header.black-menu img{
-    filter: invert(100%);
-}
-
-header.black-menu .container a{
-    color: white;
-}
-
-/* FILTRO / FILTER */
-
-.filter form{
-    display: grid;
-    grid-template-columns: 1fr 100px;
-    align-items: center;
-    margin-right: 5%;
-}
-
-.filter form input,
-.filter form button{
-    height: 37px;
-    margin: 0;
-}
-
-.filter form button{
-    margin-left: 5%;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-.filter form input{
-    color: var(--color-graySoft3);
-    font-size: 14px;
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    display: flex;                      
+    flex-direction: column;   
+    overflow-y: overlay;      
+    min-height: 100vh;
 }
 
 /* CONTAINER */
-
 .container {
     max-width: 940px;
     margin: 0 auto 50px;
@@ -104,79 +35,26 @@ header.black-menu .container a{
     position: relative;
 }
 
-/* BANNER */
-
-section.banner {
-    margin: auto auto 50px;
-    max-width: 940px;
-    background: #FBDFDB;
-    border-radius: 30px;
-}
-
-section.banner .container{
-    max-width: 940px;
-    height: 360px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-}
-
-section.banner .container div{
-    align-items: center;
-    width: 330px;
-    margin: auto 60px;
-}
-
-section.banner .container div h1{
-    font-size: 32px;
-    line-height: 42px;
-}
-
-section.banner .container div p{
-    margin-top: 10px;
-    font-size: 18px;
-    line-height: 28px;
-    width: 350px;
-    opacity: 0.7;
-}
-
-section.banner .container .banner-img{
-    margin: auto 0 0;
-}
-
-/* MAIN */
-
-main{
-    min-height: 87vh;
-    position: relative;
-    padding-bottom: 60px;
-    overflow: hidden;
-}
-
 .title{
     max-width: 940px;
-    margin: 0 auto 20px;
+    margin: 32px auto 24px;
     width: 100%;
 }
 
-/* CONTAINER DAS RECEITAS 3X */
-
-.recipes{
-    margin: 10px auto;
+/* WRAPPER DAS RECEITAS, CHEFS E USUÁRIOS */
+.show-wrapper{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    margin: 16px auto 24px;
+    grid-template-columns: repeat(3,1fr);
     gap: 20px;
-    height: 500px;
 }
 
 /* RODAPÉ / FOOTER */
-
 footer {
     background: #EEEEEE;
-    position: absolute;
-    bottom: 0;
     width: 100%;
     padding: 24px;
+    flex-flow: column;
 }
 
 footer p{
@@ -185,8 +63,24 @@ footer p{
     text-align: center;
 }
 
-/* PAGINAÇÃO / PAGINATION */
+/* ABOUT / SOBRE */
+.about h2, .about h3{
+    margin-bottom: 16px;
+    color: var(--color-grayHard);
+}
 
+.about h3{
+    margin-top: 32px;
+}
+
+.about p{
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--color-graySoft);
+    text-align: justify;
+}
+
+/* PAGINAÇÃO / PAGINATION */
 .pagination{
     display: flex;
     justify-content: center;
@@ -194,74 +88,35 @@ footer p{
     padding: 10px;
 }
 
-
-/* .pagination{
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    width: 100%;
-    bottom: 0%;
-    background-color: #DC4747;
-} */
-
 .pagination a, 
 .pagination span{
     text-decoration: none;
     margin-right: 16px;
 }
 
-/* =========================== ABOUT/SOBRE =============================== */
-
-.about h2, h3{
-    margin-bottom: 20px;
-    color: var(--color-grayHard);
-}
-
-.about h2{
-    font-size: 24px;
-}
-
-.about h3{
-    margin-top: 30px;
-    font-size: 20px;
-}
-
-.about p{
-    font-size: 18px;
-    color: var(--color-graySoft);
-    line-height: 28px;
-}
-
-/* =========================== RECIPES DETAILS / DETALHE RECEITA =============================== */
-
-/* .recipe-principal img{
-    border-radius: 15px;
-    width: 940px;
-    height: 280px;
-    object-fit: cover;
-} */
+/* RECIPES DETAILS / DETALHE DAS RECEITA */
 
 .recipe-intro{
-    margin: auto 30px;
+    margin: auto 32px;
     text-align: center;
 }
 
 .recipe-info{
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 22px;
+    line-height: 32px;
     color: var(--color-gray);
-    margin-top: 20px;
-    margin-bottom: 39px;
-}
-
-.recipe-info ul{
-    margin-left: 18px;
+    margin-top: 22px;
+    margin-bottom: 42px;
 }
 
 .recipe-info h1{
     font-size: 24px;
     color: var(--color-grayHard);
     margin-bottom: 20px;
+}
+
+.recipe-info ul{
+    margin-left: 18px;
 }
 
 .recipe .visibility{
@@ -272,379 +127,4 @@ footer p{
 
 .hide{
     display: none;
-}
-
-/* =========================== PAGE CHEFS / PÁGINA CHEFS =============================== */
-
-.chefs{
-    margin-top: 15px;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    grid-gap: 20px;
-}
-
-/* Pag. Detalhe Chef */
-
-.chef-principal .img_circular{
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto;
-}
-
-.chef-intro{
-    margin: 30px auto;
-    text-align: center;
-}
-
-/* =========================== ADMIN PAGE =============================== */
-
-.control{
-    max-width: 940px;
-    margin: 55px auto 67px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.control h1{
-    font-size: 24px;
-}
-
-.control a, button[type="submit"], .button {
-    background-color: var(--color-rocket);
-    padding: 8px 16px;
-    text-decoration: none;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 4px;
-}
-
-button[type="submit"].btn-delete, 
-button[type="submit"].btn-cancelar {
-    background-color: var(--color-deleteRed);
-}
-
-.info-title {
-    color: var(--color-grayHard);
-    font-size: 36px;
-    font-weight: bold;
-    display: block;
-}
-
-.info-subtitle{
-    font-size: 20px;
-    color: var(--color-graySoft2);
-    text-align: center;
-    display: block;
-}
-
-/* =========================== RECIPES ADMIN PAGE =============================== */
-
-.recipes-admin{
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-/* =========================== CREATE CHEFS ADMIN PAGE ============================= */
-
-/* Campo de Upload de Imagens / Upload Photos Fields */
-
-.item #avatar-upload {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    width: 125px;
-    margin-top: 8px;
-}
-
-.item #avatar-upload p {
-    box-shadow: 0 2px 2px -6px var(--color-gray);
-    width: 100%;
-    text-align: center;
-    cursor: pointer; 
-}
-
-.item #photo-avatar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-}
-/* precisa arrumar esses estilos*/
-.item #photo-preview {
-    display: grid;
-    width: 150px;
-    height: 150px;
-    margin: 5px 0 0 0;
-}
-
-.item #photo-preview img {
-    width: 150px;
-    height: 150px; 
-    border-radius: 4px;
-    object-fit: cover;
-    border: 1px solid #DDDDDD;
-}
-
-#photo-preview .photo {
-    position: relative;
-}
-
-#photo-preview .photo i {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    background: rgba(255, 255, 255, 0.8);
-    color: red;
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 200%;
-    cursor: pointer;
-
-    transition: opacity 200ms;
-    opacity: 0;
-}
-
-#photo-preview .photo:hover i{
-    opacity: 1;
-}
-
-/* =========================== CREATE RECIPES ADMIN PAGE ============================= */
-
-/* Container das Campos de Imagem / Image Fields Container */
-
-#photo-container{
-    display: grid;
-    grid-template-columns: repeat(6,1fr);
-}
-
-/* Campo de Upload de Imagens / Upload Photos Fields */
-
-.item #photos-upload {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    
-    margin: 5px;
-
-    width: 150px;
-    height: 150px;
-
-    background: #FFFFFF;
-    border: 1px solid #DDDDDD;
-    border-radius: 4px;
-}
-
-.item #photos-upload i{
-    color: #999;
-    background: #FFFFFF;
-
-    width: 100%;
-    height: 100%;
-    text-align: center;
-
-    cursor: pointer;
-    font-size: 200%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.item #photos-input{
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-}
-
-/* Campo de Vizualição das Imagens das Receitas / View Photos Fields */
-
-.item #photos-preview {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-    width: 150px;
-    height: 150px;
-    margin: 5px 0 0 0;
-}
-
-.item #photos-preview img {
-    width: 150px;
-    height: 150px;
-    border-radius: 4px;
-    object-fit: cover;
-    border: 1px solid #DDDDDD;
-}
-
-#photos-preview .photo {
-    position: relative;
-}
-
-#photos-preview .photo i {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    background: rgba(255, 255, 255, 0.8);
-    color: red;
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 200%;
-    cursor: pointer;
-
-    transition: opacity 200ms;
-    opacity: 0;
-}
-
-#photos-preview .photo:hover i{
-    opacity: 1;
-}
-
-/* =========================== SHOW RECIPES ADMIN PAGE =============================== */
-
-.gallery .highlight > img{
-    border-radius: 15px;
-    width: 940px;
-    height: 280px;
-    object-fit: cover;
-}
-
-.gallery .gallery-preview{
-    display: flex;
-    justify-content: flex-end;
-    height: 50px;
-}
-
-.gallery .gallery-preview img{
-    height: 50px;
-    width: 50px;
-
-    margin-left: 10px;
-    border-radius: 3.5px;
-    border: 1px solid #DDDDDD;
-
-    object-fit: cover;
-    opacity: 0.5;
-
-    cursor: pointer;
-    transition: 200ms;
-}
-
-.gallery .gallery-preview img:hover,
-.gallery .gallery-preview img.active{
-    opacity: 1;
-}
-
-
-/* =========================== EDIT RECIPES ADMIN PAGE =============================== */
-
-.item button{
-    background-color: transparent;
-    color: var(--color-rocket);
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-form div:first-child{
-    font-size: 16px;
-    font-weight: bold;
-}
-
-form input, textarea, select{
-    width: 100%;
-    color: #555;
-    padding: 15px 20px;
-    font-size: 16px;
-    margin-top: 10px;
-    border: 1px solid #DDDDDD;
-    border-radius: 4px;
-}
-
-input[type="checkbox"]{
-    width: auto;
-}
-
-/* =========================== Users Area =============================== */
-
-.users{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-.user.container form{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px 40px;
-}
-
-.error{
-    background-color: #e74c3c;
-    padding: 4px;
-    border-radius: 4px;
-    color: white;
-}
-
-/* =========================== PAGE 404 =============================== */
-
-.notFound{
-    text-align: center;
-}
-
-.notFound h1{
-    font-size: 24px;
-    line-height: 34px;
-    font-weight: bold;
-}
-
-.notFound p{
-    /* max-width: 600px; */
-    margin: 5px auto;
-    font-size: 18px;
-    line-height: 28px;
-}
-
-.notFound img{
-    margin: 38px auto;
-}
-
-/* Responsividade */
-
-@media(max-width: 800px) {
-
-    .recipes-title {
-        margin: 30px 100px 10px;
-    }
-
-    .recipes-container {
-        grid-template-columns: 1fr;
-        margin: 50px;
-    }
 }

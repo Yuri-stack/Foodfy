@@ -63,7 +63,7 @@ async function put(req, res, next){
     const user = await User.findOne({ where: { id }})
 
     // const passed = await compare(password, user.password)
-    // // const passed = true;
+    // const passed = true;
 
     if(!user) return res.render("admin/users/edit",{
         user: req.body,

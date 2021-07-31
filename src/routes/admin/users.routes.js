@@ -6,8 +6,10 @@ const { onlyUsers, isAdmin } = require('../../app/middlewares/session')
 
 const User = require('../../app/controllers/UserController')
 
-// Rotas para o Administrador gerenciar usuários
+routes.get("/success", (req, res) => res.render('layouts/success'))
+routes.get("/error", (req, res) => res.render('layouts/error'))
 
+// Rotas para o Administrador gerenciar usuários
 routes.get('/', onlyUsers, isAdmin, User.list)                          // Mostrar a lista de usuários cadastrados
 routes.get('/register', onlyUsers, isAdmin, User.redirectCreate)        // Mostrar o formulário de criação de um usuário
 routes.get('/:id/edit', onlyUsers, isAdmin, Validator.show, User.edit)  // Mostrar o formulário de edição de um usuário

@@ -1,41 +1,11 @@
-{% extends "layouts/public.njk" %}  
+{% extends "layouts/layout.njk" %} 
 
-    {% block head%}
+    {% block head %}
         <title>Receitas</title>
     {% endblock %}
 
-        {% block header %}
-
-            <header>
-
-                <div class="container">
-
-                    <div class="header">
-                        <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
-
-                        <nav>
-                            <a href="/about">Sobre</a>
-                            <a href="/recipes">Receitas</a>
-                            <a href="/chefs">Chefs</a>
-                        </nav>
-                    </div>
-
-                    <div class="filter">
-                        <form action="/recipes" method="GET">
-                            <input type="text" name="filter" placeholder="Buscar uma receita">
-                            <button type="submit">Buscar</button>
-                        </form>
-                    </div>
-
-                </div>
-
-            </header>
-
-        {% endblock header %}
-
-        {% block container %}
-
-        <section class="recipes container">
+    {% block content %}
+        <section class="show-wrapper container">
 
             {% for recipe in recipes %}
 
@@ -53,6 +23,10 @@
 
         </section>
 
-        <section class="pagination" data-page={{pagination.page}} data-total={{pagination.total}}></section>
+        <section 
+            class="pagination" 
+            data-page={{pagination.page}} 
+            data-total={{pagination.total}}>
+        </section>
         
-        {% endblock %}
+    {% endblock %}

@@ -1,34 +1,15 @@
 {% extends "layouts/admin.njk" %} 
 
-    {% block head %}
-        <title>Foodfy - Administração</title>
-    {% endblock %}
-
-    {% block container %}
-
+    {% block content %}
         <section class="control">
-
-            <div>
-                <h1>Criando Receita</h1>
-            </div>
-
-            <div>
-                <button class="btn-salve" type="submit" form="form-save">Salvar Receita</button>
-            </div>
-
+            <h1>Criando Receita</h1>
+            <button type="submit" form="form-save" onclick="Validate.allFields(event)">Salvar</button>
         </section>
 
-        <section class="recipe container">
-        
+        <section class="container">
             <form id="form-save" method="POST" action="/admin/recipes" enctype="multipart/form-data">
-
                 {% include 'admin/recipes/fields.njk' %}
-
             </form>
-
         </section>
 
-    {% endblock container %}
-
-    {% block footer %}
-    {% endblock footer %}
+    {% endblock %}

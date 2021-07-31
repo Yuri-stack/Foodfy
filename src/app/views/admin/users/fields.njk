@@ -1,36 +1,29 @@
-    <div class="item">
-        <div>Nome</div>
-        <div>
-            <input 
-                type="text" 
-                name="name" 
-                placeholder="Digite o nome completo" 
-                value="{{ user.name }}" 
-                required>
-        </div>
-    </div>
+<div class="item">
+    <h3>Nome</h3>
+    <input  
+        type="text" 
+        name="name" 
+        placeholder="Digite o nome completo" 
+        value="{{ user.name }}" 
+        required>
+</div>
 
-    <div class="item">
-        <div>Email</div>
-        <div>
-            <input 
-                type="email" 
-                name="email" 
-                placeholder="Digite o email" 
-                value="{{ user.email }}" 
-                onblur="Validate.apply(this, 'isEmail')"
-                required> 
-        </div>
-    </div>
+<div class="item">
+    <h3>Email</h3>
+    <input 
+        type="email" 
+        name="email" 
+        placeholder="Digite o email" 
+        value="{{ user.email }}" 
+        onblur="Validate.apply(this, 'isEmail')"
+        required> 
+</div>
     
-    <div class="item">
-        <div>
-            {% if user.is_admin == true %}
-                <input type="checkbox" name="isAdmin" value="true" checked>
-            {% else %}
-                <input type="checkbox" name="isAdmin" value="true">
-            {% endif %}
-            <label for="isAdmin">Administrador</label>
-        </div>
-    </div>
-    
+<div class="item">
+    {% if user.is_admin == true %}
+        <input type="checkbox" name="isAdmin" value="true" checked>
+    {% else %}
+        <input type="checkbox" name="isAdmin" value="true">
+    {% endif %}
+    <label for="isAdmin">Administrador</label>
+</div>

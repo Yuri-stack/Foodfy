@@ -1,25 +1,17 @@
 {% extends "layouts/admin.njk" %} 
 
     {% block head %}
-        <title>Receita - {{ recipe.title }}</title>
-    {% endblock %}
+        <title>Receita {{ recipe.title }}</title>
+    {% endblock %} 
 
-    {% block container %}
-
+    {% block content %}
         <section class="control">
-
-            <div>
-                <h1>Receita: {{ recipe.title }}</h1>
-            </div>
-
-            <div>
-                <a href="{{ recipe.id }}/edit">Editar Receita</a>
-            </div>
-
+            <h1>Receita: {{ recipe.title }}</h1>
+            <a class="button" href="{{ recipe.id }}/edit">Editar Receita</a>
         </section>
 
-        <section class="recipe container">
-
+        <section class="container">
+            
             <div class="gallery"> 
                 <div class="highlight">
                     {% if not recipe.files %}
@@ -50,26 +42,22 @@
             <h1>Ingredientes</h1>
 
             <section class="recipe-info">
-
                 <ul>
                     {% for item in recipe.ingredients %}
                         <li>{{ item }}</li>
                     {% endfor %}
                 </ul>
-
             </section>
 
             <h1>Modo de Preparo</h1>   
 
             <section class="recipe-info">
-
                 <ul>
                     {% for item in recipe.preparation %}
                         <li>{{ item }}</li>
                     {% endfor %}
                 </ul> 
-
-            </section>  
+            </section> 
 
             <h1>Informações adicionais</h1>
 
@@ -86,9 +74,3 @@
         </section>
 
     {% endblock %}
-
-    {% block footer %}
-        
-    {% endblock footer %}
-
-</html>

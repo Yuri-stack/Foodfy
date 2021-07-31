@@ -1,0 +1,30 @@
+.action-success,
+.action-error{
+    padding: 0;
+    padding-bottom: 70px;
+    text-align: center;
+}
+
+.action-success .success-lottie{
+    margin: 80px auto;
+    height: 300px;
+}
+
+.action-error .error-lottie{
+    margin: 80px auto;
+    height: 225px;
+}
+
+.action-error .error-lottie p{
+    margin-bottom: 40px;
+}
+
+.action-success .success-lottie h1,
+.action-error .error-lottie h1{
+    font-size: 32px;
+}
+
+.action-success .success-lottie p,
+.action-error .error-lottie p{
+    font-size: 24px;
+}

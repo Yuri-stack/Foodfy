@@ -1,55 +1,33 @@
 {% extends "layouts/admin.njk" %} 
 
-    {% block head %}
-        <title>Foodfy - Administração</title> 
-    {% endblock %} 
-
-    {% block container %}
-
+    {% block content %}
         <section class="control">
-
-            <div>
-                <h1>Editando Chef</h1>
-            </div>
-
+            <h1>Editando Chef</h1>
             <div>   
                 <button class="btn-delete" type="submit" form="form-delete">Deletar</button>
                 <button class="btn-salve" type="submit" form="form-save">Salvar Chef</button>
             </div>
-
         </section>
 
-        <section class="details-chefs container">
- 
+        <section class="container">
             <form id="form-save" method="post" action="/admin/chefs?_method=PUT" enctype="multipart/form-data">
-
                 <input type="hidden" name="id" value="{{ chef.id }}">
                 {# utilizando esse campo para poder mandar o ID para o backend, quando formos atualizar algum registro #}
-
                 {% include 'admin/chefs/fields.njk' %}
-                
             </form>
 
             <form id="form-delete" method="post" action="/admin/chefs?_method=DELETE">
-            
                 <input type="hidden" name="id" value="{{ chef.id }}">
-            
-            </form>     
+            </form>
 
             <script>
-
                 const formDelete = document.querySelector("#form-delete")
-
                 formDelete.addEventListener("submit", function(event){
                     const confirmation = confirm("Deseja apagar esse chef?")
-
                     if(!confirmation){
                         event.preventDefault()
                     }
                 })
-
             </script> 
-
         </section>
-
-    {% endblock container %}
+    {% endblock %}

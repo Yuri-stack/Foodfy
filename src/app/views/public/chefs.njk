@@ -1,8 +1,30 @@
-{% extends "layouts/public.njk" %}
+{% extends "layouts/layout.njk" %} 
 
-    {% block container %} 
+    {% block head %}
+        <title>Chefs</title>
+    {% endblock %}
 
-        <section class="chefs container">
+    {% block header %}
+        <header>
+            {# Parte do Logo #}
+            <div class="menu">
+                <a href="/"><img src="/assets/logo.png" alt="Logo Foodfy"></a>
+
+                {# Parte do Menu / antigo header #}
+                <nav class="principal">
+                    <a href="/about">Sobre</a>
+                    <a href="/recipes">Receitas</a>
+                    <a href="/chefs">Chefs</a>
+                    <a>|</a>
+                    <a href="/admin/login">Perfil</a>
+                </nav>
+
+            </div>
+        </header>
+    {% endblock header %}
+
+    {% block content %} 
+        <section class="show-wrapper container">
             
             {% for chef in chefs %}
 
@@ -17,5 +39,7 @@
             {% endfor %}
 
         </section>
+    {% endblock %}
 
+    {% block footer %}
     {% endblock %}

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR"> 
     <head>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        {% block head %}
-            <title>Foodfy Administração</title>
-        {% endblock %}
         
+        {% block head %}
+            <title>Foodfy</title>
+        {% endblock %}
+
         {% include "./parts/styles.njk" %}
 
     </head>
@@ -16,19 +16,19 @@
     <body>
 
         {% include "layouts/parts/messages.njk" %}
-
+        
         {% block header %}
-            {% include "./parts/adminHeader.njk" %}
+            {% include "./parts/header.njk" %}
         {% endblock %}
 
-        <main>
-            {% block content %}
-            {% endblock %}
+        {% block content %}
 
-            {% block footer %}
-            {% endblock %}
-        </main>
+        {% endblock %}
 
-        <script src="/scripts.js"></script>
+        {% block footer %}
+            {% include "./parts/footer.njk" %}
+        {% endblock %}
+        
     </body>
+
 </html>
