@@ -89,6 +89,8 @@ npm install
 
 2. Create the connection between the project and the database by editing the **db.js** file in the src/config folder with your Postgres Username and Password
 
+---
+
 ### 4. Feed the database
 
 1. Populate the database through the **seed.js** file, executing the code below:
