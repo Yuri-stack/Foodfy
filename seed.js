@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker');
 const { hash } = require('bcryptjs')
 const { generatePassword } = require('./src/lib/utils')
 
@@ -9,10 +9,10 @@ const User = require('./src/app/models/User')
 
 let chefsId, recipesId, usersId = []
 
-function createFiles(num, placeholder){
+function createFiles(num, placeholder) {
     const files = []
 
-    while(files.length < num){
+    while (files.length < num) {
         files.push({
             name: faker.image.image(),
             path: `public/images/${placeholder}.jpg`
@@ -22,12 +22,12 @@ function createFiles(num, placeholder){
     return files
 }
 
-async function createUsers(){
+async function createUsers() {
     const users = []
     let userPassword = generatePassword()
     const password = await hash(userPassword, 8)
 
-    while(users.length < 5){
+    while (users.length < 5) {
         users.push({
             name: faker.name.firstName(),
             email: faker.internet.email().toLowerCase(),
@@ -40,14 +40,14 @@ async function createUsers(){
     usersId = await Promise.all(usersPromise)
 }
 
-async function createChefs(){
+async function createChefs() {
     const chefs = []
 
-    const files = createFiles(5,'chef_nameFaker')
+    const files = createFiles(5, 'chef_nameFaker')
     const filesPromise = files.map(file => File.create(file))
     const filesId = await Promise.all(filesPromise)
 
-    for(let indexFile = 0; chefs.length < 5; indexFile++){
+    for (let indexFile = 0; chefs.length < 5; indexFile++) {
         chefs.push({
             name: faker.name.firstName(),
             file_id: filesId[indexFile]
@@ -58,17 +58,17 @@ async function createChefs(){
     chefsId = await Promise.all(chefsPromise)
 }
 
-async function createRecipes(){
+async function createRecipes() {
     const recipes = []
     const ingredients = []
     const preparation = []
 
-    for(let index = 0; index < 5; index++){
+    for (let index = 0; index < 5; index++) {
         ingredients.push(faker.lorem.words(Math.ceil(Math.random() * 6)))
         preparation.push(faker.lorem.words(Math.ceil(Math.random() * 6)))
     }
 
-    while(recipes.length < 10){
+    while (recipes.length < 10) {
         recipes.push({
             title: faker.commerce.productName(),
             ingredients,
@@ -82,15 +82,15 @@ async function createRecipes(){
     const recipesPromise = recipes.map(recipe => Recipe.create(recipe))
     recipesId = await Promise.all(recipesPromise)
 
-    const files = createFiles(10,'recipe_nameFaker')
+    const files = createFiles(10, 'recipe_nameFaker')
     const filesPromise = files.map(file => File.create(file))
     const filesId = await Promise.all(filesPromise)
 
     const recipeFiles = []
     let indexFile = 0, indexRecipe = 10 - 1, recipeImgLimit = 5
 
-    while(recipeFiles.length < 10){
-        for(let index = 0; index < recipeImgLimit; index++){
+    while (recipeFiles.length < 10) {
+        for (let index = 0; index < recipeImgLimit; index++) {
             recipeFiles.push({
                 recipe_id: recipesId[indexRecipe],
                 file_id: filesId[indexFile]
@@ -100,7 +100,7 @@ async function createRecipes(){
         indexRecipe--
     }
 
-    const recipesFilesPromise = recipeFiles.map(file => 
+    const recipesFilesPromise = recipeFiles.map(file =>
         Recipe.createImageRecipe(file.recipe_id, file.file_id)
     )
     await Promise.all(recipesFilesPromise);

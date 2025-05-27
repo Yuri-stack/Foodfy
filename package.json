@@ -24,7 +24,6 @@
     "connect-pg-simple": "10.0.0",
     "express": "5.1.0",
     "express-session": "^1.17.2",
-    "faker": "^6.6.6",
     "method-override": "^3.0.0",
     "multer": "2.0.0",
     "nodemailer": "7.0.3",
@@ -32,6 +31,7 @@
     "pg": "^8.5.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
     "browser-sync": "3.0.4",
     "nodemon": "3.1.10",
     "npm-run-all": "^4.1.5"
